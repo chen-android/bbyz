@@ -1,0 +1,49 @@
+page-login {
+  .login-title {
+    height: 30%;
+    background-image: url("../assets/imgs/bg_login_title.png");
+    background-size: contain;
+    font-size: 2rem;
+    color: white;
+  }
+  .row-id {
+    margin: 50pt 30pt 0pt 30pt;
+    padding-left: 10pt;
+    border-bottom: 1px solid color($colors, line-break);
+  }
+  .row-id .id-img {
+    width: 1.8rem;
+    height: 2rem;
+  }
+  .row-id .id-input {
+    border-style: none;
+    font-size: 1.8rem;
+    background-color: transparent;
+  }
+  .row-pwd {
+    margin: 20pt 30pt 0pt 30pt;
+    padding-left: 10pt;
+    border-bottom: 1px solid color($colors, line-break);
+  }
+  .row-pwd .pwd-img {
+    width: 1.8rem;
+    height: 2rem;
+  }
+  .row-pwd .pwd-input {
+    border-style: none;
+    font-size: 1.8rem;
+    background-color: transparent;
+  }
+  .row-check {
+    margin: 10pt 30pt;
+    padding-left: 0;
+  }
+  .row-check.item-md.item-block .item-inner {
+    border: none;
+  }
+  .login-bg{
+      margin: 10pt 10%;
+      width: 80%;
+  }
+
+}

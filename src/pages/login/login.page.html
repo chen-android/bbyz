@@ -15,7 +15,7 @@
       <img src="assets/imgs/icon_login_id.png" class="id-img" />
     </ion-col>
     <ion-col col-5>
-      <input type="text" placeholder="请输入工号" class="id-input" />
+      <input type="text" placeholder="请输入工号" class="id-input" [(ngModel)]="id"/>
     </ion-col>
   </ion-row>
   <ion-row align-items-center class="row-pwd">
@@ -23,13 +23,13 @@
       <img src="assets/imgs/icon_login_pwd.png" class="pwd-img" />
     </ion-col>
     <ion-col col-5>
-      <input type="password" placeholder="请输入密码" class="pwd-input" />
+      <input type="password" placeholder="请输入密码" class="pwd-input" [(ngModel)]="pwd"/>
     </ion-col>
   </ion-row>
   <ion-item align-items-center class="row-check">
     <ion-label>记住该账号</ion-label>
-    <ion-checkbox style="margin: 0pt 8pt;"></ion-checkbox>
+    <ion-checkbox style="margin: 0pt 8pt;" [(ngModel)]="saveCheck"></ion-checkbox>
   </ion-item>
 
-  <button ion-button color="primary" class="login-bg">登录</button>
+  <button ion-button color="primary" class="login-bg" (click)="login()">登录</button>
 </ion-content>

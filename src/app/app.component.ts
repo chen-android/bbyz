@@ -1,23 +1,88 @@
+import { StorageKeys } from './../utils/StorageKeys';
+import { StorageUtils } from './../providers/storage/StorageUtils';
+import { CacheData } from './../providers/storage/CacheData';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login.page';
+import { AppVersion } from '@ionic-native/app-version';
+import { Device } from '@ionic-native/device';
+import { User } from '../module/User';
 
 @Component({
-  templateUrl: 'app.html'
+    templateUrl: 'app.html'
 })
 export class MyApp {
+    rootPage: any = LoginPage;
 
-  rootPage: any = LoginPage;
+    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+        private appVersion:AppVersion,private device:Device,private storage:StorageUtils) {
+        this.platform.ready().then(() => {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
+            this.initAppData();
+        });
+    }
+    initAppData(): any {
+        if (this.platform.is("android")) {
+            CacheData.isAndroid = true;
+        } else if (this.platform.is("ios")) {
+            CacheData.isIos = true;
+        } else {
+            CacheData.isDebug = true;
+        }
+        this.initCommon();
+    }
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
+    initCommon() {
+        if (!CacheData.isDebug) {
+            this.appVersion.getVersionNumber().then((value: string) => {
+                CacheData.getCommon().$appVer = value;
+            });
+            this.appVersion.getPackageName().then((value) => {
+                CacheData.getCommon().$appId = value;
+            });
+            let user: User;
+            this.storage.get<User>(StorageKeys.USER_ID).then(value => {
+                user = value;
+                if (user) {
+                    CacheData.getCommon().$usId = user.id;
+                    CacheData.getCommon().$loginStatus = "1";
+                } else {
+                    CacheData.getCommon().$usId = "";
+                    CacheData.getCommon().$loginStatus = "0";
+                }
+            });
+            CacheData.getCommon().$pushToken = this.device.uuid;
+            CacheData.getCommon().$imei = this.device.uuid;
+            CacheData.getCommon().$mobileVer = this.device.version;
+            CacheData.getCommon().$platformCode = "01";
+            CacheData.getCommon().$channelVer = "";
+            CacheData.getCommon().$phone = "";
+
+            if (CacheData.isAndroid) {
+                CacheData.getCommon().$terminalType = "3";
+            }
+            if (CacheData.isIos) {
+                CacheData.getCommon().$terminalType = "4";
+            }
+        } else {
+            //debug
+            CacheData.getCommon().$usId = "";
+            CacheData.getCommon().$appVer = "2.0.0";
+            CacheData.getCommon().$appId = "com.hundsun.InternetSaleTicket";
+            CacheData.getCommon().$pushToken = "860482031470585";
+            CacheData.getCommon().$imei = "860482031470585";
+            CacheData.getCommon().$mobileVer = "7.0";
+            CacheData.getCommon().$platformCode = "01";
+            CacheData.getCommon().$loginStatus = "0";
+            CacheData.getCommon().$channelVer = "Bababus";
+            CacheData.getCommon().$phone = "13732254711";
+            CacheData.getCommon().$terminalType = "3";
+        }
+    }
 }

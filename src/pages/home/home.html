@@ -1,21 +1,21 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <img src="assets/imgs/icon_main_person_center.png" menuToggle class="home_person_center"/>
+    <div class="home_station_select">
+        <span>{{upStation}}</span>  <img src="assets/imgs/icon_main_down_arrow.png"/><br>
+        {{today | date:"yyyy年MM月dd日"}}
+    </div>
 </ion-header>
 
 <ion-content padding>
   <h3>Ionic Menu Starter</h3>
 
   <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
+    If you get lost, the
+    <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
   </p>
 
   <button ion-button secondary menuToggle>Toggle Menu</button>
   <ion-item>
-    <ion-input type="text" placeholder="input" ></ion-input>
+    <ion-input type="text" placeholder="input"></ion-input>
   </ion-item>
 </ion-content>

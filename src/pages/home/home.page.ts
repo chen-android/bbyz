@@ -2,7 +2,7 @@ import { Station } from './../../module/Station';
 import { CommandKeys } from './../../utils/CommandKeys';
 import { HttpServices } from './../../providers/http/http.service';
 import { Component } from '@angular/core';
-import { ActionSheetController, NavController } from 'ionic-angular';
+import { ActionSheetController, MenuController, NavController } from 'ionic-angular';
 
 @Component({
     selector: 'page-home',
@@ -16,7 +16,8 @@ export class HomePage {
     menuClass: {};
     stations:Array<Station>;
     selectedStation:Station;
-    constructor(public navCtrl: NavController,public http:HttpServices,public action:ActionSheetController) {
+    constructor(public navCtrl: NavController,public http:HttpServices,public action:ActionSheetController,
+        public menu:MenuController) {
         this.upStation = "请选择乘车站";
     }
     ionViewDidLoad() {

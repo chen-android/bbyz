@@ -1,0 +1,18 @@
+<!--
+  Generated template for the FeedbackPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>意见反馈</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-textarea [(ngModel)]="feedbackMsg" type="text" placeholder="请为我们提供您的宝贵意见" class="fb_text"></ion-textarea>
+  <button ion-button class="fb_commit" (click)="commit()">确定</button>
+</ion-content>

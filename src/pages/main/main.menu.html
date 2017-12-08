@@ -1,21 +1,24 @@
-<ion-menu [content]="content" id="personCenterMenu">
+<ion-menu side="left" [content]="content" id="personCenterMenu">
   <ion-content class="pcm_content">
     <div class="pcm_head"></div>
     <div class="pcm_head_id">
       <img src="assets/imgs/icon_main_person_center.png" />
       <br> 工号{{userId}}
     </div>
-    <div class="pcm_feedback">
+    <div class="pcm_feedback" (click)="feedback()" menuClose="personCenterMenu">
         <img src="assets/imgs/icon_person_center_feedback.png"/>
         意见反馈
         <img src="assets/imgs/icon_right_arrow.png"/>
     </div>
   </ion-content>
+  <ion-footer>
+    <button ion-button full color="primary" (click)="logout()">退出</button>
+  </ion-footer>
 </ion-menu>
 
-<ion-menu [content]="content" id="stationFilterMenu">
+<ion-menu side="right" [content]="content" id="stationFilterMenu">
   <ion-content>
-
+    条件筛选
   </ion-content>
 </ion-menu>
 

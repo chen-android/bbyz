@@ -26,4 +26,9 @@ export class CacheData {
 
     /** 选择的车站id */
     public static stationId:string;
+
+    public static reset():void{
+        CacheData.id = undefined;
+        CacheData.stationId = undefined;
+    }
 }

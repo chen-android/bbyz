@@ -17,6 +17,7 @@ import { AppVersion } from "@ionic-native/app-version";
 import { Device } from "@ionic-native/device";
 import { LoginPageModule } from '../pages/login/login.page.module';
 import { MainMenuModule } from '../pages/main/main.menu.module';
+import { FeedbackPageModule } from './../pages/other/feedback/feedback.page.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MainMenuModule } from '../pages/main/main.menu.module';
     LoginPageModule,
     MainMenuModule,
     HttpClientModule,
+    FeedbackPageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],

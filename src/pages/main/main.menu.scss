@@ -12,7 +12,7 @@ page-main {
     margin-left: 30pt;
     font-size: 1.6rem;
   }
-  .pcm_head_id>img {
+  .pcm_head_id > img {
     width: 5rem;
     height: 5rem;
   }
@@ -24,13 +24,13 @@ page-main {
     border-bottom: 1px solid color($colors, line-break);
     margin-top: 12pt;
   }
-  .pcm_feedback>img:first-child {
+  .pcm_feedback > img:first-child {
     width: 1.5rem;
     height: 1.2rem;
     margin-right: 5pt;
     vertical-align: bottom;
   }
-  .pcm_feedback>img:last-child {
+  .pcm_feedback > img:last-child {
     width: 0.8rem;
     height: 1.3rem;
     right: 10pt;

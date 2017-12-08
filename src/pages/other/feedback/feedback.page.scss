@@ -1,0 +1,14 @@
+page-feedback {
+  .fb_text .text-input {
+    height: 100pt;
+    background-color: white;
+    margin: 0;
+    width: 100%;
+    padding: 10pt;
+    font-size: 1.6rem;
+  }
+  .fb_commit {
+    margin: 40pt 20pt;
+    width: calc(100% - 40pt);
+  }
+}

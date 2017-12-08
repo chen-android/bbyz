@@ -43,21 +43,24 @@ $colors: (
   second-text-color:  #666666,
   third-text-color: #999999,
   line-break: #e3e3e3,
-  background: #f1f1f1
+  app-background: #f1f1f1
 );
 
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-$background-color:color($colors, background);
+$background-color:color($colors, app-background);
+$toolbar-background:color($colors, primary);
 
 
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-$background-color:color($colors,background);
+$background-color:color($colors, app-background);
+$toolbar-background:color($colors,primary);
+
 
 
 

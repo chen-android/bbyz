@@ -1,0 +1,22 @@
+<ion-header>
+    <img src="assets/imgs/icon_main_person_center.png" menuToggle class="home_person_center"/>
+<div [ngClass]="stationSelectClass" (click)="stationSelect()">
+        {{upStation}}  <img src="assets/imgs/icon_main_down_arrow.png"/><br>
+        {{today | date:"yyyy年MM月dd日"}}
+    </div>
+    <div [ngClass]="menuClass" >
+      <img src="assets/imgs/icon_home_passenger_flow_summary.png" />
+      <img src="assets/imgs/icon_home_ticket_search.png" />
+      <img src="assets/imgs/icon_home_ticket_filter.png" />
+    </div>
+</ion-header>
+
+<ion-content padding>
+  
+
+<button ion-button secondary>Toggle Menu</button>
+
+  <ion-item>
+    <ion-input type="text" placeholder="input"></ion-input>
+  </ion-item>
+</ion-content>

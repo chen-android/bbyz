@@ -1,7 +1,8 @@
-import {HomePage} from '../home/home';
+import {HomePage} from '../home/home.page';
 import { Component, ViewChild } from '@angular/core';
 import { Platform,  IonicPage,   NavController,   NavParams,   Nav} from 'ionic-angular';
 import { ListPage } from '../list/list';
+import { CacheData } from '../../providers/storage/CacheData';
 
 /**
  * Generated class for the MainPage page.
@@ -19,19 +20,13 @@ export class MainMenu {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
-
-  pages: Array<{ title: string, component: any }>;
+  userId:string;
   constructor(public platform: Platform) {
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MainPage');
+    this.userId = CacheData.id;
   }
 
   openPage(page) {

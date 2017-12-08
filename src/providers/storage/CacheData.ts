@@ -23,4 +23,7 @@ export class CacheData {
 
     /** 工号 */
     public static id:string;
+
+    /** 选择的车站id */
+    public static stationId:string;
 }

@@ -100,7 +100,7 @@ export class HttpServices {
             },
             "key": secure ? CacheData.getCommon().$imei : ""
         }
-        if (secure) {
+        if (content && secure) {
             json.key = this.encrypt.encodeForRSA(this.encrypt.encodeMD5(CacheData.getCommon().$imei));
             json.content = this.encrypt.encodeFroAES(JSON.stringify(json.content), this.encrypt.encodeMD5(CacheData.getCommon().$imei));
         }

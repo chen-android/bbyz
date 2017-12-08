@@ -1,3 +1,4 @@
+import { Station } from './../../module/Station';
 import { MainMenu } from './../main/main.menu';
 import { EncryptUtils } from './../../utils/EncryptUtils';
 import { User } from './../../module/User';
@@ -36,6 +37,12 @@ export class LoginPage {
             }
         });
 
+        // let json = [{ "ID": "1", "StationName": "杭州" }, { "ID": "2", "StationName": "丽水" }];
+        // let sList:Array<Station> = json;
+        // sList.forEach((value,index)=>{
+        //     console.info(value.ID+"--"+value.StationName+"```"+index);
+        // });
+
         // let key = "aslkdjflakjsdljfals";
         // let enStr = this.en.encodeFroAES("你好啊啊啊",key);
         // console.info("encoding:"+enStr);
@@ -65,6 +72,7 @@ export class LoginPage {
         //         console.info("登录成功:"+JSON.stringify(user));
         //     }
         // });
+        CacheData.id = "1000";
         this.navCtrl.setRoot(MainMenu);
     }
 }

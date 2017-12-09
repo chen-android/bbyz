@@ -12,7 +12,7 @@ page-main {
     margin-left: 30pt;
     font-size: 1.6rem;
   }
-  .pcm_head_id > img {
+  .pcm_head_id>img {
     width: 5rem;
     height: 5rem;
   }
@@ -24,17 +24,68 @@ page-main {
     border-bottom: 1px solid color($colors, line-break);
     margin-top: 12pt;
   }
-  .pcm_feedback > img:first-child {
+  .pcm_feedback>img:first-child {
     width: 1.5rem;
     height: 1.2rem;
     margin-right: 5pt;
     vertical-align: bottom;
   }
-  .pcm_feedback > img:last-child {
+  .pcm_feedback>img:last-child {
     width: 0.8rem;
     height: 1.3rem;
     right: 10pt;
     margin-top: 3pt;
     position: absolute;
+  }
+  .sfm_content {
+    background-color: white;
+  }
+  .sfm_grid {
+    margin-top: 20pt;
+    font-size: 1.6rem;
+  }
+  .sfm_grid ion-row:last-child{
+    border-bottom: 1px solid color($colors, line-break);
+  }
+  .sfm_right_arrow {
+    width: 0.7rem;
+    height: 1rem;
+    vertical-align: middle;
+    margin-left: 3pt;
+  }
+  .sfm_type span {
+    margin: 2px 3pt;
+  }
+  .sfm_type * {
+    vertical-align: middle;
+  }
+  .sfm_bus_input {
+    background-color: color($colors, app-background);
+    border-radius: 5pt;
+    border-color: transparent;
+  }
+  .sfm_bus_input .text-input{
+    margin: 0px;
+    padding: 8pt 4pt;
+    max-width: 100%;
+    width: 100%;
+  }
+  .border_line_break {
+    border-bottom: 1px solid color($colors, line-break);
+  }
+  .padding_10 {
+    padding: 10pt 0pt;
+  }
+  .sfm_hot_station{
+    padding-bottom: 8pt;
+  }
+  .sfm_hot_station>button {
+    border: 1px solid color($colors, line-break);
+    // text-align: center;
+    border-radius: 10pt;
+    height: 2.8rem;
+    width: 28%;
+    font-size: 1rem;
+    color:color($colors, second-text-color);
   }
 }

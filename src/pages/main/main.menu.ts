@@ -22,36 +22,40 @@ export class MainMenu {
 
     rootPage: any = HomePage;
     userId: string;
-    constructor(public platform: Platform, public alert: AlertController,public menu:MenuController) {
+    departDate: Date = new Date();
+    busId:string;
+    endStation:string;
+    hotStation: {};
+    constructor(public platform: Platform, public alert: AlertController, public menu: MenuController) {
 
     }
 
     ionViewDidLoad() {
         this.userId = CacheData.id;
+        this.hotStation =
+            [
+                ["常用站点1", "常用站点2", "常用站点3"],
+                ["常用站点4", "常用站点5", "常用站点6"],
+                ["常用站点7"]
+            ];
     }
-
-    openPage(page) {
-        // Reset the content nav to have just this page
-        // we wouldn't want the back button to show in this scenario
-        // this.nav.push(page.component);
-
-    }
+    /** 个人中心menu */
     logout() {
         this.alert.create({
-            message:"是否确定退出",
-            buttons:[
+            message: "是否确定退出",
+            buttons: [
                 {
-                    text:"确定",
-                    handler:()=>{
+                    text: "确定",
+                    handler: () => {
                         this.menu.close();
                         CacheData.reset();
                         this.nav.setRoot(LoginPage);
                     }
                 },
                 {
-                    text:"取消",
-                    role:"cancel",
-                    handler:()=>{
+                    text: "取消",
+                    role: "cancel",
+                    handler: () => {
                         this.menu.close();
                     }
                 }
@@ -60,5 +64,10 @@ export class MainMenu {
     }
     feedback() {
         this.nav.push(FeedbackPage);
+    }
+
+    /** 车次筛选menu */
+    hotStationClick(s:string){
+        this.endStation = s;
     }
 }

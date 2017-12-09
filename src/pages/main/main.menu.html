@@ -17,9 +17,39 @@
 </ion-menu>
 
 <ion-menu side="right" [content]="content" id="stationFilterMenu">
-  <ion-content>
-    条件筛选
+  <ion-content class="sfm_content">
+    <ion-grid class="sfm_grid">
+      <ion-row justify-content-between class="border_line_break padding_10">
+        <ion-col col-auto>发车日期</ion-col>
+        <ion-col col-auto>{{departDate | date:"yyyy年MM月dd日"}}<img class="sfm_right_arrow" src="assets/imgs/icon_right_arrow.png" /></ion-col>
+      </ion-row>
+      <ion-row justify-content-between class="border_line_break padding_10">
+        <ion-col col-auto>班次类别</ion-col>
+        <ion-col col-auto radio-group class="sfm_type">
+          <ion-radio value="全部" checked></ion-radio><span>全部</span>
+          <ion-radio value="正班"></ion-radio><span>正班</span>
+          <ion-radio value="加班"></ion-radio><span>加班</span>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-between align-items-center class="border_line_break padding_10">
+        <ion-col col-auto>车次号</ion-col>
+        <ion-input [(ngModel)]="busId" [disabled]='endStation?.length>0' type="tel" placeholder="请输入车次号(选填)" class="sfm_bus_input" col-8></ion-input>
+      </ion-row>
+      <ion-row justify-content-between align-items-center class="padding_10">
+        <ion-col col-auto>到达站点</ion-col>
+        <ion-input [(ngModel)]="endStation" [disabled]='busId?.length>0' type="text" placeholder="请输入到达站点(选填)" class="sfm_bus_input" col-8></ion-input>
+      </ion-row>
+      <ion-row justify-content-around *ngFor="let s of hotStation;" class="sfm_hot_station">
+        <button ion-button outline round col-auto *ngFor="let t of s;" (click)="hotStationClick(t)">{{t}}</button>
+      </ion-row>
+    </ion-grid>
   </ion-content>
+  <ion-footer>
+    <ion-row>
+      <button ion-button block col-6>确定</button>
+      <button ion-button block col-6 color="secondary">取消</button>
+    </ion-row>
+  </ion-footer>
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

@@ -6,7 +6,7 @@
     </div>
     <div [ngClass]="menuClass" >
       <img src="assets/imgs/icon_home_passenger_flow_summary.png" />
-      <img src="assets/imgs/icon_home_ticket_search.png" />
+      <img src="assets/imgs/icon_home_ticket_search.png" (click)="showSearchDialog()"/>
       <img src="assets/imgs/icon_home_ticket_filter.png" menuToggle="stationFilterMenu"/>
     </div>
 </ion-header>

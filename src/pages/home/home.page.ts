@@ -41,7 +41,7 @@ export class HomePage {
         this.requestCanSelectedStation();
         
     }
-
+    /**获取可查询车站 */
     requestCanSelectedStation(){
         // this.http.postRequest<Array<Station>>(CommandKeys.canSelectedStation,undefined,value=>{
         //     if(value.success){
@@ -54,6 +54,15 @@ export class HomePage {
             { "ID": "3", "StationName": "衢州机啊上拉框架的发" },
             { "ID": "4", "StationName": "宁波" },
             { "ID": "5", "StationName": "温州" },
+            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
+            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
+            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
+            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
+            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
+            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
+            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
+            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
+            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
             { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
         ];
         this.stations = json;
@@ -73,10 +82,43 @@ export class HomePage {
         });
         bts[bts.length] = {
             text: "取消",
-            role: "cancel"
+            role: "cancel",
+            
         }
         this.action.create({
             buttons:bts,
+            enableBackdropDismiss:true
+        }).present();
+    }
+
+    showSearchDialog(){
+        this.action.create({
+            buttons:[
+                {
+                    text:'车次售票查询',
+                    handler:()=>{
+
+                    }
+                },
+                {
+                    text:'售票明细查询',
+                    handler:()=>{
+                        
+                    }
+                },
+                {
+                    text:'票号追踪查询',
+                    handler:()=>{
+                        
+                    }
+                },
+                {
+                    text:'疑问班次查询',
+                    handler:()=>{
+                        
+                    }
+                }
+            ],
             enableBackdropDismiss:true
         }).present();
     }

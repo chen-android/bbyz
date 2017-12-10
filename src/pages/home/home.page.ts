@@ -54,16 +54,7 @@ export class HomePage {
             { "ID": "3", "StationName": "衢州机啊上拉框架的发" },
             { "ID": "4", "StationName": "宁波" },
             { "ID": "5", "StationName": "温州" },
-            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
-            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
-            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
-            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
-            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
-            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
-            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
-            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
-            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
-            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" },
+            { "ID": "6", "StationName": "金华和请勿靠近额和让客户去玩儿" }
         ];
         this.stations = json;
         let bts = [];

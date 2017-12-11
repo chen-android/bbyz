@@ -53,11 +53,26 @@ page-main {
     vertical-align: middle;
     margin-left: 3pt;
   }
-  .sfm_type span {
-    margin: 2px 3pt;
+  .bus_id_col {
+    padding: 0px;
+    min-height: initial;
+    background-color: white;
   }
-  .sfm_type * {
-    vertical-align: middle;
+  .bus_id_col .radio-md[item-start]{
+    margin: 0px 4px 0px 0px;
+  }
+  .bus_id_col .radio-ios[item-start] {
+    margin: 0px 4px 0px 0px;
+  }
+  .bus_id_col[ion-item] .item-inner{
+    padding-right: 0px;
+    border: none;
+  }
+  .bus_id_col[ion-item] .item-inner .label-md{
+    margin: 0px;
+  }
+  .bus_id_col[ion-item] .item-inner .label-ios {
+    margin: 0px;
   }
   .sfm_bus_input {
     background-color: color($colors, app-background);

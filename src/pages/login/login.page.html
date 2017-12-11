@@ -32,4 +32,8 @@
   </ion-item>
 
   <button ion-button color="primary" class="login-bg" (click)="login()">登录</button>
+  <div *ngIf="isDebug">
+  <ion-input [(ngModel)]="path" placeholder="请求地址 末尾不要带'/'"></ion-input>
+  <button ion-button (click)="setPath()">设置</button>
+  </div>
 </ion-content>

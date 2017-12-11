@@ -1,20 +1,16 @@
-import { Station } from './../../module/Station';
-import { MainMenu } from './../main/main.menu';
 import { EncryptUtils } from './../../utils/EncryptUtils';
+import { StorageUtils } from './../../providers/storage/StorageUtils';
+import { MainMenu } from './../main/main.menu';
 import { User } from './../../module/User';
 import { CommandKeys } from './../../utils/CommandKeys';
 import { HttpServices } from './../../providers/http/http.service';
 import { StorageKeys } from './../../utils/StorageKeys';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { CacheData } from '../../providers/storage/CacheData';
 import CryptoJS from "crypto-js";
 /**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * 登录页
  */
 
 @IonicPage()
@@ -23,56 +19,51 @@ import CryptoJS from "crypto-js";
     templateUrl: 'login.page.html',
 })
 export class LoginPage {
-    id:string;
-    pwd:string;
+    id: string;
+    pwd: string;
     saveCheck: boolean;
-    constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public http:HttpServices,private en:EncryptUtils) {
+    isDebug:boolean ;
+    path:string;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageUtils, 
+        public http: HttpServices,public toast:ToastController,public encrypt:EncryptUtils) {
     }
 
     ionViewDidLoad() {
-        this.storage.get(StorageKeys.USER_ID).then(value=>{
-            if(value){
-                this.id = <string>value;
+        this.isDebug = CacheData.isDebug;
+        this.storage.getUser().then(value => {
+            if (value) {
+                this.id = value["WorkerNo"];
                 this.saveCheck = true;
             }
         });
-
-        // let json = [{ "ID": "1", "StationName": "杭州" }, { "ID": "2", "StationName": "丽水" }];
-        // let sList:Array<Station> = json;
-        // sList.forEach((value,index)=>{
-        //     console.info(value.ID+"--"+value.StationName+"```"+index);
-        // });
-
-        // let key = "aslkdjflakjsdljfals";
-        // let enStr = this.en.encodeFroAES("你好啊啊啊",key);
-        // console.info("encoding:"+enStr);
-        // let result = this.en.decodeForAES(enStr, key);
-        // console.info("decoding:" + result);
-
-        // let text = '雷克萨接待来访骄傲';
-        // let key = 'secret key 123';
-        // let ciphertext = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(text), CryptoJS.enc.Utf8.parse(key) , {
-        //     mode: CryptoJS.mode.ECB,
-        //     padding: CryptoJS.pad.Pkcs7
-        // });
-
-        // // Decrypt
-        // let bytes = CryptoJS.AES.decrypt(ciphertext.toString(), CryptoJS.enc.Utf8.parse(key), {
-        //     mode: CryptoJS.mode.ECB,
-        //     padding: CryptoJS.pad.Pkcs7
-        // });
-        // let plaintext = bytes.toString(CryptoJS.enc.Utf8);
-
-        // console.log(plaintext);
     }
-    login(){
-        // this.http.postRequest1<User>(CommandKeys.login,this.id,{"Password":this.pwd},user=>{
-        //     if(user){
-        //         CacheData.id = this.id;
-        //         console.info("登录成功:"+JSON.stringify(user));
-        //     }
-        // });
-        CacheData.id = "1000";
-        this.navCtrl.setRoot(MainMenu);
+    login() {
+        this.http.postRequest1<User>(CommandKeys.login,this.id,{"Password":this.pwd},value=>{
+            if (value.success){
+                let user = value.object;
+                CacheData.id = this.id;
+                if (this.saveCheck) {
+                    this.storage.setUser(user);
+                }
+                this.toast.create({
+                    message:'登录成功',
+                    position:"middle",
+                    duration:800
+                }).present();
+                setTimeout(() => {
+                    this.navCtrl.setRoot(MainMenu);
+                }, 800);
+            }
+        });
+        
+    }
+
+    setPath(){
+        CacheData.url = this.path + "/api/Mobile";
+        this.toast.create({
+            message: '设置成功',
+            position: "middle",
+            duration: 800
+        }).present();
     }
 }

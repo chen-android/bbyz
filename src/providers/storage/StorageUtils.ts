@@ -1,12 +1,19 @@
+import { StorageKeys } from './../../utils/StorageKeys';
 import { User } from './../../module/User';
 import { CacheData } from './CacheData';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 @Injectable()
 export class StorageUtils{
-    constructor(public storage:Storage){}
+    clearableStorage: Storage;//可清除的缓存项 （如 用户名）
+    constStorage: Storage;//不清除的缓存项 （如 是否是第一次打开app标记）
+    constructor() {
+        this.clearableStorage = new Storage({ name: "clearable_storage" });
+        this.constStorage = new Storage({ name: "const_storage" });
+    }
+
     public set(key: string, value: any) {
-        this.storage.set(key, value).then(() => {
+        this.clearableStorage.set(key, value).then(() => {
             if (CacheData.isDebug) {
                 console.log("保存成功：" + key);
             }
@@ -14,17 +21,17 @@ export class StorageUtils{
             if (CacheData.isDebug) {
                 console.log("保存失败：" + key);
             }
-        })
+        });
     }
 
     public get<T>(key: string): Promise<T> {
-        return this.storage.get(key);
+        return this.clearableStorage.get(key);
     }
 
     public setUser(user: User): Promise<any> {
-        return this.storage.set("user", user);
+        return this.constStorage.set(StorageKeys.USER, user);
     }
-    public getUser(): Promise<User> {
-        return this.storage.get("user");
+    public getUser(): Promise<any> {
+        return this.constStorage.get(StorageKeys.USER);
     }
 }

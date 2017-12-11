@@ -6,10 +6,8 @@ import { Component, ViewChild } from '@angular/core';
 import { AlertController, IonicPage, Nav, Platform, MenuController } from 'ionic-angular';
 
 /**
- * Generated class for the MainPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * 
+ *主页 菜单页
  */
 
 @IonicPage()

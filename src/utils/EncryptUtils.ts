@@ -7,24 +7,23 @@ export class EncryptUtils {
     private encrypt = new JSEncrypt();
     private public_key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1k10wulc/MjjWJqVHgrfGJDCYlIn0dpGM9bp/wRmHt17DErh0RVWevqYrVOIcOqsX6ij5np3wKjKBtXczWTrqBvKwj5mDeJkJnTOa1iTDr1sNPAhcU6HnQ1hkQy9HkdsOL2AqkgvuBUgNvF2ldQF2lSjnvTrtWareHnCNA9gT5wIDAQAB";
     private max_encrypt_lenght: number = 245;
-
+    private iv: string = CryptoJS.enc.Utf8.parse("ajxieotpbjfhdietq");
     constructor() {
         this.encrypt.setPublicKey(this.public_key);
     }
 
     public decodeForAES(text: string, keyStr: string): string {
-        return CryptoJS.AES.decrypt(text, keyStr, {
-            mode: CryptoJS.mode.ECB,
-            padding: CryptoJS.pad.Pkcs7
+        let enc = CryptoJS.enc.Hex.parse(text);
+        let t = CryptoJS.enc.Base64.stringify(enc);
+        return CryptoJS.AES.decrypt(t, CryptoJS.enc.Utf8.parse(keyStr), {
+            iv:this.iv
         }).toString(CryptoJS.enc.Utf8);
     }
 
     public encodeFroAES(text:string,keyStr:string):string{
-        return CryptoJS.AES.encrypt(text, keyStr,{
-            mode: CryptoJS.mode.ECB,
-            padding: CryptoJS.pad.Pkcs7
-        }).toString();
-
+        return CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(text), CryptoJS.enc.Utf8.parse(keyStr),{
+            iv: this.iv
+        }).ciphertext.toString();
     }
     public encodeForRSA(text: string): string {
         text = encodeURI(text);

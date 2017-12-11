@@ -27,8 +27,12 @@ export class CacheData {
     /** 选择的车站id */
     public static stationId:string;
 
+    /**注销以后要重置的数据 */
     public static reset():void{
         CacheData.id = undefined;
         CacheData.stationId = undefined;
     }
+
+    /** http请求key */
+    public static secureKeys:Map<string,string> = new Map();
 }

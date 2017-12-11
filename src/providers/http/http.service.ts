@@ -1,3 +1,4 @@
+import { concat } from 'rxjs/observable/concat';
 import { CacheData } from './../storage/CacheData';
 import { RequestOptions } from './RequestOptions';
 import { EncryptUtils } from './../../utils/EncryptUtils';
@@ -11,20 +12,20 @@ import { BbyzHttpResonse } from './BbyzHttpResponse';
 export class HttpServices {
     constructor(private http: HttpClient, private encrypt: EncryptUtils, private loading: LoadingController,
         private toast: ToastController) { }
-
-    public postRequest<T>(command: string, content: any, success: (value: BbyzHttpResonse<T>) => void, error?: (error: any) => void,
-        option?: RequestOptions): void {
-        this.postRequest1(command, undefined, content, success, error, option);
-    }
     /**
      * post请求
-     * @param path 地址
+     * @param command 请求方法名
      * @param content 请求主体
-     * @param success 成功回调
+     * @param success 成功回调 默认返回false，在response返回非成功的情况下，默认取returnInfo，做tost弹出。若有自己单独处理，return true。
      * @param error 失败回调
      * @param option 请求参数 默认请求加密，显示loading框
      */
-    public postRequest1<T>(command: string, workNo = CacheData.id, content: any, success: (value: BbyzHttpResonse<T>) => void, error?: (error: any) => void,
+    public postRequest<T>(command: string, content: any, success: (value: BbyzHttpResonse<T>) => false, error?: (error: any) => void,
+        option?: RequestOptions): void {
+        this.postRequest1(command, undefined, content, success, error, option);
+    }
+    
+    public postRequest1<T>(command: string, workNo = CacheData.id, content: any, success: (value: BbyzHttpResonse<T>) => false, error?: (error: any) => void,
         option?: RequestOptions): void {
         let secure: boolean = true;
         let showProgress: boolean = true;
@@ -40,7 +41,7 @@ export class HttpServices {
     }
 
     private post<T>(command: string, workNo: string, secure: boolean, content: any, showProgress: boolean,
-        success: (value: BbyzHttpResonse<T>) => void, error?: (error: any) => void): void {
+        success: (value: BbyzHttpResonse<T>) => false, error?: (error: any) => void): void {
         let loadDialog: Loading;
         if (showProgress) {
             loadDialog = this.loading.create({
@@ -51,20 +52,39 @@ export class HttpServices {
             });
             loadDialog.present();
         }
-        this.http.post<BbyzHttpResonse<T>>(CacheData.url, this.getPostBody(secure, content), {
+        this.http.post<BbyzHttpResonse<T>>(CacheData.url, this.getPostBody(command, secure, content), {
             params: { "Command": command, "WorkNo": workNo }
         })
             .map((value: BbyzHttpResonse<T>, index: number) => {
-                if (value.secure == "1") {
-                    let util = new EncryptUtils();
-                    value.object = JSON.parse(util.decodeForAES(value.content, util.encodeMD5(CacheData.getCommon().$imei))) as T;
-                } else {
-                    value.object = JSON.parse(value.content) as T;
+                value.success = value.returnNo === 0;
+                if (value.success) {
+                    if (value.secure == "1") {
+                        let content = this.encrypt.decodeForAES(value.content, CacheData.secureKeys.get(command));
+                        if (content) {
+                            value.object = JSON.parse(content) as T;
+                        }
+                    } else {
+                        value.object = JSON.parse(value.content) as T;
+                    }
                 }
-                value.success = value.returnNo === "0000";
+                if (CacheData.isDebug) {
+                    console.info("返回参数:" + JSON.stringify(value));
+                }
                 return value;
             })
-            .subscribe(success, err => {
+            .subscribe(suc => {
+                if (success) {
+                    if (!success(suc)) {
+                        if (!suc.success) {
+                            this.toast.create({
+                                message: suc.returnInfo,
+                                position:"bottom",
+                                duration: 2000
+                            }).present();
+                        }
+                    }
+                }
+            }, err => {
                 if (error) {
                     error(err);
                 }
@@ -72,6 +92,9 @@ export class HttpServices {
                     message: "网络连接失败，请检查网络。",
                     duration: 2000
                 }).present();
+                if (loadDialog) {
+                    loadDialog.dismiss();
+                }
             }, () => {
                 if (loadDialog) {
                     loadDialog.dismiss();
@@ -79,7 +102,10 @@ export class HttpServices {
             });
     }
 
-    private getPostBody(secure: boolean, content: any): any {
+    private getPostBody(command: string, secure: boolean, content: any): any {
+        if(content == undefined){
+            content = {};
+        }
         let json = {
             "secure": secure ? "1" : "0",
             "secureType": secure ? "1" : "0",
@@ -100,9 +126,14 @@ export class HttpServices {
             },
             "key": secure ? CacheData.getCommon().$imei : ""
         }
+        if (CacheData.isDebug) {
+            console.info("请求参数:" + JSON.stringify(json));
+        }
         if (content && secure) {
-            json.key = this.encrypt.encodeForRSA(this.encrypt.encodeMD5(CacheData.getCommon().$imei));
-            json.content = this.encrypt.encodeFroAES(JSON.stringify(json.content), this.encrypt.encodeMD5(CacheData.getCommon().$imei));
+            let key = this.encrypt.encodeMD5(new Date().getTime().toString());
+            CacheData.secureKeys.set(command, key);
+            json.key = this.encrypt.encodeForRSA(key);
+            json.content = this.encrypt.encodeFroAES(JSON.stringify(json.content), key);
         }
         return JSON.stringify(json);
     }

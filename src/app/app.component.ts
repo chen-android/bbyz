@@ -15,7 +15,7 @@ import { User } from '../module/User';
     templateUrl: 'app.html'
 })
 export class MyApp {
-    rootPage: any = LoginPage;
+    rootPage: any ;
 
     constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
         private appVersion:AppVersion,private device:Device,private storage:StorageUtils) {
@@ -25,6 +25,7 @@ export class MyApp {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.initAppData();
+            this.rootPage = LoginPage;
         });
     }
     initAppData(): any {
@@ -73,15 +74,15 @@ export class MyApp {
         } else {
             //debug
             CacheData.getCommon().$usId = "";
-            CacheData.getCommon().$appVer = "2.0.0";
-            CacheData.getCommon().$appId = "com.hundsun.InternetSaleTicket";
+            CacheData.getCommon().$appVer = "1.0.0";
+            CacheData.getCommon().$appId = "com.bbkb.bbyz";
             CacheData.getCommon().$pushToken = "860482031470585";
             CacheData.getCommon().$imei = "860482031470585";
             CacheData.getCommon().$mobileVer = "7.0";
             CacheData.getCommon().$platformCode = "01";
             CacheData.getCommon().$loginStatus = "0";
-            CacheData.getCommon().$channelVer = "Bababus";
-            CacheData.getCommon().$phone = "13732254711";
+            CacheData.getCommon().$channelVer = "";
+            CacheData.getCommon().$phone = "";
             CacheData.getCommon().$terminalType = "3";
         }
     }

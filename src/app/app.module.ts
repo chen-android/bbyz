@@ -2,7 +2,6 @@ import { HttpServices } from './../providers/http/http.service';
 import { EncryptUtils } from './../utils/EncryptUtils';
 import { HttpClientModule } from '@angular/common/http';
 import { StorageUtils } from './../providers/storage/StorageUtils';
-import { IonicStorageModule } from '@ionic/storage/dist';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -31,8 +30,7 @@ import { FeedbackPageModule } from './../pages/other/feedback/feedback.page.modu
     MainMenuModule,
     HttpClientModule,
     FeedbackPageModule,
-    IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,9 +43,9 @@ import { FeedbackPageModule } from './../pages/other/feedback/feedback.page.modu
     SplashScreen,
     AppVersion,
     Device,
-    StorageUtils,
     EncryptUtils,
     HttpServices,
+    StorageUtils,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

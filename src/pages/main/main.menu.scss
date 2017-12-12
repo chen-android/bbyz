@@ -77,7 +77,6 @@ page-main {
   .sfm_bus_input {
     background-color: color($colors, app-background);
     border-radius: 5pt;
-    border-color: transparent;
   }
   .sfm_bus_input .text-input{
     margin: 0px;
@@ -94,6 +93,9 @@ page-main {
   .sfm_hot_station{
     padding-bottom: 8pt;
   }
+  .sfm_hot_station:last-child{
+    border-bottom: 1px solid color($colors, line-break);
+  }
   .sfm_hot_station>button {
     border: 1px solid color($colors, line-break);
     // text-align: center;
@@ -103,4 +105,20 @@ page-main {
     font-size: 1rem;
     color:color($colors, second-text-color);
   }
+  .row-check {
+    padding: 0px;
+    background-color: white;
+    min-height: initial;
+    height: 25pt;
+    border-bottom: 1px solid color($colors, line-break);
+  }
+
+  .row-check.item-md.item-block .item-inner {
+    border: none;
+  }
+
+  .row-check.item-ios.item-block .item-inner {
+    border: none;
+  }
+
 }

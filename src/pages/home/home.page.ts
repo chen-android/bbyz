@@ -1,8 +1,10 @@
+import { CacheData } from './../../providers/storage/CacheData';
 import { Station } from './../../module/Station';
 import { CommandKeys } from './../../utils/CommandKeys';
 import { HttpServices } from './../../providers/http/http.service';
 import { Component } from '@angular/core';
 import { ActionSheetController, MenuController, NavController } from 'ionic-angular';
+import { dateValueRange } from 'ionic-angular/util/datetime-util';
 
 @Component({
     selector: 'page-home',
@@ -44,12 +46,13 @@ export class HomePage {
     /**获取可查询车站 */
     requestCanSelectedStation() {
         if (this.stations == undefined) {
-            this.http.postRequest<Array<Station>>(CommandKeys.canSelectedStation, {}, value => {
+            this.http.postRequest<Array<Station>>(CommandKeys.canSelectedStation, null, value => {
                 if (value.success) {
                     this.stations = value.object;
                     this.showStationDialog();
                 }
-            })
+                return false;
+            });
         }else{
             this.showStationDialog();
         }
@@ -63,6 +66,7 @@ export class HomePage {
                 handler: () => {
                     this.selectedStation = value;
                     this.upStation = value.StationName;
+                    CacheData.stationId = this.selectedStation.ID;
                     if (!this.stationSelected) {
                         this.stationSelected = true;
                         this.setTitleClass();

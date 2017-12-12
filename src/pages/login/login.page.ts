@@ -20,7 +20,7 @@ import CryptoJS from "crypto-js";
 })
 export class LoginPage {
     id: string;
-    pwd: string;
+    pwd: string ;
     saveCheck: boolean;
     isDebug:boolean ;
     path:string;
@@ -36,6 +36,7 @@ export class LoginPage {
                 this.saveCheck = true;
             }
         });
+        this.pwd = "12345678";
     }
     login() {
         this.http.postRequest1<User>(CommandKeys.login,this.id,{"Password":this.pwd},value=>{
@@ -54,6 +55,7 @@ export class LoginPage {
                     this.navCtrl.setRoot(MainMenu);
                 }, 800);
             }
+            return false;
         });
         
     }

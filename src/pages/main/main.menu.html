@@ -1,11 +1,11 @@
-<ion-menu side="left" [content]="content" id="personCenterMenu">
+<ion-menu side="left" [content]="content" id="personCenterMenu" (ionOpen)="personCenterOpen($event)">
   <ion-content class="pcm_content">
     <div class="pcm_head"></div>
     <div class="pcm_head_id">
       <img src="assets/imgs/icon_main_person_center.png" />
       <br> 工号{{userId}}
     </div>
-    <div class="pcm_feedback" (click)="feedback()" menuClose="personCenterMenu">
+    <div class="pcm_feedback" (click)="feedback()">
         <img src="assets/imgs/icon_person_center_feedback.png"/>
         意见反馈
         <img src="assets/imgs/icon_right_arrow.png"/>
@@ -16,12 +16,14 @@
   </ion-footer>
 </ion-menu>
 
-<ion-menu side="right" [content]="content" id="stationFilterMenu">
+<ion-menu side="right" [content]="content" id="stationFilterMenu" (ionOpen)="stationFilterOpen($event)">
   <ion-content class="sfm_content">
     <ion-grid class="sfm_grid">
       <ion-row justify-content-between class="border_line_break padding_10">
         <ion-col col-auto>发车日期</ion-col>
-        <ion-col col-auto>{{departDate | date:"yyyy年MM月dd日"}}<img class="sfm_right_arrow" src="assets/imgs/icon_right_arrow.png" /></ion-col>
+        <ion-col col-auto>
+          <ion-datetime displayFormat="YYYY年MM月DD日" [min]="minDate" [max]="maxDate" [(ngModel)]="selectDate"></ion-datetime>
+        </ion-col>
       </ion-row>
       <ion-row radio-group class="border_line_break padding_10">
         <ion-col col-auto>班次类别</ion-col>
@@ -38,13 +40,17 @@
           <ion-label>加班</ion-label>
         </ion-col>
       </ion-row>
-      <ion-row justify-content-between align-items-center class="border_line_break padding_10">
+      <ion-row justify-content-between align-items-center class="padding_10">
         <ion-col col-auto>车次号</ion-col>
-        <ion-input [(ngModel)]="busId" [disabled]='endStation?.length>0' type="tel" placeholder="请输入车次号(选填)" class="sfm_bus_input" col-8></ion-input>
+        <ion-input [(ngModel)]="busId" [disabled]='endStation' type="tel" placeholder="请输入车次号(选填)" class="sfm_bus_input" col-8></ion-input>
+      </ion-row>
+      <ion-row ion-item align-items-center class="row-check">
+        <ion-label>显示超时班次</ion-label>
+        <ion-checkbox style="margin: 0pt 8pt;" [(ngModel)]="showOvertime"></ion-checkbox>
       </ion-row>
       <ion-row justify-content-between align-items-center class="padding_10">
         <ion-col col-auto>到达站点</ion-col>
-        <ion-input [(ngModel)]="endStation" [disabled]='busId?.length>0' type="text" placeholder="请输入到达站点(选填)" class="sfm_bus_input" col-8></ion-input>
+        <ion-col class="sfm_bus_input" col-8>{{endStation?.StopName?"endStation?.StopName":"请输入到达车站(选填)"}}</ion-col>
       </ion-row>
       <ion-row justify-content-around *ngFor="let s of hotStation;" class="sfm_hot_station">
         <button ion-button outline round col-auto *ngFor="let t of s;" (click)="hotStationClick(t)">{{t}}</button>

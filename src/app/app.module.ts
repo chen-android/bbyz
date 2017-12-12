@@ -16,6 +16,7 @@ import { AppVersion } from "@ionic-native/app-version";
 import { Device } from "@ionic-native/device";
 import { LoginPageModule } from '../pages/login/login.page.module';
 import { MainMenuModule } from '../pages/main/main.menu.module';
+import { BusTypeSearchPageModule } from './../pages/bus-type-search/bus-type-search.page.module';
 import { FeedbackPageModule } from './../pages/other/feedback/feedback.page.module';
 
 @NgModule({
@@ -30,6 +31,7 @@ import { FeedbackPageModule } from './../pages/other/feedback/feedback.page.modu
     MainMenuModule,
     HttpClientModule,
     FeedbackPageModule,
+    BusTypeSearchPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

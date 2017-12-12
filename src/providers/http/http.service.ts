@@ -20,12 +20,12 @@ export class HttpServices {
      * @param error 失败回调
      * @param option 请求参数 默认请求加密，显示loading框
      */
-    public postRequest<T>(command: string, content: any, success: (value: BbyzHttpResonse<T>) => false, error?: (error: any) => void,
+    public postRequest<T>(command: string, content: any, success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void,
         option?: RequestOptions): void {
         this.postRequest1(command, undefined, content, success, error, option);
     }
     
-    public postRequest1<T>(command: string, workNo = CacheData.id, content: any, success: (value: BbyzHttpResonse<T>) => false, error?: (error: any) => void,
+    public postRequest1<T>(command: string, workNo = CacheData.id, content: any, success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void,
         option?: RequestOptions): void {
         let secure: boolean = true;
         let showProgress: boolean = true;
@@ -41,7 +41,7 @@ export class HttpServices {
     }
 
     private post<T>(command: string, workNo: string, secure: boolean, content: any, showProgress: boolean,
-        success: (value: BbyzHttpResonse<T>) => false, error?: (error: any) => void): void {
+        success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void): void {
         let loadDialog: Loading;
         if (showProgress) {
             loadDialog = this.loading.create({
@@ -68,7 +68,10 @@ export class HttpServices {
                     }
                 }
                 if (CacheData.isDebug) {
-                    console.info("返回参数:" + JSON.stringify(value));
+                    // console.info("返回参数:" + JSON.stringify(value));
+                    console.log("--------返回参数--------"+command);
+                    console.log( value);
+                    console.log("--------返回参数--------"+command);
                 }
                 return value;
             })
@@ -103,9 +106,6 @@ export class HttpServices {
     }
 
     private getPostBody(command: string, secure: boolean, content: any): any {
-        if(content == undefined){
-            content = {};
-        }
         let json = {
             "secure": secure ? "1" : "0",
             "secureType": secure ? "1" : "0",
@@ -127,13 +127,18 @@ export class HttpServices {
             "key": secure ? CacheData.getCommon().$imei : ""
         }
         if (CacheData.isDebug) {
-            console.info("请求参数:" + JSON.stringify(json));
+            console.info("--------请求参数--------"+command);
+            console.info(json);
+            console.info("--------请求参数--------" + command);
         }
         if (content && secure) {
             let key = this.encrypt.encodeMD5(new Date().getTime().toString());
             CacheData.secureKeys.set(command, key);
             json.key = this.encrypt.encodeForRSA(key);
             json.content = this.encrypt.encodeFroAES(JSON.stringify(json.content), key);
+        }
+        if (content == undefined||content == null) {
+            json.content = {};
         }
         return JSON.stringify(json);
     }

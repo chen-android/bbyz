@@ -1,9 +1,15 @@
 export class User {
+    /* id */
     id: string;
+    /* 工号 */
     WrokerNo: string;
+    /* 名字 */
     WorkerName: string;
+    /* 名字拼写 */
     Spell: string;
+    /* 密码 */
     Password: string;
+    /*  */
     Useable: boolean;
     OuterOnly: boolean;
     AllowExportData: boolean;

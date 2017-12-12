@@ -1,9 +1,15 @@
+import { CommandKeys } from './../../utils/CommandKeys';
+import { HttpServices } from './../../providers/http/http.service';
+import { BusTypeItem } from './../../module/BusTypeItem';
 import { FeedbackPage } from './../other/feedback/feedback.page';
 import { CacheData } from './../../providers/storage/CacheData';
 import { LoginPage } from './../login/login.page';
 import { HomePage } from '../home/home.page';
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, IonicPage, Nav, Platform, MenuController } from 'ionic-angular';
+import { AlertController, IonicPage, Nav, Platform, MenuController, NavController } from 'ionic-angular';
+import { BusTypeItem } from '../../module/BusTypeItem';
+import { dateValueRange } from 'ionic-angular/util/datetime-util';
+import { getLocaleDateFormat } from '@angular/common/src/i18n/locale_data_api';
 
 /**
  * 
@@ -20,22 +26,22 @@ export class MainMenu {
 
     rootPage: any = HomePage;
     userId: string;
-    departDate: Date = new Date();
+    minDate: string;
+    maxDate: string;
+    selectDate: string;
+    canSelectDates:Array<string>;
     busId:string;
-    endStation:string;
-    hotStation: {};
-    constructor(public platform: Platform, public alert: AlertController, public menu: MenuController) {
+    endStation:BusTypeItem;
+    hotStation:{};
+    showOvertime:boolean;
+    constructor(public navCtrl:NavController,public platform: Platform, public alert: AlertController, public menu: MenuController,
+        public http:HttpServices) {
 
     }
 
     ionViewDidLoad() {
         this.userId = CacheData.id;
-        this.hotStation =
-            [
-                ["常用站点1", "常用站点2", "常用站点3"],
-                ["常用站点4", "常用站点5", "常用站点6"],
-                ["常用站点7"]
-            ];
+        this.hotStation ;
     }
     /** 个人中心menu */
     logout() {
@@ -61,11 +67,29 @@ export class MainMenu {
         }).present();
     }
     feedback() {
-        this.nav.push(FeedbackPage);
+        this.navCtrl.push(FeedbackPage);
+    }
+
+    personCenterOpen(){
+        
+    }
+    stationFilterOpen(){
+        if(this.canSelectDates==undefined){
+            this.http.postRequest(CommandKeys.filterDate, { "StationID":CacheData.stationId},value=>{
+                if(value.success){
+                    let t:string = value.object[0]["Column1"];
+                    let timeStage = t.split("~");
+                    this.minDate = timeStage[0];
+                    this.maxDate = timeStage[1];
+                    this.selectDate = 
+                }
+                return false;
+            })
+        }
     }
 
     /** 车次筛选menu */
-    hotStationClick(s:string){
+    hotStationClick(s:BusTypeItem){
         this.endStation = s;
     }
 }

@@ -10,6 +10,7 @@ import { LoginPage } from '../pages/login/login.page';
 import { AppVersion } from '@ionic-native/app-version';
 import { Device } from '@ionic-native/device';
 import { User } from '../module/User';
+import { MainMenu } from '../pages/main/main.menu';
 
 @Component({
     templateUrl: 'app.html'
@@ -25,7 +26,8 @@ export class MyApp {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.initAppData();
-            this.rootPage = LoginPage;
+            this.rootPage = MainMenu;
+            CacheData.id = '1000';
         });
     }
     initAppData(): any {

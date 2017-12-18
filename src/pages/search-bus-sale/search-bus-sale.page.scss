@@ -1,0 +1,38 @@
+page-search-bus-sale {
+    .content-md {
+        background-color: #fff;
+    }
+    .input-warp {
+        height: 5rem;
+        align-items: center;
+        border-bottom: 1px solid #f6f6f6;
+    }
+    .default-input {
+        margin-left: 1rem;
+    }
+    .search-btn-wrap {
+        justify-content: center;
+        height: 5rem;
+    }
+    .search-btn {
+        width: 60%;
+        height: 3rem;
+    }
+    
+    .col-12 {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 12%;
+        -moz-box-flex: 0;
+        -moz-flex: 0 0 12%;
+        -ms-flex: 0 0 12%;
+        flex: 0 0 12%;
+    }
+    .col-05 {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 4%;
+        -moz-box-flex: 0;
+        -moz-flex: 0 0 4%;
+        -ms-flex: 0 0 4%;
+        flex: 0 0 4%;
+    }
+}

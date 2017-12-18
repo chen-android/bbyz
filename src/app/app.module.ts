@@ -21,6 +21,10 @@ import { FeedbackPageModule } from './../pages/other/feedback/feedback.page.modu
 import { SchemDetailPageModule } from '../pages/schem-detail/schem-detail.page.module';
 import { SchemDetailModifyPageModule } from '../pages/schem-detail-modify/schem-detail-modify.page.module';
 import { SchemDetailClonePageModule } from '../pages/schem-detail-clone/schem-detail-clone.page.module';
+import { SearchBusSalePageModule } from '../pages/search-bus-sale/search-bus-sale.page.module';
+import { SearchSaleDetailPageModule } from '../pages/search-sale-detail/search-sale-detail.page.module';
+import { SearchTicketNumberPageModule } from '../pages/search-ticket-number/search-ticket-number.page.module';
+import { SearchIssueBusPageModule } from '../pages/search-issue-bus/search-issue-bus.page.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,10 @@ import { SchemDetailClonePageModule } from '../pages/schem-detail-clone/schem-de
     BrowserModule,
     LoginPageModule,
     MainMenuModule,
+    SearchBusSalePageModule,
+    SearchSaleDetailPageModule,
+    SearchTicketNumberPageModule,
+    SearchIssueBusPageModule,
     HttpClientModule,
     FeedbackPageModule,
     BusTypeSearchPageModule,

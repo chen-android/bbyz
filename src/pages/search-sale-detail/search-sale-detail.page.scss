@@ -1,0 +1,29 @@
+page-search-sale-detail {
+    .content-md {
+        background-color: #fff;
+    }
+    .arrow {
+        position: relative;
+        left: 50%;
+        margin-left: -7px;
+        float: left;
+        height: 4px;
+        width: 15px;
+    }
+    .input-warp {
+        height: 5rem;
+        align-items: center;
+        border-bottom: 1px solid #f6f6f6;
+    }
+    .default-input {
+        margin-left: 1rem;
+    }
+    .search-btn-wrap {
+        justify-content: center;
+        height: 5rem;
+    }
+    .search-btn {
+        width: 60%;
+        height: 3rem;
+    }
+}

@@ -19,3 +19,21 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+// 车次查询相关
+.scroll-grid {
+    width: 128rem;
+}
+.title-row {
+    height: 50px;
+}
+.title-row ion-col {
+    color: rgb(72, 119, 221);
+    font-size: 13px;
+}
+.content-row {
+    height: 50px;
+}
+.content-row ion-col {
+    color: rgb(51, 51, 51);
+    font-size: 13px;
+}

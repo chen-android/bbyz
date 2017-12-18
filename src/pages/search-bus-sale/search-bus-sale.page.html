@@ -1,0 +1,64 @@
+<!--
+  Generated template for the SearchBusSalePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>车次售票查询</ion-title>
+  </ion-navbar>
+  <ion-row class="input-warp">
+    <ion-input class="default-input" type="tel" placeholder="请输入车次信息" [(ngModel)]="SchemID"></ion-input>
+  </ion-row>
+  <ion-row align-items-center class="search-btn-wrap">
+    <button class="search-btn" ion-button (click)="searchAction()">查询</button>
+  </ion-row>
+</ion-header>
+
+
+<ion-content>
+  <ion-scroll scrollX="true" scrollY="true" style="height:95%; margin:10px 15px;">
+    <ion-grid no-padding class="scroll-grid">
+      <ion-row align-items-center class="title-row">
+        <ion-col>发车日期</ion-col>
+        <ion-col class="col-05">车次号</ion-col>
+        <ion-col>车票票号</ion-col>
+        <ion-col>售票员姓名</ion-col>
+        <ion-col>到站名称</ion-col>
+        <ion-col class="col-05">座位号</ion-col>
+        <ion-col class="col-05">票种</ion-col>
+        <ion-col class="col-05">状态</ion-col>
+        <ion-col>票价</ion-col>
+        <ion-col>售票时间</ion-col>
+        <ion-col>售票站名称</ion-col>
+        <ion-col>隶属站名称</ion-col>
+        <ion-col>检票时间</ion-col>
+        <ion-col>旅客姓名</ion-col>
+        <ion-col class="col-12">证件号码</ion-col>
+        <ion-col col-1>联系电话</ion-col>
+        <ion-col class="col-05">是否携童</ion-col>
+      </ion-row>
+      <ion-row align-items-center class="content-row" *ngFor="let item of list">
+        <ion-col>{{item.DriveDate}}</ion-col>
+        <ion-col class="col-05">{{item.SchemNo}}</ion-col>
+        <ion-col>{{item.TicketNo}}</ion-col>
+        <ion-col>{{item.SaleWorkerName}}</ion-col>
+        <ion-col>{{item.StopName}}</ion-col>
+        <ion-col class="col-05">{{item.SeatNo}}</ion-col>
+        <ion-col class="col-05">{{item.TicketType}}</ion-col>
+        <ion-col class="col-05">{{item.Status}}</ion-col>
+        <ion-col>{{item.Price}}</ion-col>
+        <ion-col>{{item.SaleDateTime}}</ion-col>
+        <ion-col>{{item.SaleStationName}}</ion-col>
+        <ion-col>{{item.StationName}}</ion-col>
+        <ion-col>{{item.CheckDateTime}}</ion-col>
+        <ion-col>{{item.ClientName}}</ion-col>
+        <ion-col class="col-12">{{item.IDCardNo}}</ion-col>
+        <ion-col col-1>{{item.Tel}}</ion-col>
+        <ion-col class="col-05">{{item.IsFreeChild}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-scroll>
+</ion-content>

@@ -1,4 +1,4 @@
-export class BusTypeItem{
+export class Site{
     /** 站点ID */
     StopNo:string;
     /** 站点名称 */

@@ -7,12 +7,16 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>bus-type-search</ion-title>
+    <ion-title>到达站点</ion-title>
   </ion-navbar>
-
+  <ion-searchbar placeholder="请输入到达站点" (ionInput)="searchInput($event)"></ion-searchbar>
 </ion-header>
 
-
-<ion-content padding>
+<ion-content>
+  <ion-list >
+    <ion-item *ngFor="let s of siteList" (click)="itemClick(s)" >
+      {{s.StopName}}
+    </ion-item>
+  </ion-list>
 
 </ion-content>

@@ -1,0 +1,74 @@
+page-schem-detail {
+  .sd_part1 {
+    background-color: white;
+    padding: 5pt;
+  }
+  .sd_part1>ion-col>p {
+    font-size: 1.4rem;
+    color: color($colors, third-text-color);
+    text-align: center;
+    margin: 0pt 0pt 5pt 0pt;
+  }
+  .sd_part1>ion-col>p+p {
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: color($colors, text-color);
+  }
+  .sd_part2 {
+    background-color: white;
+  }
+  .sd_part2>ion-col {
+    text-align: center;
+  }
+  .grid>.sd_part2.row>.col {
+    padding: 10pt;
+  }
+  .sd_part2>ion-col>img {
+    width: 40%;
+    margin-left: 3pt;
+  }
+  .sd_part3 {
+    color: white;
+    background-image: linear-gradient(-14deg, #2e61d2 0%, #3a7df7 100%), linear-gradient( #4877dd, #4877dd);
+    background-blend-mode: normal, normal;
+    border-radius: 5pt;
+    margin: 20pt 10pt;
+    width: initial;
+  }
+  .sd_part3>ion-row:first-child>ion-col>p:first-child{
+    font-weight: 100;
+    font-size: 1.3rem;
+  }
+  .sd_part3>ion-row:first-child>ion-col>p:last-child {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+  .sd_part3>ion-row:first-child>ion-col:last-child {
+    text-align: right;
+  }
+  .sd_part3>ion-row:first-child> ion-col >p {
+    margin: 7pt 2pt;
+  }
+  .sd_part3 .license {
+    text-align: center;
+  }
+  .sd_part3 .line2>ion-col>p:first-child{
+    font-weight: 100;
+    font-size: 1.3rem;
+  }
+  .sd_part3 .line2 > ion-col >  p + p{
+    font-size: 1.8rem;
+    font-weight: 500;
+    text-align: center;
+  }
+  .sd_part3 .line2>ion-col>p{
+    margin: 7pt 2pt;
+  }
+
+  .sd_part3 .line2>ion-col:last-child{
+    text-align: right;
+  }
+
+
+
+}

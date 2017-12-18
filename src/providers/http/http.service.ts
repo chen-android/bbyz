@@ -1,4 +1,3 @@
-import { concat } from 'rxjs/observable/concat';
 import { CacheData } from './../storage/CacheData';
 import { RequestOptions } from './RequestOptions';
 import { EncryptUtils } from './../../utils/EncryptUtils';
@@ -48,7 +47,7 @@ export class HttpServices {
                 content: "请稍后。。。",
                 showBackdrop: true,
                 enableBackdropDismiss: true,
-                dismissOnPageChange: true
+                dismissOnPageChange: false
             });
             loadDialog.present();
         }
@@ -68,10 +67,8 @@ export class HttpServices {
                     }
                 }
                 if (CacheData.isDebug) {
-                    // console.info("返回参数:" + JSON.stringify(value));
-                    console.log("--------返回参数--------"+command);
+                    console.log("<<<<<<<<返回参数<<<<<<<<"+command);
                     console.log( value);
-                    console.log("--------返回参数--------"+command);
                 }
                 return value;
             })
@@ -107,9 +104,6 @@ export class HttpServices {
 
     private getPostBody(command: string, secure: boolean, content: any): any {
         let json = {
-            "secure": secure ? "1" : "0",
-            "secureType": secure ? "1" : "0",
-            "platform": "ionic",
             "content": content,
             "common": {
                 "appId": CacheData.getCommon().$appId,
@@ -124,21 +118,20 @@ export class HttpServices {
                 "platformCode": CacheData.getCommon().$platformCode,
                 "phone": CacheData.getCommon().$phone
             },
-            "key": secure ? CacheData.getCommon().$imei : ""
+            "key": ""
         }
         if (CacheData.isDebug) {
-            console.info("--------请求参数--------"+command);
-            console.info(json);
-            console.info("--------请求参数--------" + command);
+            console.info(">>>>>>>>请求参数>>>>>>>>"+command);
+            console.info(json.content);
         }
+        let key = this.encrypt.encodeMD5(new Date().getTime().toString());
+        json.key = this.encrypt.encodeForRSA(key);
+        CacheData.secureKeys.set(command, key);
         if (content && secure) {
-            let key = this.encrypt.encodeMD5(new Date().getTime().toString());
-            CacheData.secureKeys.set(command, key);
-            json.key = this.encrypt.encodeForRSA(key);
             json.content = this.encrypt.encodeFroAES(JSON.stringify(json.content), key);
         }
-        if (content == undefined||content == null) {
-            json.content = {};
+        if(content == undefined||content == null){
+            json.content = "";
         }
         return JSON.stringify(json);
     }

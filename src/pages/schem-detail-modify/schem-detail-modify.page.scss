@@ -1,0 +1,120 @@
+page-schem-detail-modify {
+  .scroll-content {
+    background-color: white;
+  }
+  .grid {
+    padding: 0px;
+  }
+  .grid>ion-row+ion-row {
+    font-size: 1.6rem;
+    padding: 8pt 5pt;
+    border-bottom: 1px solid color($colors, line-break);
+  }
+  .part1 {
+    background-color: white;
+    padding: 5pt;
+  }
+  .part1>ion-col>p {
+    font-size: 1.4rem;
+    color: color($colors, third-text-color);
+    text-align: center;
+    margin: 0pt 0pt 5pt 0pt;
+  }
+  .part1>ion-col>p+p {
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: color($colors, text-color);
+  }
+  .divider {
+    background-color: color($colors, app-background);
+    height: 10pt;
+  }
+  .depart_time {
+    font-size: 1.6rem;
+  }
+  .depart_time>ion-col:first-child {
+    padding: 0px 8pt 0px 5pt;
+    height: 10pt;
+  }
+  .depart_time>ion-col:first-child>img {
+    width: 10pt;
+    height: 10pt;
+    vertical-align: top;
+  }
+  .depart_time>ion-col:nth-child(2) {
+    color: color($colors, third-text-color);
+  }
+  .depart_time ion-datetime {
+    text-align: end;
+    padding: 2pt 5pt;
+  }
+  .seat>ion-col>input {
+    width: 50%;
+    border: none;
+    text-align: end;
+  }
+  .seat>ion-col>div {
+    width: 40%;
+    display: inline-block;
+    color: color($colors, third-text-color);
+  }
+  .seat>ion-col:last-child {
+    border-left: 1px solid color($colors, line-break);
+    padding-left: 10pt;
+  }
+  .bus_type>ion-col>div:first-child {
+    color: color($colors, third-text-color);
+  }
+  .bus_type>ion-col>div {
+    width: 45%;
+    display: inline-block;
+  }
+  .bus_type>ion-col>div>img {
+    width: 6pt;
+    height: 10pt;
+    margin-left: 5pt;
+    vertical-align: center;
+  }
+  .bus_type>ion-col:first-child>div:last-child {
+    text-align: end;
+  }
+  .bus_type>ion-col>input {
+    width: 50%;
+    border: none;
+    text-align: end;
+  }
+  .bus_type>ion-col:last-child {
+    border-left: 1px solid color($colors, line-break);
+    padding-left: 10pt;
+  }
+  .schem_type {
+    padding: 0px;
+    min-height: initial;
+    background-color: white;
+  }
+  .schem_type .radio-md[item-start] {
+    margin: 0px 4px 0px 0px;
+  }
+  .schem_type .radio-ios[item-start] {
+    margin: 0px 4px 0px 0px;
+  }
+  .schem_type[ion-item] .item-inner {
+    padding-right: 0px;
+    border: none;
+  }
+  .schem_type[ion-item] .item-inner .label-md {
+    margin: 0px 5pt;
+  }
+  .schem_type[ion-item] .item-inner .label-ios {
+    margin: 0px 5pt;
+  }
+  .text_color_third {
+    color: color($colors, third-text-color);
+  }
+  .foot_bt button {
+    width: 100%;
+  }
+  .footer {
+    background-color: white;
+  }
+}

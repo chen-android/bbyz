@@ -1,10 +1,15 @@
+import { SchemItem } from './../../module/SchemItem';
+import { Site } from './../../module/Site';
+import { EventKeys } from './../../utils/EventKeys';
 import { CacheData } from './../../providers/storage/CacheData';
 import { Station } from './../../module/Station';
 import { CommandKeys } from './../../utils/CommandKeys';
 import { HttpServices } from './../../providers/http/http.service';
 import { Component } from '@angular/core';
-import { ActionSheetController, MenuController, NavController } from 'ionic-angular';
+import { ActionSheetController, MenuController, NavController, AlertController } from 'ionic-angular';
 import { dateValueRange } from 'ionic-angular/util/datetime-util';
+import { Events } from 'ionic-angular/util/events';
+import { SchemDetailPage } from '../schem-detail/schem-detail.page';
 
 @Component({
     selector: 'page-home',
@@ -12,18 +17,35 @@ import { dateValueRange } from 'ionic-angular/util/datetime-util';
 })
 export class HomePage {
     upStation: string;
-    today = new Date();
+    selectDate: string;
     stationSelected: boolean = false;
+    busType: number = 0;
+    busId: string;
+    endSite: Site;
+    showOvertime: boolean;
     stationSelectClass: {};
     menuClass: {};
     stations: Array<Station> = undefined;
     selectedStation: Station;
+    schemList: Array<SchemItem>;
     constructor(public navCtrl: NavController, public http: HttpServices, public action: ActionSheetController,
-        public menu: MenuController) {
+        public menu: MenuController, public alert: AlertController, public event: Events) {
         this.upStation = "请选择乘车站";
+        this.selectDate = new Date().toISOString().substring(0, 10);
     }
     ionViewDidLoad() {
         this.setTitleClass();
+        this.event.subscribe(EventKeys.stationFilter, (date: string, busType: number, busId: string, endSite: Site, showOvertime: boolean) => {
+            this.selectDate = date;
+            this.busType = busType;
+            this.busId = busId;
+            this.endSite = endSite;
+            this.showOvertime = showOvertime;
+            this.requestSchemList();
+        });
+    }
+    ionViewDidLeave() {
+        this.event.unsubscribe(EventKeys.stationFilter);
     }
 
     setTitleClass() {
@@ -41,21 +63,60 @@ export class HomePage {
     /** 选择车站 */
     stationSelect() {
         this.requestCanSelectedStation();
-
     }
     /**获取可查询车站 */
     requestCanSelectedStation() {
         if (this.stations == undefined) {
-            this.http.postRequest<Array<Station>>(CommandKeys.canSelectedStation, null, value => {
+            this.http.postRequest<Array<Station>>(CommandKeys.canSelectedStation, undefined, value => {
                 if (value.success) {
                     this.stations = value.object;
-                    this.showStationDialog();
+                    if (this.stations != null && this.stations.length > 0) {
+                        this.showStationDialog();
+                    } else {
+                        this.alert.create({
+                            title: "提示",
+                            message: "无可操作的车站",
+                            buttons: [
+                                {
+                                    text: "确认",
+                                    role: "cancel"
+                                }
+                            ]
+                        }).present();
+                    }
                 }
                 return false;
             });
-        }else{
+        } else {
             this.showStationDialog();
         }
+    }
+
+    requestSchemList() {
+        let content = {
+            "StationID": CacheData.stationId,
+            "DriveDate": this.selectDate,
+            "SchemNo": this.busId,
+            "StopNo": this.endSite ? this.endSite.StopNo : "",
+            "ShowOverTimeSchem": this.showOvertime ? 1 : 0
+        };
+        this.http.postRequest<Array<SchemItem>>(CommandKeys.schemlist, content, value => {
+            if (value.success) {
+                let f = value.object.filter((item) => {
+                    if (this.busType == 0) {
+                        return true;
+                    } else {
+                        return this.busType == item.SchemTypeCode;
+                    }
+                });
+                if (f && f.length > 0) {
+                    this.schemList = f;
+                }else{
+                    this.schemList = undefined;
+                }
+            }
+            return false;
+        });
     }
 
     showStationDialog() {
@@ -64,13 +125,19 @@ export class HomePage {
             bts[index] = {
                 text: value.StationName,
                 handler: () => {
+                    if(this.selectedStation&&this.selectedStation.ID == value.ID){
+                        return;
+                    }
                     this.selectedStation = value;
                     this.upStation = value.StationName;
                     CacheData.stationId = this.selectedStation.ID;
+                    this.resetFilter();
+                    this.requestSchemList();
                     if (!this.stationSelected) {
                         this.stationSelected = true;
                         this.setTitleClass();
                     }
+                    this.event.publish(EventKeys.clearFilter);
                 }
             }
         });
@@ -83,6 +150,14 @@ export class HomePage {
             buttons: bts,
             enableBackdropDismiss: true
         }).present();
+    }
+
+    resetFilter(){
+        this.busId = undefined;
+        this.busType = 0;
+        this.endSite = undefined;
+        this.selectDate = new Date().toISOString().substring(0, 10);
+        this.showOvertime = false;
     }
 
     showSearchDialog() {
@@ -115,5 +190,11 @@ export class HomePage {
             ],
             enableBackdropDismiss: true
         }).present();
+    }
+    schemClick(s:SchemItem){
+        if(s.IsRun == 0){
+            return;
+        }
+        this.navCtrl.push(SchemDetailPage, { schem:s});
     }
 }

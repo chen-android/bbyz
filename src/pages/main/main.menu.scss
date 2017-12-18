@@ -84,6 +84,19 @@ page-main {
     max-width: 100%;
     width: 100%;
   }
+  .sfm_end_station{
+    background-color: color($colors, app-background);
+    border-radius: 5pt;
+    padding: 12pt 8pt;
+    color: color($colors, third-text-color);
+  }
+  .sfm_end_station_active{
+    color: color($colors, text-color);
+  }
+  .sfm_end_station_close{
+    right: 5%;
+    position: absolute;
+  }
   .border_line_break {
     border-bottom: 1px solid color($colors, line-break);
   }
@@ -105,6 +118,9 @@ page-main {
     font-size: 1rem;
     color:color($colors, second-text-color);
   }
+  .sfm_datetime{
+    padding: 0px;
+  }
   .row-check {
     padding: 0px;
     background-color: white;
@@ -121,4 +137,8 @@ page-main {
     border: none;
   }
 
+  .tip{
+    margin: 5pt;
+    color: red;
+  }
 }

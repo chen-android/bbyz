@@ -3,7 +3,7 @@
   <div [ngClass]="stationSelectClass" (click)="stationSelect()">
     {{upStation}}
     <img src="assets/imgs/icon_main_down_arrow.png" />
-    <br> {{today | date:"yyyy年MM月dd日"}}
+    <br> {{selectDate | date:"yyyy年MM月dd日"}}
   </div>
   <div [ngClass]="menuClass">
     <img src="assets/imgs/icon_home_passenger_flow_summary.png" />
@@ -13,14 +13,21 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row justify-content-center>
-      <ion-col col-3>
-        1-1
-      </ion-col>
-      <ion-col col-3>
-        1-2
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-list>
+    <ion-item *ngFor="let s of schemList" class="schem_item schem_disable" [class.schem_disable]="s.IsRun==0" (click)="schemClick(s)">
+      <div item-start class="schem_start">
+        <strong>{{s.DriveTime|date:"HH:mm"}}</strong>
+        <p>{{s.SchemNo}}车次</p>
+      </div>
+      <div item-center class="schem_center">
+        <strong>{{s.StationName}}-{{s.EndStopName}}</strong>
+        <p>已售 {{s.SaledNum}} 余座 {{s.LeastSeatNum}} 订票 {{s.ReserveNum}}</p>
+      </div>
+      <div item-end class="schem_end">
+        <p>{{s.IsRun==0?"停班":s.IsRun==1?"开班":"停班有售"}}</p>
+        <p *ngIf="s.SchemTypeCode == 2" class="schem_type_enable">{{s.SchemType}}</p>
+      </div>
+    </ion-item>
+  </ion-list>
+  <div class="no_data" *ngIf="!schemList&&selectedStation">查无数据</div>
 </ion-content>

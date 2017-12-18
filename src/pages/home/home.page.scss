@@ -62,4 +62,54 @@ page-home {
   .home_menu>img+img {
     margin-left: 15pt;
   }
+  .schem_item{
+    background-color: white;
+    border-bottom: 1px solid #dedede;
+  }
+  .schem_item.item.item-block .item-inner{
+    border-bottom: none;
+  }
+  .schem_start{
+  
+  }
+
+  .schem_start > strong{
+    color: color($colors,primary);
+    font-size: 1.8rem;
+  }
+  .schem_start> p{
+    font-size: 1.2rem;
+    margin-top: 3pt;
+  }
+  .schem_center{
+    padding-left: 20pt;
+    border-bottom: none;
+  }
+  .schem_center > p{
+    margin-top: 3pt;
+  }
+  .schem_end > p:first-child{
+    font-size: 1.6rem;
+  }
+  .schem_type_enable{
+    border: 1px solid #ec3f16;
+    color: #ec3f16;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    padding: 1px 4px;
+  }
+  .schem_disable{
+    color: color($colors,third-text-color);
+  }
+  .schem_disable div > *{
+    color: color($colors, third-text-color);
+    border-color: color($colors, third-text-color);
+  }
+  .no_data{
+    font-size: 2.5rem;
+    width: 100%;
+    top: 40%;
+    text-align: center;
+    position: absolute;
+  }
 }

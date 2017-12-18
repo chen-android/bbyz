@@ -18,6 +18,9 @@ import { LoginPageModule } from '../pages/login/login.page.module';
 import { MainMenuModule } from '../pages/main/main.menu.module';
 import { BusTypeSearchPageModule } from './../pages/bus-type-search/bus-type-search.page.module';
 import { FeedbackPageModule } from './../pages/other/feedback/feedback.page.module';
+import { SchemDetailPageModule } from '../pages/schem-detail/schem-detail.page.module';
+import { SchemDetailModifyPageModule } from '../pages/schem-detail-modify/schem-detail-modify.page.module';
+import { SchemDetailClonePageModule } from '../pages/schem-detail-clone/schem-detail-clone.page.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { FeedbackPageModule } from './../pages/other/feedback/feedback.page.modu
     HttpClientModule,
     FeedbackPageModule,
     BusTypeSearchPageModule,
+    SchemDetailPageModule,
+    SchemDetailModifyPageModule,
+    SchemDetailClonePageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

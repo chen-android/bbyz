@@ -1,3 +1,4 @@
+import { ToastUtil } from './../../utils/ToastUtil';
 import { EncryptUtils } from './../../utils/EncryptUtils';
 import { StorageUtils } from './../../providers/storage/StorageUtils';
 import { MainMenu } from './../main/main.menu';
@@ -6,7 +7,7 @@ import { CommandKeys } from './../../utils/CommandKeys';
 import { HttpServices } from './../../providers/http/http.service';
 import { StorageKeys } from './../../utils/StorageKeys';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CacheData } from '../../providers/storage/CacheData';
 import CryptoJS from "crypto-js";
 /**
@@ -25,7 +26,7 @@ export class LoginPage {
     isDebug:boolean ;
     path:string;
     constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageUtils, 
-        public http: HttpServices,public toast:ToastController,public encrypt:EncryptUtils) {
+        public http: HttpServices,public toast:ToastUtil,public encrypt:EncryptUtils) {
     }
 
     ionViewDidLoad() {
@@ -46,11 +47,7 @@ export class LoginPage {
                 if (this.saveCheck) {
                     this.storage.setUser(user);
                 }
-                this.toast.create({
-                    message:'登录成功',
-                    position:"middle",
-                    duration:800
-                }).present();
+                this.toast.showAtMiddle("登录成功",800);
                 setTimeout(() => {
                     this.navCtrl.setRoot(MainMenu);
                 }, 800);
@@ -62,10 +59,6 @@ export class LoginPage {
 
     setPath(){
         CacheData.url = this.path + "/api/Mobile";
-        this.toast.create({
-            message: '设置成功',
-            position: "middle",
-            duration: 800
-        }).present();
+        this.toast.showAtMiddle("设置成功", 800);
     }
 }

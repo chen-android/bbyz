@@ -27,7 +27,7 @@
       </ion-col>
     </ion-row>
     <ion-row class="divider"></ion-row>
-    <ion-row>
+    <ion-row align-items-center class="date_range">
       <ion-col col-auto>
         <img src="assets/imgs/icon_date.png"/>
       </ion-col>
@@ -41,7 +41,7 @@
         最晚发车日期
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row align-items-center class="depart_time">
       <ion-col col-auto>
         <img src="assets/imgs/icon_time.png" />
       </ion-col>
@@ -50,5 +50,86 @@
         <ion-datetime displayFormat="HH:mm" [(ngModel)]="selectTime"></ion-datetime>
       </ion-col>
     </ion-row>
+    <ion-row class="seat">
+      <ion-col col-6>
+        <div>起座号</div>
+        <input type="number" [(ngModel)]="startSeatNo" />
+      </ion-col>
+      <ion-col col-6>
+        <div>座位数</div>
+        <input type="number" [(ngModel)]="totalSeatNum" />
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-center class="schem_code">
+      <ion-col col-auto>
+        班次号
+      </ion-col>
+      <ion-col>
+        <input type="number"/>
+      </ion-col>
+      <ion-col col-auto>
+        <img src="assets/imgs/icon_clone_arrow.png" />
+      </ion-col>
+      <ion-col>
+        <input type="number"/>
+      </ion-col>
+    </ion-row>
+    <ion-row class="bus_type">
+      <ion-col col-6>
+        <div>车型</div>
+        <div (click)="busTypeClick()">{{selectedBusType?.BusTypeName}}
+          <img src="assets/imgs/icon_right_arrow.png" />
+        </div>
+      </ion-col>
+      <ion-col col-6>
+        <div>检票口</div>
+        <input type="text" [(ngModel)]="checkGateNo" />
+      </ion-col>
+    </ion-row>
+    <ion-row radio-group [(ngModel)]="schemType">
+      <ion-col col-6>
+        类别
+      </ion-col>
+      <ion-col col-3 ion-item class="schem_type">
+        <ion-radio item-start value="1"></ion-radio>
+        <ion-label>加班</ion-label>
+      </ion-col>
+      <ion-col col-3 ion-item class="schem_type">
+        <ion-radio item-start value="2"></ion-radio>
+        <ion-label>正班</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row radio-group [(ngModel)]="isRun">
+      <ion-col col-6>
+        开停班状态
+      </ion-col>
+      <ion-col col-3 ion-item class="schem_type">
+        <ion-radio item-start value="1"></ion-radio>
+        <ion-label>停班</ion-label>
+      </ion-col>
+      <ion-col col-3 ion-item class="schem_type">
+        <ion-radio item-start value="2"></ion-radio>
+        <ion-label>开班</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="company">
+      <ion-col col-auto>
+        承运单位
+      </ion-col>
+      <ion-col>
+         {{selectedBusType?.BusTypeName}}sdafasdf
+        <img src="assets/imgs/icon_right_arrow.png" />
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
+<ion-footer>
+  <ion-row justify-centent-around class="foot_bt">
+    <ion-col>
+      <button ion-button (click)="confirmClick()">确定</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button (click)="cancelClick()">取消</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

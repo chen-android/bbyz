@@ -1,6 +1,6 @@
 export class SchemItem{
     /* 车次id */
-    SchemId:string;
+    SchemID:string;
     /* 发车日期 */
     DriveDate:string;
     /* 隶属站编号 */
@@ -45,4 +45,6 @@ export class SchemItem{
     SaledNum:number;
     /* 预定张数 */
     ReserveNum:number;
+    /* 价格 */
+    Price:string;
 }

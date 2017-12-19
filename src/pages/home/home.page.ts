@@ -28,6 +28,7 @@ export class HomePage {
     stations: Array<Station> = undefined;
     selectedStation: Station;
     schemList: Array<SchemItem>;
+    refresher: any;
     constructor(public navCtrl: NavController, public http: HttpServices, public action: ActionSheetController,
         public menu: MenuController, public alert: AlertController, public event: Events) {
         this.upStation = "请选择乘车站";
@@ -64,6 +65,11 @@ export class HomePage {
     stationSelect() {
         this.requestCanSelectedStation();
     }
+    /* 刷新 */
+    doRefresh(refresher: any) {
+        this.requestSchemList(false);
+        this.refresher = refresher;
+    }
     /**获取可查询车站 */
     requestCanSelectedStation() {
         if (this.stations == undefined) {
@@ -92,7 +98,7 @@ export class HomePage {
         }
     }
 
-    requestSchemList() {
+    requestSchemList(showProgress = true) {
         let content = {
             "StationID": CacheData.stationId,
             "DriveDate": this.selectDate,
@@ -111,11 +117,20 @@ export class HomePage {
                 });
                 if (f && f.length > 0) {
                     this.schemList = f;
-                }else{
+                } else {
                     this.schemList = undefined;
                 }
             }
+            if (this.refresher) {
+                this.refresher.complete();
+            }
             return false;
+        }, error => {
+            if (this.refresher) {
+                this.refresher.complete();
+            }
+        },{
+            showProgress: showProgress
         });
     }
 
@@ -125,7 +140,7 @@ export class HomePage {
             bts[index] = {
                 text: value.StationName,
                 handler: () => {
-                    if(this.selectedStation&&this.selectedStation.ID == value.ID){
+                    if (this.selectedStation && this.selectedStation.ID == value.ID) {
                         return;
                     }
                     this.selectedStation = value;
@@ -152,7 +167,7 @@ export class HomePage {
         }).present();
     }
 
-    resetFilter(){
+    resetFilter() {
         this.busId = undefined;
         this.busType = 0;
         this.endSite = undefined;
@@ -191,10 +206,10 @@ export class HomePage {
             enableBackdropDismiss: true
         }).present();
     }
-    schemClick(s:SchemItem){
-        if(s.IsRun == 0){
+    schemClick(s: SchemItem) {
+        if (s.IsRun == 0) {
             return;
         }
-        this.navCtrl.push(SchemDetailPage, { schem:s});
+        this.navCtrl.push(SchemDetailPage, { schem: s });
     }
 }

@@ -1,0 +1,54 @@
+page-schem-detail-shift-close {
+  .scroll-content {
+    background-color: white;
+  }
+  .divider {
+    background-color: color($colors, app-background);
+    height: 10pt;
+    padding: 0px;
+  }
+  .part1 {
+    background-color: white;
+    padding: 5pt;
+  }
+  .part1>ion-col>p {
+    font-size: 1.4rem;
+    color: color($colors, third-text-color);
+    text-align: center;
+    margin: 0pt 0pt 5pt 0pt;
+  }
+  .part1>ion-col>p+p {
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: color($colors, text-color);
+  }
+  ion-list[radio-group] {
+    margin: 0px;
+  }
+  ion-list[radio-group]>ion-item {
+    background-color: white;
+    padding-left: 0px;
+  }
+  ion-list[radio-group]>ion-item ion-label {
+    padding-left: 15pt;
+  }
+  .other_reason ion-textarea {
+    background-color: color($colors, app-background);
+    border-radius: 5pt;
+    margin: 0px 8pt;
+  }
+  .other_reason button[ion-button]{
+      color: color($colors,third-text-color);
+      border: 1px solid color($colors, app-background);
+      border-radius: 5pt;
+      width: 100%;
+      height: 2.8rem;
+      margin: 3pt 8pt;
+  }
+  .foot_bt button {
+    width: 100%;
+  }
+  .footer {
+    background-color: white;
+  }
+}

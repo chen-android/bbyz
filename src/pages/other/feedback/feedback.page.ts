@@ -1,7 +1,8 @@
+import { ToastUtil } from './../../../utils/ToastUtil';
 import { CommandKeys } from './../../../utils/CommandKeys';
 import { HttpServices } from './../../../providers/http/http.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the FeedbackPage page.
@@ -17,7 +18,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 })
 export class FeedbackPage {
     feedbackMsg:string;
-    constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpServices,public toast:ToastController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpServices,public toast:ToastUtil) {
     }
 
     ionViewDidLoad() {
@@ -33,11 +34,7 @@ export class FeedbackPage {
         //         this.navCtrl.pop();
         //     }
         // })
-        this.toast.create({
-            message: '感谢您的反馈',
-            duration: 800,
-            position: 'middle'
-        }).present();
+        this.toast.showAtMiddle('感谢您的反馈',800);
         this.navCtrl.pop();
     }
 }

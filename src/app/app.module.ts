@@ -1,3 +1,5 @@
+import { DialogUtil } from './../utils/DialogUtil';
+import { ToastUtil } from './../utils/ToastUtil';
 import { HttpServices } from './../providers/http/http.service';
 import { EncryptUtils } from './../utils/EncryptUtils';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +27,7 @@ import { SearchBusSalePageModule } from '../pages/search-bus-sale/search-bus-sal
 import { SearchSaleDetailPageModule } from '../pages/search-sale-detail/search-sale-detail.page.module';
 import { SearchTicketNumberPageModule } from '../pages/search-ticket-number/search-ticket-number.page.module';
 import { SearchIssueBusPageModule } from '../pages/search-issue-bus/search-issue-bus.page.module';
+import { SchemDetailShiftClosePageModule } from '../pages/schem-detail-shift-close/schem-detail-shift-close.page.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,7 @@ import { SearchIssueBusPageModule } from '../pages/search-issue-bus/search-issue
     SchemDetailPageModule,
     SchemDetailModifyPageModule,
     SchemDetailClonePageModule,
+    SchemDetailShiftClosePageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -62,6 +66,8 @@ import { SearchIssueBusPageModule } from '../pages/search-issue-bus/search-issue
     EncryptUtils,
     HttpServices,
     StorageUtils,
+    ToastUtil,
+    DialogUtil,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

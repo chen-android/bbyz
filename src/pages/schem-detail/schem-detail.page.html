@@ -34,11 +34,11 @@
         <img src="assets/imgs/icon_schem_copy.png" />
         <br>克隆
       </ion-col>
-      <ion-col col-3>
+      <ion-col col-3 (click)="shiftOpen()">
         <img [src]="schem.IsRun != 1?'assets/imgs/icon_schem_shift_open_enable.png':'assets/imgs/icon_schem_shift_open_disable.png'" />
         <br>开班
       </ion-col>
-      <ion-col col-3>
+      <ion-col col-3 (click)="shiftClose()">
         <img [src]="schem.IsRun == 1?'assets/imgs/icon_schem_shift_close_enable.png':'assets/imgs/icon_schem_shift_close_disable.png'" />
         <br>停班
       </ion-col>
@@ -98,7 +98,7 @@
     </ion-row>
     <ion-row justify-content-between>
       <ion-col col-auto>{{schem.CarrayCompanyName}}</ion-col>
-      <ion-col col-auto>￥23</ion-col>
+      <ion-col col-auto>￥{{schem.Price}}</ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

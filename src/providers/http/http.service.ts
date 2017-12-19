@@ -1,16 +1,17 @@
+import { ToastUtil } from './../../utils/ToastUtil';
 import { CacheData } from './../storage/CacheData';
 import { RequestOptions } from './RequestOptions';
 import { EncryptUtils } from './../../utils/EncryptUtils';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import 'rxjs/add/operator/map';
-import { Loading, LoadingController, ToastController } from 'ionic-angular';
+import { Loading, LoadingController } from 'ionic-angular';
 import { BbyzHttpResonse } from './BbyzHttpResponse';
 
 @Injectable()
 export class HttpServices {
     constructor(private http: HttpClient, private encrypt: EncryptUtils, private loading: LoadingController,
-        private toast: ToastController) { }
+        private toast: ToastUtil) { }
     /**
      * post请求
      * @param command 请求方法名
@@ -19,12 +20,12 @@ export class HttpServices {
      * @param error 失败回调
      * @param option 请求参数 默认请求加密，显示loading框
      */
-    public postRequest<T>(command: string, content: any, success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void,
+    public postRequest<T>(command: [string, string], content: any, success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void,
         option?: RequestOptions): void {
         this.postRequest1(command, undefined, content, success, error, option);
     }
     
-    public postRequest1<T>(command: string, workNo = CacheData.id, content: any, success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void,
+    public postRequest1<T>(command: [string,string], workNo = CacheData.id, content: any, success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void,
         option?: RequestOptions): void {
         let secure: boolean = true;
         let showProgress: boolean = true;
@@ -39,7 +40,7 @@ export class HttpServices {
         this.post<T>(command, workNo, secure, content, showProgress, success, error);
     }
 
-    private post<T>(command: string, workNo: string, secure: boolean, content: any, showProgress: boolean,
+    private post<T>(command: [string, string], workNo: string, secure: boolean, content: any, showProgress: boolean,
         success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void): void {
         let loadDialog: Loading;
         if (showProgress) {
@@ -52,13 +53,13 @@ export class HttpServices {
             loadDialog.present();
         }
         this.http.post<BbyzHttpResonse<T>>(CacheData.url, this.getPostBody(command, secure, content), {
-            params: { "Command": command, "WorkNo": workNo }
+            params: { "Command": command[0], "WorkNo": workNo }
         })
             .map((value: BbyzHttpResonse<T>, index: number) => {
                 value.success = value.returnNo === 0;
                 if (value.success) {
                     if (value.secure == "1") {
-                        let content = this.encrypt.decodeForAES(value.content, CacheData.secureKeys.get(command));
+                        let content = this.encrypt.decodeForAES(value.content, CacheData.secureKeys.get(command[0]));
                         if (content) {
                             value.object = JSON.parse(content) as T;
                         }
@@ -76,11 +77,7 @@ export class HttpServices {
                 if (success) {
                     if (!success(suc)) {
                         if (!suc.success) {
-                            this.toast.create({
-                                message: suc.returnInfo,
-                                position:"bottom",
-                                duration: 2000
-                            }).present();
+                            this.toast.showAtBottom(suc.returnInfo);
                         }
                     }
                 }
@@ -88,10 +85,7 @@ export class HttpServices {
                 if (error) {
                     error(err);
                 }
-                this.toast.create({
-                    message: "网络连接失败，请检查网络。",
-                    duration: 2000
-                }).present();
+                this.toast.showAtBottom("网络连接失败，请检查网络。");
                 if (loadDialog) {
                     loadDialog.dismiss();
                 }
@@ -102,7 +96,7 @@ export class HttpServices {
             });
     }
 
-    private getPostBody(command: string, secure: boolean, content: any): any {
+    private getPostBody(command: [string, string], secure: boolean, content: any): any {
         let json = {
             "content": content,
             "common": {
@@ -121,12 +115,12 @@ export class HttpServices {
             "key": ""
         }
         if (CacheData.isDebug) {
-            console.info(">>>>>>>>请求参数>>>>>>>>"+command);
+            console.info(">>>>>>>>请求参数>>>>>>>>" + command);
             console.info(json.content);
         }
         let key = this.encrypt.encodeMD5(new Date().getTime().toString());
         json.key = this.encrypt.encodeForRSA(key);
-        CacheData.secureKeys.set(command, key);
+        CacheData.secureKeys.set(command[0], key);
         if (content && secure) {
             json.content = this.encrypt.encodeFroAES(JSON.stringify(json.content), key);
         }

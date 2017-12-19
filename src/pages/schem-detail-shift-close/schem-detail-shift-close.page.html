@@ -1,0 +1,72 @@
+<!--
+  Generated template for the SchemDetailShiftClosePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>停班</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row justify-content-around class="part1">
+      <ion-col col-auto>
+        <p>时间</p>
+        <p>{{schem.DriveTime|date:"HH:mm"}}</p>
+      </ion-col>
+      <ion-col col-auto>
+        <p>线路</p>
+        <p>{{schem.StationName}}-{{schem.EndStopName}}</p>
+      </ion-col>
+      <ion-col col-auto>
+        <p>班次</p>
+        <p>{{schem.SchemNo}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="divider"></div>
+  <ion-list radio-group [(ngModel)]="closeReason">
+    <ion-item >
+      <ion-label>正常停班</ion-label>
+      <ion-radio value="正常停班"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>非正常停班</ion-label>
+      <ion-radio value="非正常停班"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>失班停班</ion-label>
+      <ion-radio value="失班停班"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>加班停班</ion-label>
+      <ion-radio value="加班停班"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>其他原因</ion-label>
+      <ion-radio value="其他原因"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <ion-grid *ngIf="closeReason == '其他原因'" class="other_reason">
+    <ion-row>
+      <ion-textarea type="text" placeholder="请输入原因" [(ngModel)]="otherReason"></ion-textarea>
+    </ion-row>
+    <ion-row *ngFor="let r of reasons">
+      <button ion-button outline (click)="reasonClick(r)">{{r?.ReasonName}}</button>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-row justify-centent-around class="foot_bt">
+    <ion-col>
+      <button ion-button (click)="confirmClick()">确定</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button (click)="cancelClick()">取消</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

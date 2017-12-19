@@ -152,10 +152,10 @@ export class MainMenu {
         if (this.endStation) {
             this.storage.getFilterSite(CacheData.stationId).then(value => {
                 if (value && value.length > 0) {
-                    if (value.length == 9) {
-                        value.shift();
-                    }
                     if (!value.find((value) => { return value.StopNo == this.endStation.StopNo; })) {
+                        if (value.length == 9) {
+                            value.shift();
+                        }
                         value.push(this.endStation);
                         this.storage.setFilterSite(CacheData.stationId,value);
                     }

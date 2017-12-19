@@ -4,10 +4,11 @@ page-schem-detail-clone {
   }
   .grid {
     padding: 0px;
+    color: color($colors, third-text-color);
   }
-  .grid>ion-row+ion-row {
+  .grid>.divider~ion-row {
     font-size: 1.6rem;
-    padding: 8pt 5pt;
+    padding: 12pt 8pt;
     border-bottom: 1px solid color($colors, line-break);
   }
   .part1 {
@@ -25,8 +26,126 @@ page-schem-detail-clone {
     font-size: 1.8rem;
     color: color($colors, text-color);
   }
-  .divider {
+  ion-row.divider {
     background-color: color($colors, app-background);
     height: 10pt;
+    padding: 0px;
+  }
+  .date_range>ion-col:nth-child(1) {
+    width: 12pt;
+    height: 12pt;
+  }
+  .date_range>ion-col:nth-child(3)>img {
+    width: 15pt;
+    height: 5pt;
+  }
+  .date_range>ion-col:nth-child(even) {
+    padding-left: 15pt;
+  }
+  .date_range>ion-col {
+    padding: 0px;
+  }
+  .depart_time>ion-col:first-child {
+    width: 12pt;
+    height: 12pt;
+  }
+  .depart_time>ion-col {
+    padding: 0px;
+  }
+  .depart_time>ion-col:nth-child(2) {
+    padding-left: 15pt;
+  }
+  .depart_time>ion-col:last-child>ion-datetime {
+    text-align: end;
+    padding: 0px 10pt;
+    color: color($colors, text-color);
+  }
+  .seat>ion-col>input {
+    width: 50%;
+    border: none;
+    text-align: end;
+  }
+  .seat>ion-col>div {
+    width: 40%;
+    display: inline-block;
+    color: color($colors, third-text-color);
+  }
+  .seat>ion-col:last-child {
+    border-left: 1px solid color($colors, line-break);
+    padding-left: 10pt;
+  }
+  .seat>ion-col {
+    padding: 0px;
+  }
+  .schem_code>ion-col>input {
+    width: 80%;
+    border: none;
+    text-align: center;
+    color: color($colors, text-color);
+  }
+  .schem_code>ion-col:nth-child(3)>img {
+    width: 15pt;
+    height: 5pt;
+  }
+  .bus_type>ion-col>div:first-child {
+    color: color($colors, third-text-color);
+  }
+  .bus_type>ion-col>div {
+    width: 45%;
+    display: inline-block;
+  }
+  .bus_type>ion-col>div>img {
+    width: 6pt;
+    height: 10pt;
+    margin-left: 5pt;
+    vertical-align: center;
+  }
+  .bus_type>ion-col:first-child>div:last-child {
+    text-align: end;
+  }
+  .bus_type>ion-col>input {
+    width: 50%;
+    border: none;
+    text-align: end;
+  }
+  .bus_type>ion-col:last-child {
+    border-left: 1px solid color($colors, line-break);
+    padding-left: 10pt;
+  }
+  .schem_type {
+    padding: 0px;
+    min-height: initial;
+    background-color: white;
+  }
+  .schem_type .radio-md[item-start] {
+    margin: 0px 4px 0px 0px;
+  }
+  .schem_type .radio-ios[item-start] {
+    margin: 0px 4px 0px 0px;
+  }
+  .schem_type[ion-item] .item-inner {
+    padding-right: 0px;
+    border: none;
+  }
+  .schem_type[ion-item] .item-inner .label-md {
+    margin: 0px 5pt;
+  }
+  .schem_type[ion-item] .item-inner .label-ios {
+    margin: 0px 5pt;
+  }
+  .company>ion-col:last-child {
+    text-align: end;
+  }
+  .company>ion-col>img {
+    width: 6pt;
+    height: 10pt;
+    margin-left: 5pt;
+    vertical-align: center;
+  }
+  .foot_bt button {
+    width: 100%;
+  }
+  .footer {
+    background-color: white;
   }
 }

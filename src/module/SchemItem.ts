@@ -8,7 +8,7 @@ export class SchemItem{
     /* 隶属站名称 */
     StationName:string;
     /* 车次号 */
-    SchemNo:string;
+    SchemNo:number;
     /* 班次类别 */
     SchemType:string;
     /* 1正班 2加班 */

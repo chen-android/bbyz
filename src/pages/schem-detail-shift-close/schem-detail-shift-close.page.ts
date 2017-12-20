@@ -47,7 +47,7 @@ export class SchemDetailShiftClosePage {
     requestCloseReason(){
         let content = {
             "StationID": CacheData.stationId,
-            "ReasonType": "停班"
+            "ReasonTypeCode": "2"
         };
         this.http.postRequest<Array<CloseReason>>(CommandKeys.closeReason,content,value=>{
             if(value.success){
@@ -78,7 +78,8 @@ export class SchemDetailShiftClosePage {
         };
         this.http.postRequest(CommandKeys.shiftClose, content, value => {
             if (value.success) {
-                
+                this.schem.IsRun = 0;
+                this.navCtrl.pop();
             }
             return false;
         });

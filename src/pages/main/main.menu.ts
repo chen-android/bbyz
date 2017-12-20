@@ -1,7 +1,7 @@
 import { StorageUtils } from './../../providers/storage/StorageUtils';
 import { ListPage } from './../list/list';
 import { EventKeys } from './../../utils/EventKeys';
-import { BusTypeSearchPage } from './../bus-type-search/bus-type-search.page';
+import { SiteSearchPage } from './../site-search/site-search.page';
 import { CommandKeys } from './../../utils/CommandKeys';
 import { HttpServices } from './../../providers/http/http.service';
 import { Site } from './../../module/Site';
@@ -133,7 +133,7 @@ export class MainMenu {
         if(this.busId){
             return;
         }
-        this.navCtrl.push(BusTypeSearchPage, {
+        this.navCtrl.push(SiteSearchPage, {
             "site": this.stationCallBack
         });
     }

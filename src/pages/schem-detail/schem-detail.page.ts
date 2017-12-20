@@ -1,14 +1,16 @@
-import { SchemDetailShiftClosePage } from './../schem-detail-shift-close/schem-detail-shift-close.page';
-import { ToastUtil } from './../../utils/ToastUtil';
-import { HttpServices } from './../../providers/http/http.service';
-import { DialogUtil } from './../../utils/DialogUtil';
-import { SchemDetailClonePage } from './../schem-detail-clone/schem-detail-clone.page';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Events } from 'ionic-angular/util/events';
+
 import { SchemItem } from '../../module/SchemItem';
-import { SchemDetailModifyPage } from '../schem-detail-modify/schem-detail-modify.page';
-import { CommandKeys } from '../../utils/CommandKeys';
 import { CacheData } from '../../providers/storage/CacheData';
+import { CommandKeys } from '../../utils/CommandKeys';
+import { SchemDetailModifyPage } from '../schem-detail-modify/schem-detail-modify.page';
+import { HttpServices } from './../../providers/http/http.service';
+import { DialogUtil } from './../../utils/DialogUtil';
+import { ToastUtil } from './../../utils/ToastUtil';
+import { SchemDetailClonePage } from './../schem-detail-clone/schem-detail-clone.page';
+import { SchemDetailShiftClosePage } from './../schem-detail-shift-close/schem-detail-shift-close.page';
 
 /**
  * Generated class for the SchemDetailPage page.
@@ -25,12 +27,17 @@ import { CacheData } from '../../providers/storage/CacheData';
 export class SchemDetailPage {
     schem: SchemItem;
     constructor(public navCtrl: NavController, public navParams: NavParams,public dialog:DialogUtil,
-        public http:HttpServices,public toast:ToastUtil) {
+        public http:HttpServices,public toast:ToastUtil,public event:Events) {
         this.schem = navParams.get("schem");
     }
 
     ionViewDidLoad() {
-
+        // this.event.subscribe(EventKeys.schemModify,(schem:SchemItem)=>{
+        //     this.schem = schem;
+        // });
+    }
+    ionViewWillUnload(){
+        // this.event.unsubscribe(EventKeys.schemModify);
     }
     modifyClick() {
         this.navCtrl.push(SchemDetailModifyPage, { schem: this.schem });

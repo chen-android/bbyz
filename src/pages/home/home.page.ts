@@ -29,6 +29,7 @@ export class HomePage {
     selectedStation: Station;
     schemList: Array<SchemItem>;
     refresher: any;
+    shouldRefresh:boolean = false;
     constructor(public navCtrl: NavController, public http: HttpServices, public action: ActionSheetController,
         public menu: MenuController, public alert: AlertController, public event: Events) {
         this.upStation = "请选择乘车站";
@@ -45,7 +46,13 @@ export class HomePage {
             this.requestSchemList();
         });
     }
-    ionViewDidLeave() {
+    ionViewDidEnter(){
+        if(this.shouldRefresh){
+            this.requestSchemList();
+            this.shouldRefresh = false;
+        }
+    }
+    ionViewWillUnload(){
         this.event.unsubscribe(EventKeys.stationFilter);
     }
 

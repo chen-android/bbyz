@@ -1,20 +1,20 @@
 <!--
-  Generated template for the BusTypeSearchPage page.
+  Generated template for the BusIdSearchPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>车型</ion-title>
+    <ion-title>车牌号</ion-title>
   </ion-navbar>
-  <ion-searchbar placeholder="请输入车型(仅中文搜索)" (ionInput)="searchInput($event)"></ion-searchbar>
+  <ion-searchbar placeholder="请输入车牌号" (ionInput)="searchInput($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let s of typeList" (click)="itemClick(s)">
-      {{s.BusTypeName}}
+      {{s.LicenseNo}}-{{s.CompanyName}}
     </ion-item>
   </ion-list>
 </ion-content>

@@ -1,3 +1,4 @@
+import { CompanySearchPageModule } from './../pages/company-search/company-search.page.module';
 import { DialogUtil } from './../utils/DialogUtil';
 import { ToastUtil } from './../utils/ToastUtil';
 import { HttpServices } from './../providers/http/http.service';
@@ -18,7 +19,7 @@ import { AppVersion } from "@ionic-native/app-version";
 import { Device } from "@ionic-native/device";
 import { LoginPageModule } from '../pages/login/login.page.module';
 import { MainMenuModule } from '../pages/main/main.menu.module';
-import { BusTypeSearchPageModule } from './../pages/bus-type-search/bus-type-search.page.module';
+import { SiteSearchPageModule } from './../pages/site-search/site-search.page.module';
 import { FeedbackPageModule } from './../pages/other/feedback/feedback.page.module';
 import { SchemDetailPageModule } from '../pages/schem-detail/schem-detail.page.module';
 import { SchemDetailModifyPageModule } from '../pages/schem-detail-modify/schem-detail-modify.page.module';
@@ -28,6 +29,8 @@ import { SearchSaleDetailPageModule } from '../pages/search-sale-detail/search-s
 import { SearchTicketNumberPageModule } from '../pages/search-ticket-number/search-ticket-number.page.module';
 import { SearchIssueBusPageModule } from '../pages/search-issue-bus/search-issue-bus.page.module';
 import { SchemDetailShiftClosePageModule } from '../pages/schem-detail-shift-close/schem-detail-shift-close.page.module';
+import { BusTypeSearchPageModule } from '../pages/bus-type-search/bus-type-search.page.module';
+import { BusIdSearchPageModule } from '../pages/bus-id-search/bus-id-search.page.module';
 
 @NgModule({
   declarations: [
@@ -45,11 +48,14 @@ import { SchemDetailShiftClosePageModule } from '../pages/schem-detail-shift-clo
     SearchIssueBusPageModule,
     HttpClientModule,
     FeedbackPageModule,
-    BusTypeSearchPageModule,
+    SiteSearchPageModule,
     SchemDetailPageModule,
     SchemDetailModifyPageModule,
     SchemDetailClonePageModule,
     SchemDetailShiftClosePageModule,
+    BusTypeSearchPageModule,
+    CompanySearchPageModule,
+    BusIdSearchPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

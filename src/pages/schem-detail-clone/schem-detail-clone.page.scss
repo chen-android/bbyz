@@ -36,11 +36,17 @@ page-schem-detail-clone {
     height: 12pt;
   }
   .date_range>ion-col:nth-child(3)>img {
-    width: 15pt;
-    height: 5pt;
+    width: 12pt;
+    height: 3pt;
+    margin-bottom: 3pt;
   }
   .date_range>ion-col:nth-child(even) {
-    padding-left: 15pt;
+    padding-left: 10pt;
+    font-size: 1.7rem;
+  }
+  .date_range ion-datetime {
+    padding: 3pt 0px;
+    color: color($colors, text-color);
   }
   .date_range>ion-col {
     padding: 0px;
@@ -64,11 +70,15 @@ page-schem-detail-clone {
     width: 50%;
     border: none;
     text-align: end;
+    color: color($colors, text-color);
   }
   .seat>ion-col>div {
     width: 40%;
     display: inline-block;
     color: color($colors, third-text-color);
+  }
+  .seat>ion-col:first-child {
+    padding-left: 4pt;
   }
   .seat>ion-col:last-child {
     border-left: 1px solid color($colors, line-break);
@@ -84,8 +94,8 @@ page-schem-detail-clone {
     color: color($colors, text-color);
   }
   .schem_code>ion-col:nth-child(3)>img {
-    width: 15pt;
-    height: 5pt;
+    width: 12pt;
+    height: 3pt;
   }
   .bus_type>ion-col>div:first-child {
     color: color($colors, third-text-color);
@@ -107,6 +117,7 @@ page-schem-detail-clone {
     width: 50%;
     border: none;
     text-align: end;
+    color: color($colors, text-color);
   }
   .bus_type>ion-col:last-child {
     border-left: 1px solid color($colors, line-break);
@@ -135,6 +146,9 @@ page-schem-detail-clone {
   }
   .company>ion-col:last-child {
     text-align: end;
+  }
+  .enable_text {
+    color: color($colors, text-color);
   }
   .company>ion-col>img {
     width: 6pt;

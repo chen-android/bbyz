@@ -1,0 +1,12 @@
+page-company-search {
+  .list .item {
+    background-color: white;
+  }
+  .label > p:first-child{
+      font-size: 1.6rem;
+  }
+  .label > p:nth-child(2){
+    color: color($colors,third-text-color);
+    font-size: 1.2rem;
+  }
+}

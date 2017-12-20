@@ -1,11 +1,13 @@
-import { ToastUtil } from './../../utils/ToastUtil';
-import { BusType } from './../../module/BusType';
-import { CommandKeys } from './../../utils/CommandKeys';
-import { HttpServices } from './../../providers/http/http.service';
-import { SchemItem } from './../../module/SchemItem';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { ActionSheetController, IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { CacheData } from '../../providers/storage/CacheData';
+import { BusTypeSearchPage } from '../bus-type-search/bus-type-search.page';
+import { BusType } from './../../module/BusType';
+import { SchemItem } from './../../module/SchemItem';
+import { HttpServices } from './../../providers/http/http.service';
+import { CommandKeys } from './../../utils/CommandKeys';
+import { ToastUtil } from './../../utils/ToastUtil';
 
 /**
  * Generated class for the SchemDetailModifyPage page.
@@ -27,7 +29,6 @@ export class SchemDetailModifyPage {
     checkGateNo: string;
     schemType: number;
     isForcePass: boolean;
-    busTypeList: Array<BusType>;
     selectedBusType: BusType;
     constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpServices,
         public action: ActionSheetController, public toast: ToastUtil) {
@@ -38,10 +39,11 @@ export class SchemDetailModifyPage {
         this.checkGateNo = this.schem.CheckGateNo;
         this.isForcePass = this.schem.IsForcePass == 1;
         this.schemType = this.schem.SchemTypeCode;
+        this.selectedBusType = new BusType();
+        this.selectedBusType.BusTypeName = this.schem.BusTypeName;
     }
 
     ionViewDidLoad() {
-        this.requestBusType(false);
     }
     confirmClick() {
         let keyNo: Array<string> = new Array();
@@ -88,15 +90,23 @@ export class SchemDetailModifyPage {
                 "Value": value.join(",")
             };
             this.http.postRequest(CommandKeys.modifySchem, content, value => {
-                if(value.success){
-                    this.toast.showAtMiddle("修改成功",800);
+                if (value.success) {
+                    this.schem.SchemTypeCode = this.schemType;
+                    this.schem.SchemType = this.schemType == 1?"正班":"加班";
+                    this.schem.DriveTime = this.schem.DriveTime.replace(this.schem.DriveTime.substring(11, 16), this.selectTime);
+                    this.schem.CheckGateNo = this.checkGateNo;
+                    this.schem.BusTypeName = this.selectedBusType.BusTypeName;
+                    this.schem.IsForcePass = this.isForcePass ? 1 : 0;
+                    this.schem.StartSeatNo = this.startSeatNo;
+                    this.schem.TotalSeatNum = this.totalSeatNum;
+                    this.toast.showAtMiddle("修改成功", 800);
                     setTimeout(() => {
                         this.navCtrl.pop();
                     }, 800);
                 }
                 return false;
             });
-        }else{
+        } else {
             this.navCtrl.pop();
         }
     }
@@ -104,49 +114,14 @@ export class SchemDetailModifyPage {
         this.navCtrl.pop();
     }
     busTypeClick() {
-        if (this.busTypeList && this.busTypeList.length > 0) {
-            this.showBusTypeDialog();
-        } else {
-            this.requestBusType(true);
-        }
-    }
-
-    requestBusType(showTypeDialog: boolean) {
-        this.http.postRequest<Array<BusType>>(CommandKeys.busType, { StationID: CacheData.stationId }, value => {
-            if (value.success) {
-                this.busTypeList = value.object;
-                if (!this.selectedBusType) {
-                    this.selectedBusType = this.busTypeList.find((value) => {
-                        if (value.BusTypeName == this.schem.BusTypeName) {
-                            return true;
-                        }
-                    });
-                }
-                if (showTypeDialog) {
-                    this.showBusTypeDialog();
-                }
-            }
-            return false;
-        })
-    }
-    showBusTypeDialog() {
-        let bts = [];
-        this.busTypeList.forEach((value, index) => {
-            bts[index] = {
-                text: value.BusTypeName,
-                handler: () => {
-                    this.selectedBusType = value;
-                }
-            }
+        this.navCtrl.push(BusTypeSearchPage, {
+            callback: (busType: BusType) => {
+                return new Promise((resolve) => {
+                    this.selectedBusType = busType;
+                    resolve("ok");
+                });
+            },
+            busTypeName: this.schem.BusTypeName
         });
-        bts[bts.length] = {
-            text: "取消",
-            role: "cancel",
-
-        }
-        this.action.create({
-            buttons: bts,
-            enableBackdropDismiss: true
-        }).present();
     }
 }

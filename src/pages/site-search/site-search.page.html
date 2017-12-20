@@ -5,16 +5,18 @@
   Ionic pages and navigation.
 -->
 <ion-header>
+
   <ion-navbar>
-    <ion-title>车型</ion-title>
+    <ion-title>到达站点</ion-title>
   </ion-navbar>
-  <ion-searchbar placeholder="请输入车型(仅中文搜索)" (ionInput)="searchInput($event)"></ion-searchbar>
+  <ion-searchbar placeholder="请输入到达站点" (ionInput)="searchInput($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let s of typeList" (click)="itemClick(s)">
-      {{s.BusTypeName}}
+  <ion-list >
+    <ion-item *ngFor="let s of siteList" (click)="itemClick(s)" >
+      {{s.StopName}}
     </ion-item>
   </ion-list>
+
 </ion-content>

@@ -1,6 +1,6 @@
+import { KeepReasonComponentModule } from '../component/keep-reason/keep-reason.component.module';
 import { CompanySearchPageModule } from './../pages/company-search/company-search.page.module';
 import { DialogUtil } from './../utils/DialogUtil';
-import { ToastUtil } from './../utils/ToastUtil';
 import { HttpServices } from './../providers/http/http.service';
 import { EncryptUtils } from './../utils/EncryptUtils';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,7 +31,9 @@ import { SearchIssueBusPageModule } from '../pages/search-issue-bus/search-issue
 import { SchemDetailShiftClosePageModule } from '../pages/schem-detail-shift-close/schem-detail-shift-close.page.module';
 import { BusTypeSearchPageModule } from '../pages/bus-type-search/bus-type-search.page.module';
 import { BusIdSearchPageModule } from '../pages/bus-id-search/bus-id-search.page.module';
-
+import { SchemDetailKeepSeatPageModule } from '../pages/schem-detail-keep-seat/schem-detail-keep-seat.page.module';
+import { SchemDetailStopSalePageModule } from '../pages/schem-detail-stop-sale/schem-detail-stop-sale.module';
+import { PassengerFlowSummaryPageModule } from '../pages/passenger-flow-summary/passenger-flow-summary.page.module';
 @NgModule({
   declarations: [
     MyApp,
@@ -53,9 +55,13 @@ import { BusIdSearchPageModule } from '../pages/bus-id-search/bus-id-search.page
     SchemDetailModifyPageModule,
     SchemDetailClonePageModule,
     SchemDetailShiftClosePageModule,
+    SchemDetailKeepSeatPageModule,
+    SchemDetailStopSalePageModule,
     BusTypeSearchPageModule,
     CompanySearchPageModule,
     BusIdSearchPageModule,
+    KeepReasonComponentModule,
+    PassengerFlowSummaryPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -72,7 +78,6 @@ import { BusIdSearchPageModule } from '../pages/bus-id-search/bus-id-search.page
     EncryptUtils,
     HttpServices,
     StorageUtils,
-    ToastUtil,
     DialogUtil,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

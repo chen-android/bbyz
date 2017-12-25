@@ -1,24 +1,26 @@
 page-search-sale-detail {
+    .content {
+        background-color: #fff;
+    }
     // 车次查询相关
     .scroll-grid {
         width: 128rem;
     }
     .title-row {
-        height: 50px;
+        height: 4rem;
+        border-bottom: 1px solid #e3e3e3;
     }
     .title-row ion-col {
         color: rgb(72, 119, 221);
         font-size: 13px;
     }
     .content-row {
-        height: 50px;
+        height: 4rem;
+        border-bottom: 1px solid #e3e3e3;
     }
     .content-row ion-col {
         color: rgb(51, 51, 51);
         font-size: 13px;
-    }
-    .content-md {
-        background-color: #fff;
     }
     .arrow {
         position: relative;
@@ -31,7 +33,7 @@ page-search-sale-detail {
     .input-warp {
         height: 5rem;
         align-items: center;
-        border-bottom: 1px solid #f6f6f6;
+        border-bottom: 1px solid #e3e3e3;
     }
     .default-input {
         margin-left: 1rem;
@@ -43,5 +45,21 @@ page-search-sale-detail {
     .search-btn {
         width: 60%;
         height: 3rem;
+    }
+    .col-12 {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 12%;
+        -moz-box-flex: 0;
+        -moz-flex: 0 0 12%;
+        -ms-flex: 0 0 12%;
+        flex: 0 0 12%;
+    }
+    .col-04 {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 4%;
+        -moz-box-flex: 0;
+        -moz-flex: 0 0 4%;
+        -ms-flex: 0 0 4%;
+        flex: 0 0 4%;
     }
 }

@@ -7,12 +7,67 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>search-ticket-number</ion-title>
+    <ion-title>票号追踪</ion-title>
   </ion-navbar>
-
+  <ion-row class="input-warp">
+    <ion-input class="default-input" type="text" placeholder="请输入票号" [(ngModel)]="ticketNumber"></ion-input>
+  </ion-row>
+  <ion-row justify-content-around class="input-warp">
+    <ion-col>
+      <ion-datetime cancelText="取消" doneText="确认" placeholder="最早发车日期" displayFormat="YYYY年MM月DD日" pickerFormat="YYYY MM DD" [(ngModel)]="beginTime"></ion-datetime>
+    </ion-col>
+    <ion-col>
+      <img src="assets/imgs/icon_arrow.png" class="arrow" />
+    </ion-col>
+    <ion-col>
+      <ion-datetime cancelText="取消" doneText="确认" placeholder="最晚发车日期" displayFormat="YYYY年MM月DD日" pickerFormat="YYYY MM DD" [(ngModel)]="endTime"></ion-datetime>
+    </ion-col>
+  </ion-row>
+  <ion-row align-items-center class="search-btn-wrap">
+    <button class="search-btn" ion-button (click)="searchAction()">查询</button>
+  </ion-row>
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-scroll scrollX="true" scrollY="true" style="height:95%; margin:10px 15px;">
+    <ion-grid no-padding class="scroll-grid">
+      <ion-row align-items-center class="title-row">
+        <ion-col>发车时间</ion-col>
+        <ion-col class="col-04">车次号</ion-col>
+        <ion-col>票号</ion-col>
+        <ion-col>售票类别</ion-col>
+        <ion-col>到站名称</ion-col>
+        <ion-col class="col-04">当前状态</ion-col>
+        <ion-col>售票时间</ion-col>
+        <ion-col>旅客姓名</ion-col>
+        <ion-col class="col-12">证件号码</ion-col>
+        <ion-col col-1>联系电话</ion-col>
+        <ion-col class="col-04">座位号</ion-col>
+        <ion-col class="col-04">票种</ion-col>
+        <ion-col>票价</ion-col>
+        <ion-col>检票时间</ion-col>
+        <ion-col>售票站名称</ion-col>
+        <ion-col>售票员姓名</ion-col>
+      </ion-row>
+      <ion-row align-items-center class="content-row" *ngFor="let item of dataArray">
+        <ion-col>{{item.DriveTime}}</ion-col>
+        <ion-col class="col-04">{{item.SchemID}}</ion-col>
+        <ion-col>{{item.TicketNo}}</ion-col>
+        <ion-col>{{item.BuyTicketType}}</ion-col>
+        <ion-col>{{item.StopName}}</ion-col>
+        <ion-col class="col-04">{{item.CurState}}</ion-col>
+        <ion-col>{{item.SaleTime}}</ion-col>
+        <ion-col>{{item.Name}}</ion-col>
+        <ion-col class="col-12">{{item.IDCardNo}}</ion-col>
+        <ion-col col-1>{{item.TelNo}}</ion-col>
+        <ion-col class="col-04">{{item.SeatNo}}</ion-col>
+        <ion-col class="col-04">{{item.TicketType}}</ion-col>
+        <ion-col>￥{{item.TicketPrice}}</ion-col>
+        <ion-col>{{item.CheckTime}}</ion-col>
+        <ion-col>{{item.SaleStationName}}</ion-col>
+        <ion-col>{{item.SaleWorkName}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-scroll>
 </ion-content>

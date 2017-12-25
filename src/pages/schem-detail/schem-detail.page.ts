@@ -5,10 +5,12 @@ import { Events } from 'ionic-angular/util/events';
 import { SchemItem } from '../../module/SchemItem';
 import { CacheData } from '../../providers/storage/CacheData';
 import { CommandKeys } from '../../utils/CommandKeys';
+import { SchemDetailKeepSeatPage } from '../schem-detail-keep-seat/schem-detail-keep-seat.page';
 import { SchemDetailModifyPage } from '../schem-detail-modify/schem-detail-modify.page';
+import { SchemDetailStopSalePage } from '../schem-detail-stop-sale/schem-detail-stop-sale';
+import { SearchBusSalePage } from '../search-bus-sale/search-bus-sale.page';
 import { HttpServices } from './../../providers/http/http.service';
 import { DialogUtil } from './../../utils/DialogUtil';
-import { ToastUtil } from './../../utils/ToastUtil';
 import { SchemDetailClonePage } from './../schem-detail-clone/schem-detail-clone.page';
 import { SchemDetailShiftClosePage } from './../schem-detail-shift-close/schem-detail-shift-close.page';
 
@@ -26,8 +28,8 @@ import { SchemDetailShiftClosePage } from './../schem-detail-shift-close/schem-d
 })
 export class SchemDetailPage {
     schem: SchemItem;
-    constructor(public navCtrl: NavController, public navParams: NavParams,public dialog:DialogUtil,
-        public http:HttpServices,public toast:ToastUtil,public event:Events) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public dialog: DialogUtil,
+        public http: HttpServices, public event: Events) {
         this.schem = navParams.get("schem");
     }
 
@@ -36,7 +38,7 @@ export class SchemDetailPage {
         //     this.schem = schem;
         // });
     }
-    ionViewWillUnload(){
+    ionViewWillUnload() {
         // this.event.unsubscribe(EventKeys.schemModify);
     }
     modifyClick() {
@@ -45,33 +47,43 @@ export class SchemDetailPage {
     cloneClick() {
         this.navCtrl.push(SchemDetailClonePage, { schem: this.schem });
     }
-    shiftOpen(){
-        if(this.schem.IsRun == 1){
-            this.dialog.simpleMessageDialog("确定对改班次开班？",()=>{
+    shiftOpen() {
+        if (this.schem.IsRun == 0) {
+            this.dialog.simpleMessageDialog("确定对改班次开班？", () => {
                 this.requestShiftOpen();
             });
-        }else{
-            this.toast.showAtMiddle("该班次已开班");
+        } else {
+            this.dialog.showAtMiddleToast("该班次已开班");
         }
     }
-    requestShiftOpen(){
+    requestShiftOpen() {
         let content = {
-            "StationID":CacheData.stationId,
-            "SchemID":this.schem.SchemID
+            "StationID": CacheData.stationId,
+            "SchemID": this.schem.SchemID
         };
-        this.http.postRequest(CommandKeys.shiftOpen,content,value=>{
-            if(value.success){
-                this.schem.IsRun = 0;
+        this.http.postRequest(CommandKeys.shiftOpen, content, value => {
+            if (value.success) {
+                this.schem.IsRun = 1;
             }
             return false;
-        })
+        });
     }
-    shiftClose(){
+    shiftClose() {
         if (this.schem.IsRun == 1) {
             this.navCtrl.push(SchemDetailShiftClosePage, { schem: this.schem })
-        }else{
-            this.toast.showAtMiddle("该班次已停班");
+        } else {
+            this.dialog.showAtMiddleToast("该班次已停班");
         }
     }
-    
+    keepClick() {
+        this.navCtrl.push(SchemDetailKeepSeatPage, { schem: this.schem });
+    }
+    shiftDetail() {
+        if (this.schem.SchemID) {
+            this.navCtrl.push(SearchBusSalePage, { schem: this.schem });
+        }
+    }
+    stopSaleClick() {
+        this.navCtrl.push(SchemDetailStopSalePage, { schem: this.schem });
+    }
 }

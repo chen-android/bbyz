@@ -1,0 +1,27 @@
+page-schem-detail-keep-seat {
+  .keep_tab_title {
+    margin-top: 10pt;
+    background-color: white;
+    padding: 8pt 8pt;
+    color: color($colors, third-text-color);
+  }
+  .keep_tab_title>ion-col:last-child {
+    text-align: center;
+  }
+  .keep_seat {
+    background-color: white;
+    padding: 5pt 8pt;
+  }
+  ion-row+ion-row {
+    border-bottom: 1px solid color($colors, line-break);
+  }
+  .foot_bt button {
+    width: 100%;
+  }
+  .foot_bt>ion-col:first-child>button {
+    background-color: color($colors, secondary);
+  }
+  .footer {
+    background-color: white;
+  }
+}

@@ -3,7 +3,6 @@ import { CacheData } from '../../providers/storage/CacheData';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DialogUtil } from '../../utils/DialogUtil';
-import { ToastUtil } from '../../utils/ToastUtil';
 import { SchemItem } from '../../module/SchemItem';
 import { CommandKeys } from '../../utils/CommandKeys';
 import { CloseReason } from '../../module/CloseReason';
@@ -25,8 +24,8 @@ export class SchemDetailShiftClosePage {
     closeReason: string;
     reasons: Array<CloseReason>;
     otherReason:string;
-    constructor(public navCtrl: NavController, public navParams: NavParams, public dialog: DialogUtil,
-        public toast: ToastUtil, public http: HttpServices) {
+    constructor(public navCtrl: NavController, public navParams: NavParams,public dialog: DialogUtil,
+        public http: HttpServices) {
         this.schem = navParams.get("schem");
         this.closeReason = "正常停班";
     }
@@ -37,7 +36,7 @@ export class SchemDetailShiftClosePage {
         this.otherReason = r.ReasonName;
     }
     confirmClick() {
-        this.dialog.simpleMessageDialog("确定对改班次停班？", () => {
+        this.dialog.simpleMessageDialog("确定对该班次停班？", () => {
             this.requestShiftClose();
         });
     }

@@ -10,9 +10,9 @@
         意见反馈
         <img src="assets/imgs/icon_right_arrow.png"/>
     </div>
-    <button ion-item (click)="test()" menuClose="personCenterMenu">
+    <!-- <button ion-item (click)="test()" menuClose="personCenterMenu">
       测试
-    </button>
+    </button> -->
   </ion-content>
   <ion-footer>
     <button ion-button full color="primary" (click)="logout()">退出</button>
@@ -62,8 +62,8 @@
         <button [disabled]='busId' ion-button outline round col-auto *ngFor="let t of s;" (click)="hotStationClick(t)">{{t.StopName}}</button>
       </ion-row>
     </ion-grid>
-    <div *ngIf="busId" class="tip">*已填写车次号，无法同时选择到达站点</div>
-    <div *ngIf="endStation?.StopName" class="tip">*已选择到达站点，无法同时填写车次号</div>
+    <div *ngIf="busId" class="tip">*请注意车次号、到达站点不能同时填写</div>
+    <div *ngIf="endStation?.StopName" class="tip">*请注意车次号、到达站点不能同时填写</div>
   </ion-content>
   <ion-footer>
     <ion-row>

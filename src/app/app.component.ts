@@ -1,16 +1,15 @@
-import { StorageKeys } from './../utils/StorageKeys';
-import { StorageUtils } from './../providers/storage/StorageUtils';
-import { CacheData } from './../providers/storage/CacheData';
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { LoginPage } from '../pages/login/login.page';
 import { AppVersion } from '@ionic-native/app-version';
 import { Device } from '@ionic-native/device';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { Platform } from 'ionic-angular';
+
 import { User } from '../module/User';
-import { MainMenu } from '../pages/main/main.menu';
+import { LoginPage } from '../pages/login/login.page';
+import { CacheData } from './../providers/storage/CacheData';
+import { StorageUtils } from './../providers/storage/StorageUtils';
+import { StorageKeys } from './../utils/StorageKeys';
 
 @Component({
     templateUrl: 'app.html'
@@ -26,8 +25,7 @@ export class MyApp {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.initAppData();
-            this.rootPage = MainMenu;
-            CacheData.id = '1000';
+            this.rootPage = LoginPage;
         });
     }
     initAppData(): any {

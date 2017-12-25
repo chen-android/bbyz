@@ -1,17 +1,20 @@
-import { ToastUtil } from './../../utils/ToastUtil';
-import { CacheData } from './../storage/CacheData';
-import { RequestOptions } from './RequestOptions';
-import { EncryptUtils } from './../../utils/EncryptUtils';
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import 'rxjs/add/operator/map';
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Loading, LoadingController } from 'ionic-angular';
+
+import { DialogUtil } from '../../utils/DialogUtil';
+import { EncryptUtils } from './../../utils/EncryptUtils';
+import { CacheData } from './../storage/CacheData';
 import { BbyzHttpResonse } from './BbyzHttpResponse';
+import { RequestOptions } from './RequestOptions';
 
 @Injectable()
 export class HttpServices {
+    loadDialog: Loading;
     constructor(private http: HttpClient, private encrypt: EncryptUtils, private loading: LoadingController,
-        private toast: ToastUtil) { }
+        private dialog: DialogUtil) { }
     /**
      * post请求
      * @param command 请求方法名
@@ -24,8 +27,8 @@ export class HttpServices {
         option?: RequestOptions): void {
         this.postRequest1(command, undefined, content, success, error, option);
     }
-    
-    public postRequest1<T>(command: [string,string], workNo = CacheData.id, content: any, success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void,
+
+    public postRequest1<T>(command: [string, string], workNo = CacheData.id, content: any, success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void,
         option?: RequestOptions): void {
         let secure: boolean = true;
         let showProgress: boolean = true;
@@ -42,16 +45,23 @@ export class HttpServices {
 
     private post<T>(command: [string, string], workNo: string, secure: boolean, content: any, showProgress: boolean,
         success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void): void {
-        let loadDialog: Loading;
+
         if (showProgress) {
-            loadDialog = this.loading.create({
-                content: "请稍后。。。",
+            this.loadDialog = this.loading.create({
+                content: "请稍后...",
                 showBackdrop: true,
                 enableBackdropDismiss: true,
                 dismissOnPageChange: false
             });
-            loadDialog.present();
+            this.loadDialog.present().then(value => {
+                this.req(command, workNo, secure, content, showProgress, success, error);
+            });
+        } else {
+            this.req(command, workNo, secure, content, showProgress, success, error);
         }
+    }
+    private req<T>(command: [string, string], workNo: string, secure: boolean, content: any, showProgress: boolean,
+        success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void): void {
         this.http.post<BbyzHttpResonse<T>>(CacheData.url, this.getPostBody(command, secure, content), {
             params: { "Command": command[0], "WorkNo": workNo }
         })
@@ -68,30 +78,30 @@ export class HttpServices {
                     }
                 }
                 if (CacheData.isDebug) {
-                    console.log("<<<<<<<<返回参数<<<<<<<<"+command);
-                    console.log( value);
+                    console.log("<<<<<<<<返回参数<<<<<<<<" + command);
+                    console.log(value);
                 }
                 return value;
             })
             .subscribe(suc => {
+                if (this.loadDialog && showProgress) {
+                    this.loadDialog.dismiss();
+                }
                 if (success) {
                     if (!success(suc)) {
                         if (!suc.success) {
-                            this.toast.showAtBottom(suc.returnInfo);
+                            this.dialog.showAtBottomToast(suc.returnInfo);
                         }
                     }
                 }
+
             }, err => {
+                this.dialog.showAtBottomToast("网络连接失败，请检查网络。");
+                if (this.loadDialog && showProgress) {
+                    this.loadDialog.dismiss();
+                }
                 if (error) {
                     error(err);
-                }
-                this.toast.showAtBottom("网络连接失败，请检查网络。");
-                if (loadDialog) {
-                    loadDialog.dismiss();
-                }
-            }, () => {
-                if (loadDialog) {
-                    loadDialog.dismiss();
                 }
             });
     }
@@ -124,7 +134,7 @@ export class HttpServices {
         if (content && secure) {
             json.content = this.encrypt.encodeFroAES(JSON.stringify(json.content), key);
         }
-        if(content == undefined||content == null){
+        if (content == undefined || content == null) {
             json.content = "";
         }
         return JSON.stringify(json);

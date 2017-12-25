@@ -11,21 +11,6 @@ page-schem-detail-clone {
     padding: 12pt 8pt;
     border-bottom: 1px solid color($colors, line-break);
   }
-  .part1 {
-    background-color: white;
-    padding: 5pt;
-  }
-  .part1>ion-col>p {
-    font-size: 1.4rem;
-    color: color($colors, third-text-color);
-    text-align: center;
-    margin: 0pt 0pt 5pt 0pt;
-  }
-  .part1>ion-col>p+p {
-    font-weight: 600;
-    font-size: 1.8rem;
-    color: color($colors, text-color);
-  }
   ion-row.divider {
     background-color: color($colors, app-background);
     height: 10pt;
@@ -158,6 +143,9 @@ page-schem-detail-clone {
   }
   .foot_bt button {
     width: 100%;
+  }
+  .foot_bt>ion-col:first-child>button {
+    background-color: color($colors, secondary);
   }
   .footer {
     background-color: white;

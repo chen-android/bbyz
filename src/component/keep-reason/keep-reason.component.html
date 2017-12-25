@@ -1,0 +1,13 @@
+<ion-grid class="root">
+  <ion-row><ion-col>请说明留座原因</ion-col></ion-row>
+  <ion-row>
+    <input type="text" placeholder="选填" [(ngModel)]="reason"/>
+  </ion-row>
+  <ion-row *ngFor="let i of historyReasons" justify-content-around class="reason">
+    <ion-col col-auto *ngFor="let j of i" (click)="reasonClick(j)">{{j.ReasonName}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-6 (click)="confirmClick()">确定</ion-col>
+    <ion-col col-6 (click)="cancelClick()">取消</ion-col>
+  </ion-row>
+</ion-grid>

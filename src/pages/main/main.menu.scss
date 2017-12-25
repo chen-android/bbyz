@@ -112,8 +112,8 @@ page-main {
   .sfm_hot_station>button {
     border: 1px solid color($colors, line-break);
     // text-align: center;
-    border-radius: 10pt;
-    height: 2.8rem;
+    border-radius: 15pt;
+    height: 2.1rem;
     width: 28%;
     font-size: 1rem;
     color:color($colors, second-text-color);
@@ -139,6 +139,6 @@ page-main {
 
   .tip{
     margin: 5pt;
-    color: red;
+    color:color($colors,third-text-color);
   }
 }

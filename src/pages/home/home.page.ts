@@ -10,6 +10,10 @@ import { ActionSheetController, MenuController, NavController, AlertController }
 import { dateValueRange } from 'ionic-angular/util/datetime-util';
 import { Events } from 'ionic-angular/util/events';
 import { SchemDetailPage } from '../schem-detail/schem-detail.page';
+import { SearchSaleDetailPage } from '../search-sale-detail/search-sale-detail.page';
+import { SearchTicketNumberPage } from '../search-ticket-number/search-ticket-number.page';
+import { SearchIssueBusPage } from '../search-issue-bus/search-issue-bus.page';
+import { PassengerFlowSummaryPage } from '../passenger-flow-summary/passenger-flow-summary.page';
 
 @Component({
     selector: 'page-home',
@@ -186,27 +190,21 @@ export class HomePage {
         this.action.create({
             buttons: [
                 {
-                    text: '车次售票查询',
-                    handler: () => {
-
-                    }
-                },
-                {
                     text: '售票明细查询',
                     handler: () => {
-
+                        this.navCtrl.push(SearchSaleDetailPage);
                     }
                 },
                 {
                     text: '票号追踪查询',
                     handler: () => {
-
+                        this.navCtrl.push(SearchTicketNumberPage);
                     }
                 },
                 {
                     text: '疑问班次查询',
                     handler: () => {
-
+                        this.navCtrl.push(SearchIssueBusPage);
                     }
                 }
             ],
@@ -214,9 +212,12 @@ export class HomePage {
         }).present();
     }
     schemClick(s: SchemItem) {
-        if (s.IsRun == 0) {
-            return;
-        }
         this.navCtrl.push(SchemDetailPage, { schem: s });
+    }
+    /**
+     * 前往客流汇总
+     */
+    gotoPassengerFlowSummary() {
+        this.navCtrl.push(PassengerFlowSummaryPage);
     }
 }

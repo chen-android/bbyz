@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SearchSaleDetailPage } from '../search-sale-detail/search-sale-detail.page';
+import { CacheData } from '../../providers/storage/CacheData';
+import { HttpServices } from '../../providers/http/http.service';
+import { BusSaleItem } from '../../module/BusSaleItem';
+import { CommandKeys } from '../../utils/CommandKeys';
+import { SchemItem } from '../../module/SchemItem';
+import { DialogUtil } from '../../utils/DialogUtil';
 
 /**
  * 
@@ -13,127 +18,31 @@ import { SearchSaleDetailPage } from '../search-sale-detail/search-sale-detail.p
   templateUrl: 'search-bus-sale.page.html',
 })
 export class SearchBusSalePage {
-  schemID: string;
-  list: Array<object> = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  schem: SchemItem;
+  dataArray: Array<BusSaleItem> = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpServices, public dialog: DialogUtil) {
+    this.schem = this.navParams.get("schem");
+  }
+
+  requestData() {
+
+    let content = {
+      "StationID": CacheData.stationId,
+      "SchemID": this.schem.SchemID
+    };
+    this.http.postRequest<Array<BusSaleItem>>(CommandKeys.searchBusSale, content, value => {
+      if (value.success) {
+        let list = value.object;
+        if (list.length == 0) {
+          this.dialog.showAtMiddleToast('暂无该车次售票信息');
+        }
+        this.dataArray = list;
+      }
+      return false;
+    });
   }
 
   ionViewDidLoad() {
-
-  }
-
-  searchAction() {
-    this.list = [{
-      DriveDate: 'yyyy-MM-dd',
-      StationName: '杭州客运中心',
-      SchemNo: '9999',
-      TicketNo: '22222',
-      SeatNo: '12',
-      StopName: '丽水',
-      TicketType: '全票',
-      Price: '123.00',
-      Status: '已售',
-      SaleDateTime:'yyyy-MM-dd',
-      ClientName: '刘照天',
-      IDCardNo: '610103199305231619',
-      Tel: '18740395237',
-      CheckDateTime:'yyyy-MM-dd',
-      IsFreeChild: 0,
-      SaleStationName: '杭州',
-      SaleWorkerName: '陈宇宝宝'      
-    },{
-      DriveDate: 'yyyy-MM-dd',
-      StationName: '杭州客运中心',
-      SchemNo: '9999',
-      TicketNo: '22222',
-      SeatNo: '12',
-      StopName: '丽水',
-      TicketType: '全票',
-      Price: '123.00',
-      Status: '已售',
-      SaleDateTime:'yyyy-MM-dd HH:mm:ss',
-      ClientName: '刘照天',
-      IDCardNo: '610103199305231619',
-      Tel: '18740395237',
-      CheckDateTime:'yyyy-MM-dd',
-      IsFreeChild: 0,
-      SaleStationName: '杭州',
-      SaleWorkerName: '陈宇宝宝'      
-    },{
-      DriveDate: 'yyyy-MM-dd',
-      StationName: '杭州客运中心',
-      SchemNo: '9999',
-      TicketNo: '22222',
-      SeatNo: '12',
-      StopName: '丽水',
-      TicketType: '全票',
-      Price: '123.00',
-      Status: '已售',
-      SaleDateTime:'yyyy-MM-dd',
-      ClientName: '刘照天',
-      IDCardNo: '610103199305231619',
-      Tel: '18740395237',
-      CheckDateTime:'yyyy-MM-dd',
-      IsFreeChild: 0,
-      SaleStationName: '杭州',
-      SaleWorkerName: '陈宇宝宝'      
-    },{
-      DriveDate: 'yyyy-MM-dd',
-      StationName: '杭州客运中心',
-      SchemNo: '9999',
-      TicketNo: '22222',
-      SeatNo: '12',
-      StopName: '丽水',
-      TicketType: '全票',
-      Price: '123.00',
-      Status: '已售',
-      SaleDateTime:'yyyy-MM-dd',
-      ClientName: '刘照天',
-      IDCardNo: '610103199305231619',
-      Tel: '18740395237',
-      CheckDateTime:'yyyy-MM-dd',
-      IsFreeChild: 0,
-      SaleStationName: '杭州',
-      SaleWorkerName: '陈宇宝宝'      
-    },{
-      DriveDate: 'yyyy-MM-dd',
-      StationName: '杭州客运中心',
-      SchemNo: '9999',
-      TicketNo: '22222',
-      SeatNo: '12',
-      StopName: '丽水',
-      TicketType: '全票',
-      Price: '123.00',
-      Status: '已售',
-      SaleDateTime:'yyyy-MM-dd',
-      ClientName: '刘照天',
-      IDCardNo: '610103199305231619',
-      Tel: '18740395237',
-      CheckDateTime:'yyyy-MM-dd',
-      IsFreeChild: 0,
-      SaleStationName: '杭州',
-      SaleWorkerName: '陈宇宝宝'      
-    },{
-      DriveDate: 'yyyy-MM-dd',
-      StationName: '杭州客运中心',
-      SchemNo: '9999',
-      TicketNo: '22222',
-      SeatNo: '12',
-      StopName: '丽水',
-      TicketType: '全票',
-      Price: '123.00',
-      Status: '已售',
-      SaleDateTime:'yyyy-MM-dd',
-      ClientName: '刘照天',
-      IDCardNo: '610103199305231619',
-      Tel: '18740395237',
-      CheckDateTime:'yyyy-MM-dd',
-      IsFreeChild: 0,
-      SaleStationName: '杭州',
-      SaleWorkerName: '陈宇宝宝'      
-    }]
-    console.log(this.schemID);
-    console.log(this.list);
-    this.navCtrl.push(SearchSaleDetailPage)
+    this.requestData();
   }
 }

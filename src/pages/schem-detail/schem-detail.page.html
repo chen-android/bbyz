@@ -44,17 +44,17 @@
       </ion-col>
     </ion-row>
     <ion-row class="sd_part2">
-      <ion-col col-3>
+      <ion-col col-3 (click)="keepClick()">
         <img src="assets/imgs/icon_schem_keep_seat.png" />
         <br> 留座
       </ion-col>
-      <ion-col col-3>
+      <ion-col col-3 (click)="shiftDetail()">
         <img src="assets/imgs/icon_schem_detail.png" />
-        <br>班次详情
+        <br>售票详情
       </ion-col>
-      <ion-col col-3>
+      <ion-col col-3 (click)="stopSaleClick()">
         <img src="assets/imgs/icon_schem_stop.png" />
-        <br>站点停靠
+        <br>站点停售
       </ion-col>
     </ion-row>
 

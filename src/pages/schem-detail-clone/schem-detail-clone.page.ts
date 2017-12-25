@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { ActionSheetController, IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { BusId } from '../../module/BusId';
 import { BusType } from '../../module/BusType';
 import { Company } from '../../module/Company';
 import { CacheData } from '../../providers/storage/CacheData';
 import { CommandKeys } from '../../utils/CommandKeys';
+import { DialogUtil } from '../../utils/DialogUtil';
+import { BusIdSearchPage } from '../bus-id-search/bus-id-search.page';
 import { SchemItem } from './../../module/SchemItem';
 import { HttpServices } from './../../providers/http/http.service';
 import { BusTypeSearchPage } from './../bus-type-search/bus-type-search.page';
 import { CompanySearchPage } from './../company-search/company-search.page';
-import { ToastUtil } from '../../utils/ToastUtil';
-import { BusId } from '../../module/BusId';
-import { BusIdSearchPage } from '../bus-id-search/bus-id-search.page';
 
 /**
  * Generated class for the SchemDetailClonePage page.
@@ -59,7 +59,7 @@ export class SchemDetailClonePage {
     selectBusId:BusId;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpServices,public action:ActionSheetController,
-        public toast:ToastUtil) {
+        public dialog:DialogUtil) {
         this.schem = this.navParams.get("schem");
         this.selectTime = this.schem.DriveTime.substring(11, 16);
         this.selectStartDate = this.schem.DriveDate.substring(0,10);
@@ -122,6 +122,14 @@ export class SchemDetailClonePage {
         });
     }
     confirmClick(){
+        if (this.selectedBusType == undefined){
+            this.dialog.showAtMiddleToast("请选择车型");
+            return;
+        }
+        if(this.selectCompany == undefined){
+            this.dialog.showAtMiddleToast("请选择承运单位");
+            return;
+        }
         this.requestClone();
     }
     cancelClick(){
@@ -145,7 +153,7 @@ export class SchemDetailClonePage {
         };
         this.http.postRequest(CommandKeys.clone,content,value=>{
             if(value.success){
-                this.toast.showAtMiddle("克隆成功",800);
+                this.dialog.showAtMiddleToast("克隆成功",800);
                 setTimeout(() => {
                     this.navCtrl.pop();
                 }, 800);

@@ -1,18 +1,19 @@
-import { StorageUtils } from './../../providers/storage/StorageUtils';
-import { ListPage } from './../list/list';
-import { EventKeys } from './../../utils/EventKeys';
-import { SiteSearchPage } from './../site-search/site-search.page';
-import { CommandKeys } from './../../utils/CommandKeys';
-import { HttpServices } from './../../providers/http/http.service';
-import { Site } from './../../module/Site';
-import { FeedbackPage } from './../other/feedback/feedback.page';
-import { CacheData } from './../../providers/storage/CacheData';
-import { LoginPage } from './../login/login.page';
-import { HomePage } from '../home/home.page';
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, IonicPage, Nav, Platform, MenuController, NavController, LoadingController } from 'ionic-angular';
+import { AlertController, IonicPage, LoadingController, MenuController, Nav, NavController, Platform } from 'ionic-angular';
 import { Events } from 'ionic-angular/util/events';
 
+import { HomePage } from '../home/home.page';
+import { Site } from './../../module/Site';
+import { HttpServices } from './../../providers/http/http.service';
+import { CacheData } from './../../providers/storage/CacheData';
+import { StorageUtils } from './../../providers/storage/StorageUtils';
+import { CommandKeys } from './../../utils/CommandKeys';
+import { EventKeys } from './../../utils/EventKeys';
+import { LoginPage } from './../login/login.page';
+import { FeedbackPage } from './../other/feedback/feedback.page';
+import { SiteSearchPage } from './../site-search/site-search.page';
+
+// import { ListPage } from './../list/list';
 /**
  * 
  *主页 菜单页
@@ -50,13 +51,13 @@ export class MainMenu {
         });
     }
 
-    ionViewDidLoad() {
+    ionViewDidEnter(){
         this.userId = CacheData.id;
     }
 
-    test() {
-        this.navCtrl.push(ListPage);
-    }
+    // test() {
+    //     this.navCtrl.push(ListPage);
+    // }
 
     /** 个人中心menu */
     logout() {
@@ -68,7 +69,7 @@ export class MainMenu {
                     handler: () => {
                         this.menu.close();
                         CacheData.reset();
-                        this.nav.setRoot(LoginPage);
+                        this.navCtrl.setRoot(LoginPage);
                     }
                 },
                 {

@@ -6,14 +6,14 @@
     <br> {{selectDate | date:"yyyy年MM月dd日"}}
   </div>
   <div [ngClass]="menuClass">
-    <img src="assets/imgs/icon_home_passenger_flow_summary.png" />
+    <img src="assets/imgs/icon_home_passenger_flow_summary.png" (click)="gotoPassengerFlowSummary()"/>
     <img src="assets/imgs/icon_home_ticket_search.png" (click)="showSearchDialog()" />
     <img src="assets/imgs/icon_home_ticket_filter.png" menuToggle="stationFilterMenu" />
   </div>
 </ion-header>
 
 <ion-content>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="stationSelected">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中...">
     </ion-refresher-content>
   </ion-refresher>
@@ -28,10 +28,13 @@
         <p>已售 {{s.SaledNum}} 余座 {{s.LeastSeatNum}} 订票 {{s.ReserveNum}}</p>
       </div>
       <div item-end class="schem_end">
-        <p>{{s.IsRun==0?"停班":s.IsRun==1?"开班":"停班有售"}}</p>
+        <p>{{s.IsRun==0?s.SaledNum>0?"停班有售":"停班":"开班"}}</p>
         <p *ngIf="s.SchemTypeCode == 2" class="schem_type_enable">{{s.SchemType}}</p>
       </div>
     </ion-item>
   </ion-list>
-  <div class="no_data" *ngIf="!schemList&&selectedStation">查无数据</div>
+  <div class="no_data" *ngIf="!schemList">
+    <img src="assets/imgs/icon_home_no_data.png"/><br>
+    {{selectedStation?"暂无内容":"请选择乘车站"}}
+  </div>
 </ion-content>

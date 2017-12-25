@@ -1,0 +1,79 @@
+<!--
+  Generated template for the PassengerFlowSummaryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>客流汇总</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-row justify-content-around class="input-warp">
+    <ion-col>
+      <ion-datetime cancelText="取消" doneText="确认" placeholder="起始发车日期" displayFormat="YYYY年MM月DD日" pickerFormat="YYYY MM DD" [(ngModel)]="beginTime"></ion-datetime>
+    </ion-col>
+    <ion-col>
+      <img src="assets/imgs/icon_arrow.png" class="arrow" />
+    </ion-col>
+    <ion-col>
+      <ion-datetime cancelText="取消" doneText="确认" placeholder="结束发车日期" displayFormat="YYYY年MM月DD日" pickerFormat="YYYY MM DD" [(ngModel)]="endTime"></ion-datetime>
+    </ion-col>
+  </ion-row>
+  <ion-row align-items-center class="search-btn-wrap">
+    <button class="search-btn" ion-button (click)="searchAction()">查询</button>
+  </ion-row>
+  <ion-grid no-padding class="scroll-grid">
+    <ion-row align-items-center>
+      <ion-col align-self-center>
+        <div class="title">总人数</div>
+        <div class="number">{{passengerFlowItem?.TotalTickets ? passengerFlowItem.TotalTickets : 0}}</div>
+      </ion-col>
+      <ion-col align-self-center>
+        <div class="title">正班人数</div>
+        <div class="number">{{passengerFlowItem?.NormalTickets ? passengerFlowItem.NormalTickets : 0}}</div>
+      </ion-col>
+      <ion-col align-self-center>
+        <div class="title">加班人数</div>
+        <div class="number">{{passengerFlowItem?.AddedTickets ? passengerFlowItem.AddedTickets : 0}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-center>
+      <ion-col align-self-center>
+        <div class="title">总营收</div>
+        <div class="number">{{passengerFlowItem?.TotalIncome ? passengerFlowItem.TotalIncome : 0}}</div>
+      </ion-col>
+      <ion-col align-self-center>
+        <div class="title">正班营收</div>
+        <div class="number">{{passengerFlowItem?.NormalIncome ? passengerFlowItem.NormalIncome : 0}}</div>
+      </ion-col>
+      <ion-col align-self-center>
+        <div class="title">加班营收</div>
+        <div class="number">{{passengerFlowItem?.AddedIncome ? passengerFlowItem.AddedIncome : 0}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-center>
+      <ion-col align-self-center>
+        <div class="title">预售张数</div>
+        <div class="number">{{passengerFlowItem?.PreSaleTickets ? passengerFlowItem.PreSaleTickets : 0}}</div>
+      </ion-col>
+      <ion-col align-self-center>
+        <div class="title">当日张数</div>
+        <div class="number">{{passengerFlowItem?.NormalSaleTickets?passengerFlowItem.NormalSaleTickets:0}}</div>
+      </ion-col>
+      <ion-col align-self-center>
+        <div class="title">未检票张数</div>
+        <div class="number">{{passengerFlowItem?.UncheckedTickets?passengerFlowItem.UncheckedTickets:0}}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-row [hidden]="hiddenInfo" class="canvas-warp">
+    <canvas #canvas1 class="canvas"></canvas>
+    <canvas #canvas2 class="canvas"></canvas>
+  </ion-row>
+</ion-content>

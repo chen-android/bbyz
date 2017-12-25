@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { ActionSheetController, IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { CacheData } from '../../providers/storage/CacheData';
+import { DialogUtil } from '../../utils/DialogUtil';
 import { BusTypeSearchPage } from '../bus-type-search/bus-type-search.page';
 import { BusType } from './../../module/BusType';
 import { SchemItem } from './../../module/SchemItem';
 import { HttpServices } from './../../providers/http/http.service';
 import { CommandKeys } from './../../utils/CommandKeys';
-import { ToastUtil } from './../../utils/ToastUtil';
 
 /**
  * Generated class for the SchemDetailModifyPage page.
@@ -31,7 +31,7 @@ export class SchemDetailModifyPage {
     isForcePass: boolean;
     selectedBusType: BusType;
     constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpServices,
-        public action: ActionSheetController, public toast: ToastUtil) {
+        public action: ActionSheetController, public dialog: DialogUtil) {
         this.schem = this.navParams.get("schem");
         this.selectTime = this.schem.DriveTime.substring(11, 16);
         this.startSeatNo = this.schem.StartSeatNo;
@@ -72,11 +72,11 @@ export class SchemDetailModifyPage {
         if (this.startSeatNo != this.schem.StartSeatNo ||
             this.totalSeatNum != this.schem.TotalSeatNum) {
             if (this.startSeatNo < 0 || this.startSeatNo > 100) {
-                this.toast.showAtMiddle("起座号必须在0-100之间");
+                this.dialog.showAtMiddleToast("起座号必须在0-100之间");
                 return;
             }
             if (this.totalSeatNum < 0 || this.totalSeatNum > 100) {
-                this.toast.showAtMiddle("座位数必须在0-100之间");
+                this.dialog.showAtMiddleToast("座位数必须在0-100之间");
                 return;
             }
             keyNo.push("5");
@@ -99,7 +99,8 @@ export class SchemDetailModifyPage {
                     this.schem.IsForcePass = this.isForcePass ? 1 : 0;
                     this.schem.StartSeatNo = this.startSeatNo;
                     this.schem.TotalSeatNum = this.totalSeatNum;
-                    this.toast.showAtMiddle("修改成功", 800);
+                    this.schem.LeastSeatNum = this.totalSeatNum - this.schem.SaledNum-this.schem.ReserveNum;
+                    this.dialog.showAtMiddleToast("修改成功", 800);
                     setTimeout(() => {
                         this.navCtrl.pop();
                     }, 800);

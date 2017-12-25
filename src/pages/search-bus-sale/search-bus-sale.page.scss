@@ -1,40 +1,40 @@
 page-search-bus-sale {
-    // 车次查询相关
+    .sd_part1 {
+        background-color: white;
+        padding: 5pt;
+    }
+    .sd_part1>ion-col>p {
+        font-size: 1.4rem;
+        color: color($colors, third-text-color);
+        text-align: center;
+        margin: 0pt 0pt 5pt 0pt;
+    }
+    .sd_part1>ion-col>p+p {
+        font-weight: 600;
+        font-size: 1.8rem;
+        color: color($colors, text-color);
+    }
     .scroll-grid {
         width: 128rem;
     }
     .title-row {
-        height: 50px;
+        height: 4rem;
+        border-bottom: 1px solid #e3e3e3;
     }
     .title-row ion-col {
         color: rgb(72, 119, 221);
         font-size: 13px;
     }
     .content-row {
-        height: 50px;
+        height: 4rem;
+        border-bottom: 1px solid #e3e3e3;
     }
     .content-row ion-col {
         color: rgb(51, 51, 51);
         font-size: 13px;
     }
-    .content-md {
+    .content {
         background-color: #fff;
-    }
-    .input-warp {
-        height: 5rem;
-        align-items: center;
-        border-bottom: 1px solid #f6f6f6;
-    }
-    .default-input {
-        margin-left: 1rem;
-    }
-    .search-btn-wrap {
-        justify-content: center;
-        height: 5rem;
-    }
-    .search-btn {
-        width: 60%;
-        height: 3rem;
     }
     .col-12 {
         -webkit-box-flex: 0;
@@ -44,7 +44,7 @@ page-search-bus-sale {
         -ms-flex: 0 0 12%;
         flex: 0 0 12%;
     }
-    .col-05 {
+    .col-04 {
         -webkit-box-flex: 0;
         -webkit-flex: 0 0 4%;
         -moz-box-flex: 0;

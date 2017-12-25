@@ -1,15 +1,15 @@
-import { ToastUtil } from './../../utils/ToastUtil';
-import { EncryptUtils } from './../../utils/EncryptUtils';
-import { StorageUtils } from './../../providers/storage/StorageUtils';
-import { MainMenu } from './../main/main.menu';
-import { User } from './../../module/User';
-import { CommandKeys } from './../../utils/CommandKeys';
-import { HttpServices } from './../../providers/http/http.service';
-import { StorageKeys } from './../../utils/StorageKeys';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { CacheData } from '../../providers/storage/CacheData';
-import CryptoJS from "crypto-js";
+import { DialogUtil } from '../../utils/DialogUtil';
+import { User } from './../../module/User';
+import { HttpServices } from './../../providers/http/http.service';
+import { StorageUtils } from './../../providers/storage/StorageUtils';
+import { CommandKeys } from './../../utils/CommandKeys';
+import { EncryptUtils } from './../../utils/EncryptUtils';
+import { MainMenu } from './../main/main.menu';
+
 /**
  * 登录页
  */
@@ -26,7 +26,7 @@ export class LoginPage {
     isDebug:boolean ;
     path:string;
     constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageUtils, 
-        public http: HttpServices,public toast:ToastUtil,public encrypt:EncryptUtils) {
+        public http: HttpServices,public dialog:DialogUtil,public encrypt:EncryptUtils) {
     }
 
     ionViewDidLoad() {
@@ -37,7 +37,6 @@ export class LoginPage {
                 this.saveCheck = true;
             }
         });
-        this.pwd = "12345678";
     }
     login() {
         this.http.postRequest1<User>(CommandKeys.login,this.id,{"Password":this.pwd},value=>{
@@ -47,7 +46,7 @@ export class LoginPage {
                 if (this.saveCheck) {
                     this.storage.setUser(user);
                 }
-                this.toast.showAtMiddle("登录成功",800);
+                this.dialog.showAtMiddleToast("登录成功",800);
                 setTimeout(() => {
                     this.navCtrl.setRoot(MainMenu);
                 }, 800);
@@ -57,8 +56,8 @@ export class LoginPage {
         
     }
 
-    setPath(){
-        CacheData.url = this.path + "/api/Mobile";
-        this.toast.showAtMiddle("设置成功", 800);
-    }
+    // setPath(){
+    //     CacheData.url = this.path + "/api/Mobile";
+    //     this.dialog.showAtMiddleToast("设置成功", 800);
+    // }
 }

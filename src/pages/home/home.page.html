@@ -20,7 +20,7 @@
   <ion-list>
     <ion-item *ngFor="let s of schemList" class="schem_item schem_disable" [class.schem_disable]="s.IsRun==0" (click)="schemClick(s)">
       <div item-start class="schem_start">
-        <strong>{{s.DriveTime|date:"HH:mm"}}</strong>
+        <strong>{{s.DriveTime|dateFormat}}</strong>
         <p>{{s.SchemNo}}车次</p>
       </div>
       <div item-center class="schem_center">

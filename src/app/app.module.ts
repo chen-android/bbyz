@@ -34,6 +34,8 @@ import { BusIdSearchPageModule } from '../pages/bus-id-search/bus-id-search.page
 import { SchemDetailKeepSeatPageModule } from '../pages/schem-detail-keep-seat/schem-detail-keep-seat.page.module';
 import { SchemDetailStopSalePageModule } from '../pages/schem-detail-stop-sale/schem-detail-stop-sale.module';
 import { PassengerFlowSummaryPageModule } from '../pages/passenger-flow-summary/passenger-flow-summary.page.module';
+import { PipeModule } from '../pipe/PipeModule';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -62,6 +64,7 @@ import { PassengerFlowSummaryPageModule } from '../pages/passenger-flow-summary/
     BusIdSearchPageModule,
     KeepReasonComponentModule,
     PassengerFlowSummaryPageModule,
+    PipeModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

@@ -1,24 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppVersion } from '@ionic-native/app-version';
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Platform } from 'ionic-angular';
+import { Platform, IonicApp, Nav, NavController } from 'ionic-angular';
 
 import { User } from '../module/User';
 import { LoginPage } from '../pages/login/login.page';
 import { CacheData } from './../providers/storage/CacheData';
 import { StorageUtils } from './../providers/storage/StorageUtils';
 import { StorageKeys } from './../utils/StorageKeys';
+import { Keyboard } from 'ionic-angular/platform/keyboard';
+import { DialogUtil } from '../utils/DialogUtil';
+import { ViewController } from 'ionic-angular/navigation/view-controller';
 
 @Component({
     templateUrl: 'app.html'
 })
 export class MyApp {
-    rootPage: any ;
-
+    rootPage: any;
+    @ViewChild(Nav) nav: Nav;
+    lastClickTime: number;
     constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-        private appVersion:AppVersion,private device:Device,private storage:StorageUtils) {
+        private appVersion: AppVersion, private device: Device, private storage: StorageUtils, private ionicApp: IonicApp,
+        private keyboard: Keyboard, private dialog: DialogUtil) {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.

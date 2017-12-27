@@ -77,7 +77,7 @@ export class PassengerFlowSummaryPage {
       options: {
         scales: {
           xAxes: [{
-            barPercentage: 0.3,
+            barPercentage: 0.5,
             categoryPercentage: 0.8,
             gridLines: {
               display: false
@@ -112,7 +112,7 @@ export class PassengerFlowSummaryPage {
 
         scales: {
           xAxes: [{
-            barPercentage: 0.3,
+            barPercentage: 0.5,
             categoryPercentage: 0.8,
             gridLines: {
               display: false

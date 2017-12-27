@@ -1,19 +1,20 @@
-import { SchemItem } from './../../module/SchemItem';
-import { Site } from './../../module/Site';
-import { EventKeys } from './../../utils/EventKeys';
-import { CacheData } from './../../providers/storage/CacheData';
-import { Station } from './../../module/Station';
-import { CommandKeys } from './../../utils/CommandKeys';
-import { HttpServices } from './../../providers/http/http.service';
 import { Component } from '@angular/core';
-import { ActionSheetController, MenuController, NavController, AlertController } from 'ionic-angular';
-import { dateValueRange } from 'ionic-angular/util/datetime-util';
+import { ActionSheetController, AlertController, MenuController, NavController } from 'ionic-angular';
 import { Events } from 'ionic-angular/util/events';
+
+import { PassengerFlowSummaryPage } from '../passenger-flow-summary/passenger-flow-summary.page';
 import { SchemDetailPage } from '../schem-detail/schem-detail.page';
+import { SearchIssueBusPage } from '../search-issue-bus/search-issue-bus.page';
 import { SearchSaleDetailPage } from '../search-sale-detail/search-sale-detail.page';
 import { SearchTicketNumberPage } from '../search-ticket-number/search-ticket-number.page';
-import { SearchIssueBusPage } from '../search-issue-bus/search-issue-bus.page';
-import { PassengerFlowSummaryPage } from '../passenger-flow-summary/passenger-flow-summary.page';
+import { SchemItem } from './../../module/SchemItem';
+import { Site } from './../../module/Site';
+import { Station } from './../../module/Station';
+import { HttpServices } from './../../providers/http/http.service';
+import { CacheData } from './../../providers/storage/CacheData';
+import { CommandKeys } from './../../utils/CommandKeys';
+import { EventKeys } from './../../utils/EventKeys';
+
 
 @Component({
     selector: 'page-home',
@@ -51,10 +52,16 @@ export class HomePage {
         });
     }
     ionViewDidEnter(){
+        this.menu.enable(true, "personCenterMenu");
+        this.menu.enable(true, "stationFilterMenu");
         if(this.shouldRefresh){
             this.requestSchemList();
             this.shouldRefresh = false;
         }
+    }
+    ionViewDidLeave(){
+        this.menu.enable(false,"personCenterMenu");
+        this.menu.enable(false,"stationFilterMenu");
     }
     ionViewWillUnload(){
         this.event.unsubscribe(EventKeys.stationFilter);

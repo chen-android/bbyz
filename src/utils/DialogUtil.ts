@@ -31,6 +31,7 @@ export class DialogUtil {
             message: msg,
             position: "middle",
             duration: duration,
+            cssClass: 'text-align: center',
             dismissOnPageChange:false
         }).present();
     }
@@ -39,6 +40,7 @@ export class DialogUtil {
             message: msg,
             position: "bottom",
             duration: duration,
+            cssClass: 'text-align: center',
             dismissOnPageChange: false
         }).present();
     }

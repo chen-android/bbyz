@@ -25,7 +25,7 @@
       <ion-row justify-content-between align-items-center class="border_line_break padding_10">
         <ion-col col-auto>发车日期</ion-col>
         <ion-col col-auto>
-          <ion-datetime class="sfm_datetime" displayFormat="YYYY年MM月DD日" [min]="minDate" [max]="maxDate" [(ngModel)]="selectDate"></ion-datetime>
+          <ion-datetime doneText="确定" cancelText="取消" class="sfm_datetime" displayFormat="YYYY年MM月DD日" [min]="minDate" [max]="maxDate" [(ngModel)]="selectDate"></ion-datetime>
         </ion-col>
       </ion-row>
       <ion-row radio-group class="border_line_break padding_10" [(ngModel)]="busType">
@@ -67,8 +67,8 @@
   </ion-content>
   <ion-footer>
     <ion-row>
-      <button ion-button block col-6 (click)="filterSubmit()" menuClose="stationFilterMenu">确定</button>
-      <button ion-button block col-6 color="secondary" menuClose="stationFilterMenu">取消</button>
+      <button ion-button block col-6 color="secondary" (click)="filterSubmit()" menuClose="stationFilterMenu">确定</button>
+      <button ion-button block col-6 menuClose="stationFilterMenu">取消</button>
     </ion-row>
   </ion-footer>
 </ion-menu>

@@ -1,13 +1,13 @@
-import { KeepReasonComponent } from '../../component/keep-reason/keep-reason.component';
-import { CacheData } from '../../providers/storage/CacheData';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
 
+import { KeepReasonComponent } from '../../component/keep-reason/keep-reason.component';
+import { BusStatus } from '../../module/BusStatus';
 import { SchemItem } from '../../module/SchemItem';
 import { HttpServices } from '../../providers/http/http.service';
+import { CacheData } from '../../providers/storage/CacheData';
 import { CommandKeys } from '../../utils/CommandKeys';
-import { BusStatus } from '../../module/BusStatus';
-import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
 import { DialogUtil } from '../../utils/DialogUtil';
 import { EventKeys } from '../../utils/EventKeys';
 

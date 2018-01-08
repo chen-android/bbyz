@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { CacheData } from '../../providers/storage/CacheData';
-import { HttpServices } from '../../providers/http/http.service';
+
 import { BusSaleItem } from '../../module/BusSaleItem';
-import { CommandKeys } from '../../utils/CommandKeys';
 import { SchemItem } from '../../module/SchemItem';
+import { HttpServices } from '../../providers/http/http.service';
+import { CacheData } from '../../providers/storage/CacheData';
+import { CommandKeys } from '../../utils/CommandKeys';
 import { DialogUtil } from '../../utils/DialogUtil';
 
 /**

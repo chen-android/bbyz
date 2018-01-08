@@ -1,9 +1,10 @@
-import { CacheData } from '../../providers/storage/CacheData';
-import { CommandKeys } from '../../utils/CommandKeys';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { Company } from '../../module/Company';
 import { HttpServices } from '../../providers/http/http.service';
+import { CacheData } from '../../providers/storage/CacheData';
+import { CommandKeys } from '../../utils/CommandKeys';
 
 /**
  * Generated class for the CompanySearchPage page.

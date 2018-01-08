@@ -65,7 +65,13 @@ import { PipeModule } from '../pipe/PipeModule';
     KeepReasonComponentModule,
     PassengerFlowSummaryPageModule,
     PipeModule.forRoot(),
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{
+      platform:{
+        ios:{
+          backButtonText: ''
+        }
+      }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

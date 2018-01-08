@@ -1,8 +1,9 @@
-import { CommandKeys } from './../../../utils/CommandKeys';
-import { HttpServices } from './../../../providers/http/http.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { DialogUtil } from '../../../utils/DialogUtil';
+import { HttpServices } from './../../../providers/http/http.service';
+import { CommandKeys } from './../../../utils/CommandKeys';
 
 /**
  * Generated class for the FeedbackPage page.

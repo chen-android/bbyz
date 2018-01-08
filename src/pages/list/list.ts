@@ -1,9 +1,9 @@
-import { Site } from './../../module/Site';
-import { StorageUtils } from './../../providers/storage/StorageUtils';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
+
 import { KeepReasonComponent } from '../../component/keep-reason/keep-reason.component';
+import { StorageUtils } from './../../providers/storage/StorageUtils';
 
 @Component({
     selector: 'page-list',

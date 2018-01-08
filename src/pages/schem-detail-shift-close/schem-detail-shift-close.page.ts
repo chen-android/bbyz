@@ -1,11 +1,12 @@
-import { HttpServices } from './../../providers/http/http.service';
-import { CacheData } from '../../providers/storage/CacheData';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DialogUtil } from '../../utils/DialogUtil';
-import { SchemItem } from '../../module/SchemItem';
-import { CommandKeys } from '../../utils/CommandKeys';
+
 import { CloseReason } from '../../module/CloseReason';
+import { SchemItem } from '../../module/SchemItem';
+import { CacheData } from '../../providers/storage/CacheData';
+import { CommandKeys } from '../../utils/CommandKeys';
+import { DialogUtil } from '../../utils/DialogUtil';
+import { HttpServices } from './../../providers/http/http.service';
 
 /**
  * Generated class for the SchemDetailShiftClosePage page.

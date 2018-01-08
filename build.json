@@ -1,0 +1,11 @@
+{
+    "android": {
+        "release": {
+            "keystore": "G:\\bbkb\\ticket-project-android-studio\\app\\keystore_hundsun_ticket.key",
+            "storePassword": "B43d8bJcUeBnrWR39uKs946VT16bNz7f",
+            "alias": "bbyz",
+            "password": "wEi62GJwHQN8yn0PNKpeQABeCGOiqlNY",
+            "keystoreType": "jks"
+        }
+    }
+}

@@ -35,7 +35,7 @@
       </ion-col>
       <ion-col>发车时间</ion-col>
       <ion-col>
-        <ion-datetime displayFormat="HH:mm" [(ngModel)]="selectTime"></ion-datetime>
+        <ion-datetime doneText="确定" cancelText="取消" displayFormat="HH:mm" [(ngModel)]="selectTime" class="number_text"></ion-datetime>
       </ion-col>
     </ion-row>
     <ion-row class="seat">
@@ -73,13 +73,11 @@
         <ion-label>正班</ion-label>
       </ion-col>
     </ion-row>
-    <ion-row align-items-center>
-      <ion-col class="text_color_third">
+    <ion-row ion-item class="schem_toggle">
+      <ion-label class="text_color_third">
         强制门检放行
-      </ion-col>
-      <ion-col col-auto>
+      </ion-label>
         <ion-toggle [(ngModel)]="isForcePass"></ion-toggle>
-      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

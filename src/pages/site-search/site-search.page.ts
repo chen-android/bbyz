@@ -1,9 +1,10 @@
-import { CacheData } from './../../providers/storage/CacheData';
-import { CommandKeys } from './../../utils/CommandKeys';
-import { HttpServices } from './../../providers/http/http.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { Site } from '../../module/Site';
+import { HttpServices } from './../../providers/http/http.service';
+import { CacheData } from './../../providers/storage/CacheData';
+import { CommandKeys } from './../../utils/CommandKeys';
 
 /**
  * Generated class for the BusTypeSearchPage page.

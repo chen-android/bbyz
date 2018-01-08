@@ -1,10 +1,11 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import Chart from 'chart.js';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { PassengerFlowItem } from '../../module/PassengerFlowItem';
 import { HttpServices } from '../../providers/http/http.service';
 import { CacheData } from '../../providers/storage/CacheData';
-import { PassengerFlowItem } from '../../module/PassengerFlowItem';
 import { CommandKeys } from '../../utils/CommandKeys';
-import Chart from 'chart.js'; // 导入chart.jsimport 
 import { DialogUtil } from '../../utils/DialogUtil';
 
 /**

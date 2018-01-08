@@ -93,6 +93,16 @@ page-schem-detail-modify {
   .schem_type[ion-item] .item-inner .label-ios {
     margin: 0px 5pt;
   }
+  .schem_toggle{
+    padding: 3pt 5pt !important;
+    background-color: transparent;
+  }
+  .schem_toggle .item-inner{
+    border-bottom: none !important;
+  }
+  .schem_toggle ion-label{
+    padding-left: 5px;
+  }
   .text_color_third {
     color: color($colors, third-text-color);
   }

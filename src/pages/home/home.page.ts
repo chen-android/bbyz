@@ -14,6 +14,7 @@ import { HttpServices } from './../../providers/http/http.service';
 import { CacheData } from './../../providers/storage/CacheData';
 import { CommandKeys } from './../../utils/CommandKeys';
 import { EventKeys } from './../../utils/EventKeys';
+import { ListPage } from '../list/list';
 
 
 @Component({
@@ -226,5 +227,9 @@ export class HomePage {
      */
     gotoPassengerFlowSummary() {
         this.navCtrl.push(PassengerFlowSummaryPage);
+    }
+
+    showLog(){
+        this.navCtrl.push(ListPage);
     }
 }

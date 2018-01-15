@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { AlertController, IonicPage, LoadingController, MenuController, Nav, NavController, Platform } from 'ionic-angular';
 import { Events } from 'ionic-angular/util/events';
 
+import { Upgrade } from '../../module/Upgrade';
+import { UpgradeService } from '../../providers/upgrade.service';
 import { HomePage } from '../home/home.page';
 import { Site } from './../../module/Site';
 import { HttpServices } from './../../providers/http/http.service';
@@ -29,6 +31,8 @@ export class MainMenu {
 
     rootPage: any = HomePage;
     userId: string;
+    hasUpdate:boolean = false;
+    upgrade:Upgrade;
     minDate: string;
     maxDate: string;
     selectDate: string;
@@ -38,7 +42,7 @@ export class MainMenu {
     hotStation: Array<Array<Site>>=[];
     showOvertime: boolean;
     constructor(public navCtrl: NavController, public platform: Platform, public alert: AlertController, public menu: MenuController,
-        public http: HttpServices, public event: Events, public storage: StorageUtils,public loading:LoadingController) {
+        public http: HttpServices, public event: Events, public storage: StorageUtils,public loading:LoadingController,private upService:UpgradeService) {
         this.selectDate = new Date().toISOString().substring(0, 10);
         this.event.subscribe(EventKeys.clearFilter,()=>{
             this.minDate = undefined;
@@ -49,6 +53,9 @@ export class MainMenu {
             this.hotStation = undefined;
             this.showOvertime = false;
         });
+        this.upService.detectionUpgrade().then(value=>{
+            this.hasUpdate = value;
+        })
     }
 
     ionViewDidEnter(){
@@ -84,6 +91,11 @@ export class MainMenu {
     }
     feedback() {
         this.navCtrl.push(FeedbackPage);
+    }
+    checkUpdate(){
+       if(this.hasUpdate){
+           this.upService.detectionUpgrade(true);
+       }
     }
 
     personCenterOpen() {

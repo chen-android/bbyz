@@ -37,6 +37,36 @@ page-main {
     margin-top: 3pt;
     position: absolute;
   }
+  .pcm_check_update{
+    background-color: white;
+    font-size: 1.7rem;
+    padding: 12pt 10pt;
+    border-bottom: 1px solid color($colors, line-break);
+  }
+  .pcm_check_update>img:first-child{
+    width: 1.4rem;
+    height: 1.5rem;
+    margin-right: 5pt;
+    vertical-align: bottom;
+  }
+  .pcm_check_update>ion-col{
+    padding: 0px;
+    margin-left: 5px;
+  }
+  .pcm_check_update>div{
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 20px;
+    margin-right: 10pt;
+  }
+  .pcm_check_update>img:last-child {
+    width: 0.8rem;
+    height: 1.3rem;
+    right: 10pt;
+    position: absolute;
+  }
+
   .sfm_content {
     background-color: white;
   }

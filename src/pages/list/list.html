@@ -1,12 +1,39 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>测试</ion-title>
+    <ion-title>日志记录</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <button ion-button (click)="addclick()" full>add</button>
-  <button ion-button (click)="delick()" full>delete</button>
-  <button ion-button (click)="btclick()" full>show</button>
-  <button ion-button (click)="clearclick()" full>clear</button>
+  <ion-segment [(ngModel)]="log">
+    <ion-segment-button value="request">
+      请求参数
+    </ion-segment-button>
+    <ion-segment-button value="response">
+      响应参数
+    </ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="log">
+    <ion-list *ngSwitchCase="'request'">
+      <ion-item *ngFor="let l of requestLogs" (click)="detail(l)">
+        <div item-start>
+          {{l?.title}}
+        </div>
+        <div item-end>
+          {{l?.date | date:"yyyy-MM-dd HH:mm:ss"}}
+        </div>
+      </ion-item>
+    </ion-list>
+  
+    <ion-list *ngSwitchCase="'response'">
+      <ion-item *ngFor="let l of responseLogs" (click)="detail(l)">
+        <div item-start>
+          {{l?.title}}
+        </div>
+        <div item-end>
+          {{l?.date | date:"yyyy-MM-dd HH:mm:ss"}}
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

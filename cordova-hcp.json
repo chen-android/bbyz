@@ -1,0 +1,8 @@
+{
+  "name": "bbyz",
+  "ios_identifier": "",
+  "android_identifier": "com.bbkb.bbyz",
+  "update": "start",
+  "content_url": "http://121.199.31.187:8093/www",
+  "min_native_interface":1
+}

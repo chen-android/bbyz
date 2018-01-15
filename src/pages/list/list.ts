@@ -1,28 +1,21 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
-
-import { KeepReasonComponent } from '../../component/keep-reason/keep-reason.component';
-import { StorageUtils } from './../../providers/storage/StorageUtils';
+import { DebugLog } from '../../module/DebugLog';
+import { LogUtil } from '../../utils/LogUtil';
+import { LogPage } from '../log/log';
 
 @Component({
     selector: 'page-list',
     templateUrl: 'list.html'
 })
 export class ListPage {
-    constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageUtils,public pop:PopoverController) {
-        
+    requestLogs: Array<DebugLog>;
+    responseLogs: Array<DebugLog>;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public log: LogUtil) {
+        this.requestLogs = log.requestLogs;
+        this.responseLogs = log.responseLogs;
     }
-    ionViewDidLoad() {
+    detail(l:DebugLog){
+        this.navCtrl.push(LogPage,l);
     }
-    clearclick() {
-        let p = this.pop.create(KeepReasonComponent,{},{
-            enableBackdropDismiss:true
-        });
-        p.onDidDismiss(data=>{
-            console.info(data);
-        });
-        p.present();
-    }
-
 }

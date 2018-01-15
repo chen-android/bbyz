@@ -10,6 +10,12 @@
         意见反馈
         <img src="assets/imgs/icon_right_arrow.png"/>
     </div>
+    <ion-row class="pcm_check_update" align-items-center (click)="checkUpdate()">
+      <img src="assets/imgs/icon_person_center_upgrade.png" col-auto/>
+      <ion-col>检查更新</ion-col>
+      <div class="pcm_check_update_dot" col-auto *ngIf="hasUpdate"></div>
+      <img src="assets/imgs/icon_right_arrow.png" col-auto/>
+    </ion-row>
     <!-- <button ion-item (click)="test()" menuClose="personCenterMenu">
       测试
     </button> -->

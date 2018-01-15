@@ -9,12 +9,13 @@ import { EncryptUtils } from './../../utils/EncryptUtils';
 import { CacheData } from './../storage/CacheData';
 import { BbyzHttpResonse } from './BbyzHttpResponse';
 import { RequestOptions } from './RequestOptions';
+import { LogUtil } from '../../utils/LogUtil';
 
 @Injectable()
 export class HttpServices {
     loadDialog: Loading;
     constructor(private http: HttpClient, private encrypt: EncryptUtils, private loading: LoadingController,
-        private dialog: DialogUtil) { }
+        private dialog: DialogUtil,private log:LogUtil) { }
     /**
      * post请求
      * @param command 请求方法名
@@ -77,6 +78,7 @@ export class HttpServices {
                         value.object = JSON.parse(value.content) as T;
                     }
                 }
+                this.log.saveResponseLogs(command[0] + "-" + command[1],JSON.stringify(value))
                 if (CacheData.isDebug) {
                     console.log("<<<<<<<<返回参数<<<<<<<<" + command);
                     console.log(value);
@@ -124,6 +126,7 @@ export class HttpServices {
             },
             "key": ""
         }
+        this.log.saveRequestLogs(command[0]+"-"+command[1],JSON.stringify(json));
         if (CacheData.isDebug) {
             console.info(">>>>>>>>请求参数>>>>>>>>" + command);
             console.info(json.content);

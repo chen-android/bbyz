@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="1.0.0" id="com.bbkb.bbyz" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="1.0.1" id="com.bbkb.bbyz" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>巴巴驿站</name>
     <description>巴巴快巴车站调度app</description>
     <author email="service@bababus.com" href="http://www.bababus.com/">bbkb Team</author>
@@ -83,5 +83,15 @@
     <plugin name="cordova-sqlite-storage" spec="^2.1.2" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="cordova-hot-code-push-plugin" spec="^1.5.3" />
+    <chcp>
+        <config-file url="http://121.199.31.187:8093/www/chcp.json" />
+        <native-interface version="1" />
+        <auto-download enabled="true" />
+        <auto-install enabled="true" />
+    </chcp>
     <engine name="android" spec="6.4.0" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.0" />
+    <plugin name="cordova-plugin-file-opener2" spec="^2.0.19" />
+    <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
 </widget>

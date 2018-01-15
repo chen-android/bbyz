@@ -16,6 +16,10 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AppVersion } from "@ionic-native/app-version";
+import { File } from "@ionic-native/file";
+import { FileTransfer,FileTransferObject } from "@ionic-native/file-transfer";
+import { FileOpener } from "@ionic-native/file-opener";
+import { AndroidPermissions } from "@ionic-native/android-permissions";
 import { Device } from "@ionic-native/device";
 import { LoginPageModule } from '../pages/login/login.page.module';
 import { MainMenuModule } from '../pages/main/main.menu.module';
@@ -35,12 +39,16 @@ import { SchemDetailKeepSeatPageModule } from '../pages/schem-detail-keep-seat/s
 import { SchemDetailStopSalePageModule } from '../pages/schem-detail-stop-sale/schem-detail-stop-sale.module';
 import { PassengerFlowSummaryPageModule } from '../pages/passenger-flow-summary/passenger-flow-summary.page.module';
 import { PipeModule } from '../pipe/PipeModule';
+import { UpgradeService } from '../providers/upgrade.service';
+import { LogUtil } from '../utils/LogUtil';
+import { LogPage } from '../pages/log/log';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    LogPage
   ],
   imports: [
     BrowserModule,
@@ -77,17 +85,25 @@ import { PipeModule } from '../pipe/PipeModule';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    LogPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AppVersion,
+    File,
+    FileOpener,
+    FileTransfer,
+    FileTransferObject,
     Device,
+    AndroidPermissions,
     EncryptUtils,
     HttpServices,
+    UpgradeService,
     StorageUtils,
     DialogUtil,
+    LogUtil,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

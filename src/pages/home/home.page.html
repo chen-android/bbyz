@@ -37,4 +37,9 @@
     <img src="assets/imgs/icon_home_no_data.png"/><br>
     {{selectedStation?"暂无内容":"请选择乘车站"}}
   </div>
+  <ion-fab bottom right edge>
+    <button ion-fab mini (click)="showLog()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

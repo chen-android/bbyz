@@ -27,6 +27,9 @@ export class MyApp {
             this.splashScreen.hide();
             this.initAppData();
             this.rootPage = LoginPage;
+            // this.platform.registerListener(document, "chcp_updateLoadFailed", (eventData)=>{
+            //     this.dialog.showAtMiddleToast("升级失败" + eventData.detail,8000);
+            // },{})
         });
     }
     initAppData(): any {
@@ -43,7 +46,7 @@ export class MyApp {
     initCommon() {
         if (!CacheData.isDebug) {
             this.appVersion.getVersionNumber().then((value: string) => {
-                CacheData.getCommon().$appVer = value;
+                CacheData.getCommon().$appVer = value.replace(".", "").replace(".", "");
             });
             this.appVersion.getPackageName().then((value) => {
                 CacheData.getCommon().$appId = value;
@@ -62,7 +65,7 @@ export class MyApp {
             CacheData.getCommon().$pushToken = this.device.uuid;
             CacheData.getCommon().$imei = this.device.uuid;
             CacheData.getCommon().$mobileVer = this.device.version;
-            CacheData.getCommon().$platformCode = "01";
+            CacheData.getCommon().$platformCode = CacheData.isAndroid?"03":"04";
             CacheData.getCommon().$channelVer = "";
             CacheData.getCommon().$phone = "";
 
@@ -75,7 +78,7 @@ export class MyApp {
         } else {
             //debug
             CacheData.getCommon().$usId = "";
-            CacheData.getCommon().$appVer = "1.0.0";
+            CacheData.getCommon().$appVer = "100";
             CacheData.getCommon().$appId = "com.bbkb.bbyz";
             CacheData.getCommon().$pushToken = "860482031470585";
             CacheData.getCommon().$imei = "860482031470585";

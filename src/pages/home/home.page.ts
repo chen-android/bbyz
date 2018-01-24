@@ -15,8 +15,9 @@ import { CacheData } from './../../providers/storage/CacheData';
 import { CommandKeys } from './../../utils/CommandKeys';
 import { EventKeys } from './../../utils/EventKeys';
 import { ListPage } from '../list/list';
+import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 
-
+@IonicPage()
 @Component({
     selector: 'page-home',
     templateUrl: 'home.page.html'

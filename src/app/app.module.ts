@@ -8,7 +8,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home.page';
 import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -46,11 +45,11 @@ import { KeepReasonComponent } from '../component/keep-reason/keep-reason.compon
 import { DateFormatPipe } from '../pipe/dateTransform.pipe';
 import { SchemTitleComponent } from '../component/schem-title/schem-title.component';
 import { SchemDetailShiftClosePage } from '../pages/schem-detail-shift-close/schem-detail-shift-close.page';
+import { HomePageModule } from '../pages/home/home.page.module';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     ListPage,
     LogPage,
     LoginPage,
@@ -79,6 +78,7 @@ import { SchemDetailShiftClosePage } from '../pages/schem-detail-shift-close/sch
   ],
   imports: [
     BrowserModule,
+    HomePageModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp,{
       platform:{
@@ -91,7 +91,6 @@ import { SchemDetailShiftClosePage } from '../pages/schem-detail-shift-close/sch
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     ListPage,
     LogPage,
     LoginPage,

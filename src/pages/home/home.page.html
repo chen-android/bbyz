@@ -24,8 +24,8 @@
         <p>{{s.SchemNo}}车次</p>
       </div>
       <div item-center class="schem_center">
-        <strong>{{s.StationName}}-{{s.EndStopName}}</strong>
-        <p>已售 {{s.SaledNum}} 余座 {{s.LeastSeatNum}} 订票 {{s.ReserveNum}}</p>
+        <strong>{{s.StationName}}<span *ngIf="s.IsDeparture == 0" style="font-size:1.1rem">(配载点)</span>-{{s.EndStopName}}</strong>
+        <p>已售 {{s.SaledNum}} 余座 {{s.LeastSeatNum}} 预订 {{s.ReserveNum}}</p>
       </div>
       <div item-end class="schem_end">
         <p>{{s.IsRun==0?s.SaledNum>0?"停班有售":"停班":"开班"}}</p>

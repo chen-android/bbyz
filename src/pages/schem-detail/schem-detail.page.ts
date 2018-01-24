@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 import { Events } from 'ionic-angular/util/events';
 
 import { SchemItem } from '../../module/SchemItem';
@@ -21,28 +21,31 @@ import { SchemDetailShiftClosePage } from './../schem-detail-shift-close/schem-d
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
     selector: 'page-schem-detail',
     templateUrl: 'schem-detail.page.html',
 })
 export class SchemDetailPage {
     schem: SchemItem;
+    schemNo:string;
+    driveDate:string;
+    stationId:string;
+    showOverTimeSchem:number;
     constructor(public navCtrl: NavController, public navParams: NavParams, public dialog: DialogUtil,
         public http: HttpServices, public event: Events) {
-        this.schem = navParams.get("schem");
+        this.schemNo = navParams.get("schemNo");
+        this.driveDate = navParams.get("driveDate");
+        this.showOverTimeSchem = navParams.get("showOverTimeSchem");
+        this.requestSchemItem();
     }
-
     ionViewDidLoad() {
-        // this.event.subscribe(EventKeys.schemModify,(schem:SchemItem)=>{
-        //     this.schem = schem;
-        // });
     }
     ionViewWillUnload() {
-        // this.event.unsubscribe(EventKeys.schemModify);
     }
     modifyClick() {
-        this.navCtrl.push(SchemDetailModifyPage, { schem: this.schem });
+        this.navCtrl.push(SchemDetailModifyPage, { schem: this.schem,callback:()=>{
+            this.requestSchemItem();
+        } });
     }
     cloneClick() {
         this.navCtrl.push(SchemDetailClonePage, { schem: this.schem });
@@ -55,6 +58,21 @@ export class SchemDetailPage {
         } else {
             this.dialog.showAtMiddleToast("该班次已开班");
         }
+    }
+    requestSchemItem(){
+        let content = {
+            "StationID": CacheData.stationId,
+            "SchemNo": this.schemNo,
+            "DriveDate":this.driveDate,
+            "StopNo":"",
+            "ShowOverTimeSchem": this.showOverTimeSchem
+        };
+        this.http.postRequest(CommandKeys.schemlist, content, value => {
+            if (value.success) {
+                this.schem = value.object[0];
+            }
+            return false;
+        });
     }
     requestShiftOpen() {
         let content = {
@@ -69,14 +87,26 @@ export class SchemDetailPage {
         });
     }
     shiftClose() {
+        if(this.schem.IsDeparture == 0){
+            this.dialog.showAtMiddleToast("配载班次开停班必须由始发站操作");
+            return;
+        }
         if (this.schem.IsRun == 1) {
-            this.navCtrl.push(SchemDetailShiftClosePage, { schem: this.schem })
+            this.navCtrl.push(SchemDetailShiftClosePage, {
+                schem: this.schem, callback: () => {
+                    this.requestSchemItem();
+                }
+            })
         } else {
             this.dialog.showAtMiddleToast("该班次已停班");
         }
     }
     keepClick() {
-        this.navCtrl.push(SchemDetailKeepSeatPage, { schem: this.schem });
+        this.navCtrl.push(SchemDetailKeepSeatPage, {
+            schem: this.schem ,callback: () => {
+                this.requestSchemItem();
+            }
+        });
     }
     shiftDetail() {
         if (this.schem.SchemID) {

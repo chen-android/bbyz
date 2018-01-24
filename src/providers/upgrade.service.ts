@@ -8,12 +8,13 @@ import { CommandKeys } from "../utils/CommandKeys";
 import { CacheData } from "./storage/CacheData";
 import { DialogUtil } from "../utils/DialogUtil";
 import { AndroidPermissions } from "@ionic-native/android-permissions";
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Injectable()
 export class UpgradeService {
     upgrade: Upgrade;
     constructor(private transfer: FileTransfer, private file: File, private opener: FileOpener, private http: HttpServices,
-        private dialog: DialogUtil, private permission: AndroidPermissions) {
+        private dialog: DialogUtil, private permission: AndroidPermissions, private inAppBrowser: InAppBrowser) {
 
     }
     /**
@@ -58,7 +59,7 @@ export class UpgradeService {
             if (CacheData.isAndroid) {
                 this.checkPermission();
             }else if(CacheData.isIos){
-                window.open(this.upgrade.UpdateUrl);
+                this.inAppBrowser.create(this.upgrade.UpdateUrl,"_system")
             }
         })
     }

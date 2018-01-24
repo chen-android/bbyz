@@ -3,7 +3,7 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Keyboard } from 'ionic-angular';
 
 import { User } from '../module/User';
 import { LoginPage } from '../pages/login/login.page';
@@ -18,18 +18,17 @@ export class MyApp {
     rootPage: any;
     @ViewChild(Nav) nav: Nav;
     lastClickTime: number;
+    keyShow:boolean = false;
     constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-        private appVersion: AppVersion, private device: Device, private storage: StorageUtils) {
+        private appVersion: AppVersion, private device: Device, private storage: StorageUtils,private keyboard:Keyboard) {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.initAppData();
+            this.registerBackButtonListener();
             this.rootPage = LoginPage;
-            // this.platform.registerListener(document, "chcp_updateLoadFailed", (eventData)=>{
-            //     this.dialog.showAtMiddleToast("升级失败" + eventData.detail,8000);
-            // },{})
         });
     }
     initAppData(): any {
@@ -89,5 +88,14 @@ export class MyApp {
             CacheData.getCommon().$phone = "";
             CacheData.getCommon().$terminalType = "3";
         }
+    }
+    registerBackButtonListener(){
+        this.platform.registerBackButtonAction(()=>{
+            if(this.keyboard.isOpen()){
+                this.keyboard.close();
+                return true;
+            }
+            return false;
+        })
     }
 }

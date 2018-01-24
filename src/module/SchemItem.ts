@@ -47,4 +47,6 @@ export class SchemItem{
     ReserveNum:number;
     /* 价格 */
     Price:string;
+    /* 是否始发站 */
+    IsDeparture:number;
 }

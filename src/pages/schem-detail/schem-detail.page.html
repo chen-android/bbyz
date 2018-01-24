@@ -11,20 +11,7 @@
 </ion-header>
 <ion-content>
   <ion-grid no-padding>
-    <ion-row justify-content-around class="sd_part1">
-      <ion-col col-auto>
-        <p>时间</p>
-        <p>{{schem.DriveTime|dateFormat}}</p>
-      </ion-col>
-      <ion-col col-auto>
-        <p>线路</p>
-        <p>{{schem.StationName}}-{{schem.EndStopName}}</p>
-      </ion-col>
-      <ion-col col-auto>
-        <p>班次</p>
-        <p>{{schem.SchemNo}}</p>
-      </ion-col>
-    </ion-row>
+    <schem-title [schem]="schem"></schem-title>
     <ion-row class="sd_part2" style="margin-top:15pt;">
       <ion-col col-3 (click)="modifyClick()">
         <img src="assets/imgs/icon_schem_modify.png" />
@@ -35,11 +22,11 @@
         <br>克隆
       </ion-col>
       <ion-col col-3 (click)="shiftOpen()">
-        <img [src]="schem.IsRun != 1?'assets/imgs/icon_schem_shift_open_enable.png':'assets/imgs/icon_schem_shift_open_disable.png'" />
+        <img [src]="schem?.IsRun != 1?'assets/imgs/icon_schem_shift_open_enable.png':'assets/imgs/icon_schem_shift_open_disable.png'" />
         <br>开班
       </ion-col>
       <ion-col col-3 (click)="shiftClose()">
-        <img [src]="schem.IsRun == 1?'assets/imgs/icon_schem_shift_close_enable.png':'assets/imgs/icon_schem_shift_close_disable.png'" />
+        <img [src]="schem?.IsRun == 1?'assets/imgs/icon_schem_shift_close_enable.png':'assets/imgs/icon_schem_shift_close_disable.png'" />
         <br>停班
       </ion-col>
     </ion-row>
@@ -64,41 +51,41 @@
     <ion-row align-items-center justify-content-between>
       <ion-col col-5>
         <p>到站名称</p>
-        <p class="text-ellipsis-end">{{schem.EndStopName}}</p>
+        <p class="text-ellipsis-end">{{schem?.EndStopName}}</p>
       </ion-col>
       <ion-col col-auto class="license">
-        {{schem.LicenseNo}}
+        {{schem?.LicenseNo}}
       </ion-col>
       <ion-col>
         <p>状态</p>
-        <p>{{schem.IsRun==0?"停班":schem.IsRun==1?"开班":"停班有售"}}</p>
+        <p>{{schem?.IsRun==0?"停班":schem?.IsRun==1?"开班":"停班有售"}}</p>
       </ion-col>
     </ion-row>
     <ion-row justify-content-between class="line2">
       <ion-col col-auto>
         <p>已售</p>
-        <p>{{schem.SaledNum}}</p>
+        <p>{{schem?.SaledNum}}</p>
       </ion-col>
       <ion-col col-auto>
         <p>余座</p>
-        <p>{{schem.LeastSeatNum}}</p>
+        <p>{{schem?.LeastSeatNum}}</p>
       </ion-col>
       <ion-col col-auto>
-        <p>预定</p>
-        <p>{{schem.LeastSeatNum}}</p>
+        <p>预订</p>
+        <p>{{schem?.LeastSeatNum}}</p>
       </ion-col>
       <ion-col col-auto>
         <p>检票口</p>
-        <p>{{schem.CheckGateNo}}</p>
+        <p>{{schem?.CheckGateNo}}</p>
       </ion-col>
       <ion-col col-auto >
         <p>班次类别</p>
-        <p style="text-align: right;">{{schem.SchemType}}</p>
+        <p style="text-align: right;">{{schem?.SchemType}}</p>
       </ion-col>
     </ion-row>
     <ion-row justify-content-between>
-      <ion-col col-auto>{{schem.CarrayCompanyName}}</ion-col>
-      <ion-col col-auto>￥{{schem.Price}}</ion-col>
+      <ion-col col-auto>{{schem?.CarrayCompanyName}}</ion-col>
+      <ion-col col-auto>￥{{schem?.Price}}</ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

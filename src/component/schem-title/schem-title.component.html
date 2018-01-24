@@ -1,0 +1,15 @@
+<ion-row justify-content-around class="sd_part1">
+    <ion-col col-auto>
+        <p>时间</p>
+        <p>{{schem?.DriveTime|dateFormat}}</p>
+    </ion-col>
+    <ion-col col-auto>
+        <p>线路</p>
+        <p>{{schem?.StationName}}
+            <span *ngIf="schem?.IsDeparture == 0" style="font-size:1.1rem">(配载点)</span>-{{schem?.EndStopName}}</p>
+    </ion-col>
+    <ion-col col-auto>
+        <p>班次</p>
+        <p>{{schem?.SchemNo}}</p>
+    </ion-col>
+</ion-row>

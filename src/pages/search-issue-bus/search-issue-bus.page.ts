@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 
 import { BusIssueItem } from '../../module/BusIssueItem';
 import { HttpServices } from '../../providers/http/http.service';
@@ -14,7 +14,7 @@ import { DialogUtil } from '../../utils/DialogUtil';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-search-issue-bus',
   templateUrl: 'search-issue-bus.page.html',

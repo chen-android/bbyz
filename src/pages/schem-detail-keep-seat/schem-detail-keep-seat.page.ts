@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
 
 import { KeepReasonComponent } from '../../component/keep-reason/keep-reason.component';
@@ -15,7 +15,7 @@ import { EventKeys } from '../../utils/EventKeys';
  * 留座界面
  */
 
-@IonicPage()
+
 @Component({
     selector: 'page-schem-detail-keep-seat',
     templateUrl: 'schem-detail-keep-seat.page.html',
@@ -26,9 +26,11 @@ export class SchemDetailKeepSeatPage {
     keepList: Array<boolean> = new Array();
     addList: Array<string> = new Array();
     delList: Array<string> = new Array();
+    callback:()=>void;
     constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpServices,
         public pop: PopoverController, public dialog: DialogUtil) {
         this.schem = navParams.get("schem");
+        this.callback = navParams.get("callback");
     }
 
     ionViewDidLoad() {
@@ -100,6 +102,7 @@ export class SchemDetailKeepSeatPage {
             if (value.success) {
                 this.dialog.showAtMiddleToast("操作成功", 800);
                 setTimeout(() => {
+                    this.callback();
                     this.navCtrl.pop();
                 }, 800);
             }

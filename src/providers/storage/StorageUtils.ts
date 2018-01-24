@@ -39,6 +39,9 @@ export class StorageUtils {
     public getUser(): Promise<any> {
         return this.constStorage.get(StorageKeys.USER);
     }
+    public clearUser():Promise<any>{
+        return this.constStorage.remove(StorageKeys.USER);
+    }
 
     public setFilterSite(keyId: string, site: Array<Site>): Promise<any> {
         return this.clearableStorage.set(StorageKeys.FILTERSITE + keyId, site);

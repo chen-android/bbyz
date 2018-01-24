@@ -54,7 +54,7 @@ page-schem-detail-clone {
   .seat>ion-col>input {
     width: 50%;
     border: none;
-    text-align: end;
+    text-align: center;
     color: color($colors, text-color);
   }
   .seat>ion-col>div {
@@ -101,7 +101,7 @@ page-schem-detail-clone {
   .bus_type>ion-col>input {
     width: 50%;
     border: none;
-    text-align: end;
+    text-align: center;
     color: color($colors, text-color);
   }
   .bus_type>ion-col:last-child {

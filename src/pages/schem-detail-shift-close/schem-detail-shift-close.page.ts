@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 
 import { CloseReason } from '../../module/CloseReason';
 import { SchemItem } from '../../module/SchemItem';
@@ -15,7 +15,7 @@ import { HttpServices } from './../../providers/http/http.service';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
     selector: 'page-schem-detail-shift-close',
     templateUrl: 'schem-detail-shift-close.page.html',
@@ -25,9 +25,11 @@ export class SchemDetailShiftClosePage {
     closeReason: string;
     reasons: Array<CloseReason>;
     otherReason:string;
+    callback:()=>void;
     constructor(public navCtrl: NavController, public navParams: NavParams,public dialog: DialogUtil,
         public http: HttpServices) {
         this.schem = navParams.get("schem");
+        this.callback = navParams.get("callback");
         this.closeReason = "正常停班";
     }
     ionViewDidLoad() {
@@ -78,7 +80,8 @@ export class SchemDetailShiftClosePage {
         };
         this.http.postRequest(CommandKeys.shiftClose, content, value => {
             if (value.success) {
-                this.schem.IsRun = 0;
+                // this.schem.IsRun = 0;
+                this.callback();
                 this.navCtrl.pop();
             }
             return false;

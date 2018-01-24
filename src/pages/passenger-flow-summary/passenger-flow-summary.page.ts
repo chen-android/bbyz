@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import Chart from 'chart.js';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 
 import { PassengerFlowItem } from '../../module/PassengerFlowItem';
 import { HttpServices } from '../../providers/http/http.service';
@@ -15,7 +15,6 @@ import { DialogUtil } from '../../utils/DialogUtil';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-passenger-flow-summary',
   templateUrl: 'passenger-flow-summary.page.html',
@@ -28,7 +27,7 @@ export class PassengerFlowSummaryPage {
   hiddenInfo: boolean = true;
   passengerFlowItem: PassengerFlowItem;
   constructor(public navCtrl: NavController, public navParams: NavParams, public dialog: DialogUtil, public http: HttpServices) {
-    this.beginTime = new Date().toISOString().substring(0,10);
+    this.beginTime = new Date().toISOString().substring(0, 10);
     this.endTime = new Date().toISOString().substring(0, 10);
   }
 
@@ -85,7 +84,9 @@ export class PassengerFlowSummaryPage {
             }
           }],
           yAxes: [{
-            display: false
+            ticks: {
+              beginAtZero: true
+            }
           }]
         }
       }
@@ -120,7 +121,9 @@ export class PassengerFlowSummaryPage {
             }
           }],
           yAxes: [{
-            display: false
+            ticks: {
+              beginAtZero: true
+            }
           }]
         }
       }

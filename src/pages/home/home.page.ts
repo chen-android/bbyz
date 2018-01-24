@@ -220,7 +220,11 @@ export class HomePage {
         }).present();
     }
     schemClick(s: SchemItem) {
-        this.navCtrl.push(SchemDetailPage, { schem: s });
+        this.navCtrl.push(SchemDetailPage, { 
+            schemNo: s.SchemNo,
+            driveDate: s.DriveDate.substring(0,10),
+            showOverTimeSchem: this.showOvertime ? 1 : 0
+        });
     }
     /**
      * 前往客流汇总

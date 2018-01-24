@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController,  NavController, NavParams } from 'ionic-angular';
 
 import { BusId } from '../../module/BusId';
 import { BusType } from '../../module/BusType';
@@ -20,7 +20,7 @@ import { CompanySearchPage } from './../company-search/company-search.page';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
     selector: 'page-schem-detail-clone',
     templateUrl: 'schem-detail-clone.page.html',

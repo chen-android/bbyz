@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 
 import { BusSaleItem } from '../../module/BusSaleItem';
 import { SchemItem } from '../../module/SchemItem';
@@ -13,7 +13,7 @@ import { DialogUtil } from '../../utils/DialogUtil';
  * 查询车次售票
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-search-bus-sale',
   templateUrl: 'search-bus-sale.page.html',

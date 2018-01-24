@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, IonicPage, LoadingController, MenuController, Nav, NavController, Platform } from 'ionic-angular';
+import { AlertController,  LoadingController, MenuController, Nav, NavController, Platform } from 'ionic-angular';
 import { Events } from 'ionic-angular/util/events';
 
 import { Upgrade } from '../../module/Upgrade';
@@ -14,6 +14,7 @@ import { EventKeys } from './../../utils/EventKeys';
 import { LoginPage } from './../login/login.page';
 import { FeedbackPage } from './../other/feedback/feedback.page';
 import { SiteSearchPage } from './../site-search/site-search.page';
+import { DialogUtil } from '../../utils/DialogUtil';
 
 // import { ListPage } from './../list/list';
 /**
@@ -21,7 +22,6 @@ import { SiteSearchPage } from './../site-search/site-search.page';
  *主页 菜单页
  */
 
-@IonicPage()
 @Component({
     selector: 'page-main',
     templateUrl: 'main.menu.html',
@@ -42,7 +42,8 @@ export class MainMenu {
     hotStation: Array<Array<Site>>=[];
     showOvertime: boolean;
     constructor(public navCtrl: NavController, public platform: Platform, public alert: AlertController, public menu: MenuController,
-        public http: HttpServices, public event: Events, public storage: StorageUtils,public loading:LoadingController,private upService:UpgradeService) {
+        public http: HttpServices, public event: Events, public storage: StorageUtils,public loading:LoadingController,
+        private upService:UpgradeService,private dialog:DialogUtil) {
         this.selectDate = new Date().toISOString().substring(0, 10);
         this.event.subscribe(EventKeys.clearFilter,()=>{
             this.minDate = undefined;
@@ -117,15 +118,15 @@ export class MainMenu {
             if (value) {
                 this.hotStation = new Array();
                 let a: Array<Site>;
-                for (let index = 0; index < value.length; index++) {
+                value.reverse().forEach((site,index)=>{
                     if (index % 3 == 0) {
                         a = new Array();
                     }
-                    a.push(value[index]);
+                    a.push(site);
                     if (index % 3 == 2 || index == value.length - 1) {
                         this.hotStation.push(a);
                     }
-                }
+                })
                 console.info(this.hotStation);
             } else {
                 this.hotStation = [];
@@ -162,34 +163,45 @@ export class MainMenu {
         this.endStation = undefined;
     }
     filterSubmit() {
+        if(this.busId && this.busId.length!=4){
+            this.dialog.showAtMiddleToast("车次号必须是4位数字");
+            return;
+        }
         if (this.endStation) {
             this.storage.getFilterSite(CacheData.stationId).then(value => {
                 if (value && value.length > 0) {
-                    if (!value.find((value) => { return value.StopNo == this.endStation.StopNo; })) {
+
+                    let findIndex = value.findIndex((value) => { return value.StopNo == this.endStation.StopNo; });
+                    if (findIndex < 0) {
                         if (value.length == 9) {
                             value.shift();
                         }
                         value.push(this.endStation);
-                        this.storage.setFilterSite(CacheData.stationId,value);
+                    }else{
+                        let delvalue = value.splice(findIndex,1);
+                        value.push(delvalue[0]);
                     }
                 } else {
                     value = new Array();
                     value.push(this.endStation);
-                    this.storage.setFilterSite(CacheData.stationId,value);
+                    
                 }
-                this.hotStation = new Array();
-                let a: Array<Site>;
-                for (let index = 0; index < value.length; index++) {
-                    if (index % 3 == 0) {
-                        a = new Array();
-                    }
-                    a.push(value[index]);
-                    if (index % 3 == 2 || index == value.length - 1) {
-                        this.hotStation.push(a);
-                    }
-                }
+                this.storage.setFilterSite(CacheData.stationId, value).then(()=>{
+                    this.hotStation = new Array();
+                    let a: Array<Site>;
+                    value.reverse().forEach((site, index) => {
+                        if (index % 3 == 0) {
+                            a = new Array();
+                        }
+                        a.push(site);
+                        if (index % 3 == 2 || index == value.length - 1) {
+                            this.hotStation.push(a);
+                        }
+                    })
+                })
             });
         }
         this.event.publish(EventKeys.stationFilter, this.selectDate, this.busType, this.busId, this.endStation, this.showOvertime);
+        this.menu.close("stationFilterMenu");
     }
 }

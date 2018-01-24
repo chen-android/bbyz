@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 
 import { BusStop } from '../../module/BusStop';
 import { SchemItem } from '../../module/SchemItem';
@@ -15,7 +15,7 @@ import { DialogUtil } from '../../utils/DialogUtil';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
     selector: 'page-schem-detail-stop-sale',
     templateUrl: 'schem-detail-stop-sale.html',

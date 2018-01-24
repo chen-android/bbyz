@@ -1,0 +1,32 @@
+schem-title{
+    .sd_part1 {
+      background-color: white;
+      padding: 5pt;
+    }
+
+    .sd_part1>ion-col>p {
+      font-size: 1.4rem;
+      color: color($colors, third-text-color);
+      text-align: center;
+      margin: 0pt 0pt 5pt 0pt;
+    }
+
+    .sd_part1>ion-col>p+p {
+      font-weight: 600;
+      font-size: 1.8rem;
+      color: color($colors, text-color);
+    }
+
+    .sd_part1>ion-col:nth-child(odd)>p+p {
+      font-weight: 600;
+      font-size: 1.8rem;
+      color: color($colors, text-color);
+    }
+
+    .sd_part1>ion-col:nth-child(2)>p+p {
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: color($colors, text-color);
+    }
+
+}

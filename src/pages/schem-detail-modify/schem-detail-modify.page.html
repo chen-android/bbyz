@@ -5,29 +5,14 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>修改班次</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row justify-content-around class="sd_part1">
-      <ion-col col-auto>
-        <p>时间</p>
-        <p>{{schem.DriveTime|dateFormat}}</p>
-      </ion-col>
-      <ion-col col-auto>
-        <p>线路</p>
-        <p>{{schem.StationName}}-{{schem.EndStopName}}</p>
-      </ion-col>
-      <ion-col col-auto>
-        <p>班次</p>
-        <p>{{schem.SchemNo}}</p>
-      </ion-col>
-    </ion-row>
+    <schem-title [schem]="schem"></schem-title>
     <ion-row class="divider"></ion-row>
     <ion-row justify-content-between align-items-center class="depart_time">
       <ion-col col-auto>

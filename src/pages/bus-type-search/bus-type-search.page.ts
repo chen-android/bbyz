@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 
 import { CacheData } from '../../providers/storage/CacheData';
 import { CommandKeys } from '../../utils/CommandKeys';
@@ -13,7 +13,6 @@ import { HttpServices } from './../../providers/http/http.service';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
     selector: 'page-bus-type-search',
     templateUrl: 'bus-type-search.page.html',

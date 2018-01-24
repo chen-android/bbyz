@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 
 import { Site } from '../../module/Site';
 import { HttpServices } from './../../providers/http/http.service';
@@ -13,7 +13,7 @@ import { CommandKeys } from './../../utils/CommandKeys';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
     selector: 'page-site-search',
     templateUrl: 'site-search.page.html',

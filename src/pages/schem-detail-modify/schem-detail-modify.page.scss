@@ -36,7 +36,7 @@ page-schem-detail-modify {
   .seat>ion-col>input {
     width: 50%;
     border: none;
-    text-align: end;
+    text-align: center;
   }
   .seat>ion-col>div {
     width: 40%;
@@ -51,7 +51,7 @@ page-schem-detail-modify {
     color: color($colors, third-text-color);
   }
   .bus_type>ion-col>div {
-    width: 45%;
+    width: 40%;
     display: inline-block;
   }
   .bus_type>ion-col>div>img {
@@ -61,12 +61,12 @@ page-schem-detail-modify {
     vertical-align: center;
   }
   .bus_type>ion-col:first-child>div:last-child {
-    text-align: end;
+    text-align: center;
   }
   .bus_type>ion-col>input {
     width: 50%;
     border: none;
-    text-align: end;
+    text-align: center;
   }
   .bus_type>ion-col:last-child {
     border-left: 1px solid color($colors, line-break);

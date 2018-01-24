@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 
 import { DialogUtil } from '../../../utils/DialogUtil';
 import { HttpServices } from './../../../providers/http/http.service';
@@ -12,7 +12,6 @@ import { CommandKeys } from './../../../utils/CommandKeys';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
     selector: 'page-feedback',
     templateUrl: 'feedback.page.html',
@@ -27,7 +26,7 @@ export class FeedbackPage {
 
     }
     commit() {
-        if (this.feedbackMsg && this.feedbackMsg.length > 4) {
+        if (this.feedbackMsg && this.feedbackMsg.length >= 4) {
             this.http.postRequest(CommandKeys.feedback, { "Message": this.feedbackMsg }, value => {
                 if (value.success) {
                     this.dialog.showAtMiddleToast("感谢您的反馈", 800);

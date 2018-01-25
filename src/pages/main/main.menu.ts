@@ -1,27 +1,25 @@
 import { Component, ViewChild } from '@angular/core';
-import { AlertController,  LoadingController, MenuController, Nav, NavController, Platform } from 'ionic-angular';
+import { AlertController, LoadingController, MenuController, Nav, NavController, Platform } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { Events } from 'ionic-angular/util/events';
 
 import { Upgrade } from '../../module/Upgrade';
 import { UpgradeService } from '../../providers/upgrade.service';
-import { HomePage } from '../home/home.page';
+import { DialogUtil } from '../../utils/DialogUtil';
+import { SiteSearchPage } from '../schem-detail/site-search/site-search.page';
 import { Site } from './../../module/Site';
 import { HttpServices } from './../../providers/http/http.service';
 import { CacheData } from './../../providers/storage/CacheData';
 import { StorageUtils } from './../../providers/storage/StorageUtils';
 import { CommandKeys } from './../../utils/CommandKeys';
 import { EventKeys } from './../../utils/EventKeys';
-import { LoginPage } from './../login/login.page';
-import { FeedbackPage } from './../other/feedback/feedback.page';
-import { SiteSearchPage } from './../site-search/site-search.page';
-import { DialogUtil } from '../../utils/DialogUtil';
 
 // import { ListPage } from './../list/list';
 /**
  * 
  *主页 菜单页
  */
-
+@IonicPage()
 @Component({
     selector: 'page-main',
     templateUrl: 'main.menu.html',
@@ -29,7 +27,7 @@ import { DialogUtil } from '../../utils/DialogUtil';
 export class MainMenu {
     @ViewChild(Nav) nav: Nav;
 
-    rootPage: any = HomePage;
+    rootPage: any = 'HomePage';
     userId: string;
     hasUpdate:boolean = false;
     upgrade:Upgrade;
@@ -77,7 +75,7 @@ export class MainMenu {
                     handler: () => {
                         this.menu.close();
                         CacheData.reset();
-                        this.navCtrl.setRoot(LoginPage);
+                        this.navCtrl.setRoot('LoginPage');
                     }
                 },
                 {
@@ -91,7 +89,7 @@ export class MainMenu {
         }).present();
     }
     feedback() {
-        this.navCtrl.push(FeedbackPage);
+        this.navCtrl.push('FeedbackPage');
     }
     checkUpdate(){
        if(this.hasUpdate){

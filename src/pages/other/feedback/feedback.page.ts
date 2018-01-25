@@ -4,6 +4,7 @@ import {  NavController, NavParams } from 'ionic-angular';
 import { DialogUtil } from '../../../utils/DialogUtil';
 import { HttpServices } from './../../../providers/http/http.service';
 import { CommandKeys } from './../../../utils/CommandKeys';
+import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 
 /**
  * Generated class for the FeedbackPage page.
@@ -11,7 +12,7 @@ import { CommandKeys } from './../../../utils/CommandKeys';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+@IonicPage()
 @Component({
     selector: 'page-feedback',
     templateUrl: 'feedback.page.html',

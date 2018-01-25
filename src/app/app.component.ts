@@ -3,10 +3,10 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Nav, Platform, Keyboard } from 'ionic-angular';
+import { Keyboard, Nav, Platform } from 'ionic-angular';
+import { App } from 'ionic-angular/components/app/app';
 
 import { User } from '../module/User';
-import { LoginPage } from '../pages/login/login.page';
 import { CacheData } from './../providers/storage/CacheData';
 import { StorageUtils } from './../providers/storage/StorageUtils';
 import { StorageKeys } from './../utils/StorageKeys';
@@ -20,7 +20,8 @@ export class MyApp {
     lastClickTime: number;
     keyShow:boolean = false;
     constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-        private appVersion: AppVersion, private device: Device, private storage: StorageUtils,private keyboard:Keyboard) {
+        private appVersion: AppVersion, private device: Device, private storage: StorageUtils,private keyboard:Keyboard,
+        private app:App) {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
@@ -28,7 +29,7 @@ export class MyApp {
             this.splashScreen.hide();
             this.initAppData();
             this.registerBackButtonListener();
-            this.rootPage = LoginPage;
+            this.rootPage = 'LoginPage';
         });
     }
     initAppData(): any {
@@ -93,9 +94,21 @@ export class MyApp {
         this.platform.registerBackButtonAction(()=>{
             if(this.keyboard.isOpen()){
                 this.keyboard.close();
-                return true;
+                return;
             }
-            return false;
+            let overlay = this.app._appRoot._overlayPortal.getActive() || this.app._appRoot._modalPortal.getActive();
+            if (overlay) {
+                overlay.dismiss();
+                return;
+            }
+
+            let act = this.app.getActiveNav();
+            if(act.canGoBack()){
+                act.pop();
+                return;
+            }
+            this.platform.exitApp();
         })
     }
+    
 }

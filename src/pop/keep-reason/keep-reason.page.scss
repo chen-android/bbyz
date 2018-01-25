@@ -1,0 +1,43 @@
+page-keep-reason{
+  .root {
+    background-color: white;
+  }
+  .root>ion-row:first-child{
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 5pt;
+  }
+  .root>ion-row:nth-child(2)>input{
+    border: none;
+    width: 100%;
+    margin: 0px 10pt;
+    background-color: color($colors,app-background);
+    border-radius: 2pt;
+    min-height: 50px;
+  }
+  .root>ion-row:last-child {
+    text-align: center;
+    padding: 5pt 0pt;
+    border-top: 1px solid color($colors,line-break);
+    margin-top: 10pt;
+  }
+  .root>ion-row:last-child>ion-col:last-child{
+    color:color($colors,primary);
+  }
+  .root>ion-row:last-child>ion-col:last-child{
+    border-left: 1px solid color($colors, line-break);
+  }
+  .root .reason > ion-col{
+    border: 1px solid color($colors, line-break);
+    border-radius: 15pt;
+    padding: 3px 0pt;
+    width: 40%;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  .root .reason{
+    margin-top: 5pt;
+  }
+
+
+}

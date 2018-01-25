@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { ActionSheetController, AlertController, MenuController, NavController } from 'ionic-angular';
 import { Events } from 'ionic-angular/util/events';
-
-import { PassengerFlowSummaryPage } from '../passenger-flow-summary/passenger-flow-summary.page';
-import { SchemDetailPage } from '../schem-detail/schem-detail.page';
-import { SearchIssueBusPage } from '../search-issue-bus/search-issue-bus.page';
-import { SearchSaleDetailPage } from '../search-sale-detail/search-sale-detail.page';
-import { SearchTicketNumberPage } from '../search-ticket-number/search-ticket-number.page';
 import { SchemItem } from './../../module/SchemItem';
 import { Site } from './../../module/Site';
 import { Station } from './../../module/Station';
@@ -14,7 +8,6 @@ import { HttpServices } from './../../providers/http/http.service';
 import { CacheData } from './../../providers/storage/CacheData';
 import { CommandKeys } from './../../utils/CommandKeys';
 import { EventKeys } from './../../utils/EventKeys';
-import { ListPage } from '../list/list';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 
 @IonicPage()
@@ -201,19 +194,19 @@ export class HomePage {
                 {
                     text: '售票明细查询',
                     handler: () => {
-                        this.navCtrl.push(SearchSaleDetailPage);
+                        this.navCtrl.push('SearchSaleDetailPage');
                     }
                 },
                 {
                     text: '票号追踪查询',
                     handler: () => {
-                        this.navCtrl.push(SearchTicketNumberPage);
+                        this.navCtrl.push('SearchTicketNumberPage');
                     }
                 },
                 {
                     text: '疑问班次查询',
                     handler: () => {
-                        this.navCtrl.push(SearchIssueBusPage);
+                        this.navCtrl.push('SearchIssueBusPage');
                     }
                 }
             ],
@@ -221,7 +214,7 @@ export class HomePage {
         }).present();
     }
     schemClick(s: SchemItem) {
-        this.navCtrl.push(SchemDetailPage, { 
+        this.navCtrl.push('SchemDetailPage', { 
             schemNo: s.SchemNo,
             driveDate: s.DriveDate.substring(0,10),
             showOverTimeSchem: this.showOvertime ? 1 : 0
@@ -231,10 +224,10 @@ export class HomePage {
      * 前往客流汇总
      */
     gotoPassengerFlowSummary() {
-        this.navCtrl.push(PassengerFlowSummaryPage);
+        this.navCtrl.push('PassengerFlowSummaryPage');
     }
 
     showLog(){
-        this.navCtrl.push(ListPage);
+        this.navCtrl.push('LogMenuPage');
     }
 }

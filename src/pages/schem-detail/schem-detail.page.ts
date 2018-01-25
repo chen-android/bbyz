@@ -1,18 +1,13 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { Events } from 'ionic-angular/util/events';
 
 import { SchemItem } from '../../module/SchemItem';
 import { CacheData } from '../../providers/storage/CacheData';
 import { CommandKeys } from '../../utils/CommandKeys';
-import { SchemDetailKeepSeatPage } from '../schem-detail-keep-seat/schem-detail-keep-seat.page';
-import { SchemDetailModifyPage } from '../schem-detail-modify/schem-detail-modify.page';
-import { SchemDetailStopSalePage } from '../schem-detail-stop-sale/schem-detail-stop-sale';
-import { SearchBusSalePage } from '../search-bus-sale/search-bus-sale.page';
 import { HttpServices } from './../../providers/http/http.service';
 import { DialogUtil } from './../../utils/DialogUtil';
-import { SchemDetailClonePage } from './../schem-detail-clone/schem-detail-clone.page';
-import { SchemDetailShiftClosePage } from './../schem-detail-shift-close/schem-detail-shift-close.page';
 
 /**
  * Generated class for the SchemDetailPage page.
@@ -20,7 +15,7 @@ import { SchemDetailShiftClosePage } from './../schem-detail-shift-close/schem-d
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+@IonicPage()
 @Component({
     selector: 'page-schem-detail',
     templateUrl: 'schem-detail.page.html',
@@ -43,12 +38,12 @@ export class SchemDetailPage {
     ionViewWillUnload() {
     }
     modifyClick() {
-        this.navCtrl.push(SchemDetailModifyPage, { schem: this.schem,callback:()=>{
+        this.navCtrl.push('SchemDetailModifyPage', { schem: this.schem,callback:()=>{
             this.requestSchemItem();
         } });
     }
     cloneClick() {
-        this.navCtrl.push(SchemDetailClonePage, { schem: this.schem });
+        this.navCtrl.push('SchemDetailClonePage', { schem: this.schem });
     }
     shiftOpen() {
         if (this.schem.IsRun == 0) {
@@ -92,7 +87,7 @@ export class SchemDetailPage {
             return;
         }
         if (this.schem.IsRun == 1) {
-            this.navCtrl.push(SchemDetailShiftClosePage, {
+            this.navCtrl.push('SchemDetailShiftClosePage', {
                 schem: this.schem, callback: () => {
                     this.requestSchemItem();
                 }
@@ -102,7 +97,7 @@ export class SchemDetailPage {
         }
     }
     keepClick() {
-        this.navCtrl.push(SchemDetailKeepSeatPage, {
+        this.navCtrl.push('SchemDetailKeepSeatPage', {
             schem: this.schem ,callback: () => {
                 this.requestSchemItem();
             }
@@ -110,10 +105,10 @@ export class SchemDetailPage {
     }
     shiftDetail() {
         if (this.schem.SchemID) {
-            this.navCtrl.push(SearchBusSalePage, { schem: this.schem });
+            this.navCtrl.push('SchemDetailSaleDetailPage', { schem: this.schem });
         }
     }
     stopSaleClick() {
-        this.navCtrl.push(SchemDetailStopSalePage, { schem: this.schem });
+        this.navCtrl.push('SchemDetailStopSalePage', { schem: this.schem });
     }
 }

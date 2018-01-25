@@ -8,13 +8,13 @@ import { HttpServices } from './../../providers/http/http.service';
 import { StorageUtils } from './../../providers/storage/StorageUtils';
 import { CommandKeys } from './../../utils/CommandKeys';
 import { EncryptUtils } from './../../utils/EncryptUtils';
-import { MainMenu } from './../main/main.menu';
+import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 
 /**
  * 登录页
  */
 
-
+@IonicPage()
 @Component({
     selector: 'page-login',
     templateUrl: 'login.page.html',
@@ -58,7 +58,7 @@ export class LoginPage {
                 }
                 this.dialog.showAtMiddleToast("登录成功",800);
                 setTimeout(() => {
-                    this.navCtrl.setRoot(MainMenu);
+                    this.navCtrl.setRoot('MainMenu');
                 }, 800);
             }
             return false;

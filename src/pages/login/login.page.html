@@ -14,16 +14,16 @@
     <ion-col col-auto>
       <img src="assets/imgs/icon_login_id.png" class="id-img" />
     </ion-col>
-    <ion-col col-5>
-      <input type="text" placeholder="请输入工号" class="id-input" [(ngModel)]="id" />
+    <ion-col>
+      <ion-input type="text" placeholder="请输入工号" class="id-input" [(ngModel)]="id" ></ion-input>
     </ion-col>
   </ion-row>
   <ion-row align-items-center class="row-pwd">
     <ion-col col-auto>
       <img src="assets/imgs/icon_login_pwd.png" class="pwd-img" />
     </ion-col>
-    <ion-col col-5>
-      <input type="password" placeholder="请输入密码" class="pwd-input" [(ngModel)]="pwd" />
+    <ion-col>
+      <ion-input type="password" placeholder="请输入密码" class="pwd-input" [(ngModel)]="pwd" ></ion-input>
     </ion-col>
   </ion-row>
   <ion-item align-items-center class="row-check">
@@ -31,7 +31,7 @@
     <ion-checkbox style="margin: 0pt 8pt;" [(ngModel)]="saveCheck"></ion-checkbox>
   </ion-item>
 
-  <button ion-button color="primary" class="login-bg" (click)="login()">登-录</button>
+  <button ion-button color="primary" class="login-bg" (click)="login()">登录</button>
   <!-- <div *ngIf="isDebug">
     <ion-input [(ngModel)]="path" placeholder="请求地址 末尾不要带'/'"></ion-input>
     <button ion-button (click)="setPath()">设置</button>

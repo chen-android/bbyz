@@ -6,7 +6,6 @@ import { Events } from 'ionic-angular/util/events';
 import { Upgrade } from '../../module/Upgrade';
 import { UpgradeService } from '../../providers/upgrade.service';
 import { DialogUtil } from '../../utils/DialogUtil';
-import { SiteSearchPage } from '../schem-detail/site-search/site-search.page';
 import { Site } from './../../module/Site';
 import { HttpServices } from './../../providers/http/http.service';
 import { CacheData } from './../../providers/storage/CacheData';
@@ -145,7 +144,7 @@ export class MainMenu {
         if(this.busId){
             return;
         }
-        this.navCtrl.push(SiteSearchPage, {
+        this.navCtrl.push('SiteSearchPage', {
             "site": this.stationCallBack
         });
     }

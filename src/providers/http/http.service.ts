@@ -26,10 +26,10 @@ export class HttpServices {
      */
     public postRequest<T>(command: [string, string], content: any, success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void,
         option?: RequestOptions): void {
-        this.postRequest1(command, undefined, content, success, error, option);
+        this.postRequestFull(command, undefined, content, success, error, option);
     }
 
-    public postRequest1<T>(command: [string, string], workNo = CacheData.id, content: any, success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void,
+    public postRequestFull<T>(command: [string, string], workNo = CacheData.id, content: any, success: (value: BbyzHttpResonse<T>) => boolean, error?: (error: any) => void,
         option?: RequestOptions): void {
         let secure: boolean = true;
         let showProgress: boolean = true;
@@ -92,13 +92,13 @@ export class HttpServices {
                 if (success) {
                     if (!success(suc)) {
                         if (!suc.success) {
-                            this.dialog.showAtBottomToast(suc.returnInfo);
+                            this.dialog.showAtMiddleToast(suc.returnInfo);
                         }
                     }
                 }
 
             }, err => {
-                this.dialog.showAtBottomToast("网络连接失败，请检查网络。");
+                this.dialog.showAtMiddleToast("网络连接失败，请检查网络。");
                 if (this.loadDialog && showProgress) {
                     this.loadDialog.dismiss();
                 }

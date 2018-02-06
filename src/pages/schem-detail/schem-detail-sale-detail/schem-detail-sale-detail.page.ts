@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Scroll } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 
 import { BusSaleItem } from '../../../module/BusSaleItem';
@@ -8,6 +8,7 @@ import { HttpServices } from '../../../providers/http/http.service';
 import { CacheData } from '../../../providers/storage/CacheData';
 import { CommandKeys } from '../../../utils/CommandKeys';
 import { DialogUtil } from '../../../utils/DialogUtil';
+import { StorageUtils } from '../../../providers/storage/StorageUtils';
 
 /**
  * 
@@ -16,13 +17,17 @@ import { DialogUtil } from '../../../utils/DialogUtil';
 
 @IonicPage()
 @Component({
-    selector: 'page-schem-detail-sale-detail',
+  selector: 'page-schem-detail-sale-detail',
   templateUrl: 'schem-detail-sale-detail.page.html',
 })
 export class SchemDetailSaleDetailPage {
+  @ViewChild("headerScroll") headScroll: Scroll;
+  @ViewChild("contentScroll") contentScroll: Scroll;
   schem: SchemItem;
   dataArray: Array<BusSaleItem> = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpServices, public dialog: DialogUtil) {
+  showTip: boolean = true;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+     public http: HttpServices, public dialog: DialogUtil, public storage: StorageUtils) {
     this.schem = this.navParams.get("schem");
   }
 
@@ -34,17 +39,27 @@ export class SchemDetailSaleDetailPage {
     };
     this.http.postRequest<Array<BusSaleItem>>(CommandKeys.searchBusSale, content, value => {
       if (value.success) {
-        let list = value.object;
-        if (list.length == 0) {
+        this.dataArray = value.object;
+        if (this.dataArray.length == 0) {
           this.dialog.showAtMiddleToast('暂无该车次售票信息');
         }
-        this.dataArray = list;
+        this.storage.hasShowTableTip().then(hasShow => {
+          if (!hasShow) {
+            this.dialog.showAtMiddleToast("信息不完整？试试左右滑动");
+            this.storage.setHasShowTableTip(true);
+          }
+        })
       }
       return false;
     });
   }
 
+
   ionViewDidLoad() {
     this.requestData();
+    let that = this;
+    this.contentScroll.addScrollEventListener(function (event: any) {
+      that.headScroll._scrollContent.nativeElement.scrollLeft = event.target.scrollLeft;
+    })
   }
 }

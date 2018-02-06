@@ -37,7 +37,7 @@ export class MainMenu {
     busId: string;
     endStation: Site;
     hotStation: Array<Array<Site>>=[];
-    showOvertime: boolean;
+    showOverTime: boolean = true;
     constructor(public navCtrl: NavController, public platform: Platform, public alert: AlertController, public menu: MenuController,
         public http: HttpServices, public event: Events, public storage: StorageUtils,public loading:LoadingController,
         private upService:UpgradeService,private dialog:DialogUtil) {
@@ -49,7 +49,6 @@ export class MainMenu {
             this.busId = undefined;
             this.endStation = undefined;
             this.hotStation = undefined;
-            this.showOvertime = false;
         });
         this.upService.detectionUpgrade().then(value=>{
             this.hasUpdate = value;
@@ -198,7 +197,7 @@ export class MainMenu {
                 })
             });
         }
-        this.event.publish(EventKeys.stationFilter, this.selectDate, this.busType, this.busId, this.endStation, this.showOvertime);
+        this.event.publish(EventKeys.stationFilter, this.selectDate, this.busType, this.busId, this.endStation, this.showOverTime);
         this.menu.close("stationFilterMenu");
     }
 }

@@ -1,56 +1,70 @@
 page-search-issue-bus {
-    .content {
-        background-color: #fff;
-    }
-    // 车次查询相关
-    .scroll-grid {
-        width: 100rem;
-    }
-    .title-row {
-        height: 4rem;
-        border-bottom: 1px solid #e3e3e3;
-    }
-    .title-row ion-col {
-        color: rgb(72, 119, 221);
-        font-size: 14px;
-    }
-    .content-row {
-        height: 4rem;
-        border-bottom: 1px solid #e3e3e3;
-    }
-    .content-row ion-col {
-        color: rgb(51, 51, 51);
-        font-size: 14px;
-    }
-    .input-warp {
-        height: 5rem;
-        align-items: center;
-        border-bottom: 1px solid #e3e3e3;
-    }
-    .default-input {
-        margin-left: 1rem;
-    }
-    .search-btn-wrap {
-        justify-content: center;
-        height: 6rem;
-    }
-    .search-btn {
-        width: 60%;
-    }
-    .col-12 {
-        -webkit-box-flex: 0;
-        -webkit-flex: 0 0 12%;
-        -moz-box-flex: 0;
-        -moz-flex: 0 0 12%;
-        -ms-flex: 0 0 12%;
-        flex: 0 0 12%;
-    }
-    .col-04 {
-        -webkit-box-flex: 0;
-        -webkit-flex: 0 0 4%;
-        -moz-box-flex: 0;
-        -moz-flex: 0 0 4%;
-        -ms-flex: 0 0 4%;
-        flex: 0 0 4%;
-    }
+  .content {
+    background-color: #fff;
+  } // 车次查询相关
+  .scroll-grid {
+    width: 100rem;
+  }
+  .title-row {
+    height: 4rem;
+    border-bottom: 1px solid #e3e3e3;
+  }
+  .title-row ion-col {
+    color: rgb(72, 119, 221);
+    font-size: 14px;
+  }
+  .content-scroll {
+    height: calc(95% - 5rem);
+    height: -moz-calc(95% - 5rem);
+    height: -webkit-calc(95% - 5rem);
+    margin: 10px 15px;
+  }
+  .content-row {
+    height: 4rem;
+    border-bottom: 1px solid #e3e3e3;
+  }
+  .content-row ion-col {
+    color: rgb(51, 51, 51);
+    font-size: 14px;
+  }
+  .input-warp {
+    height: 5rem;
+    align-items: center;
+    border-bottom: 1px solid #e3e3e3;
+  }
+  .default-input {
+    margin-left: 1rem;
+  }
+  .stopNo-button {
+    width: 90%;
+    height: 100%;
+    background-color: #fff;
+    margin-left: 1.1rem;
+    text-align: left;
+    font-size: 15px;
+    color: color($colors, second-text-color);
+  }
+  .search-btn-wrap {
+    justify-content: center;
+    height: 6rem;
+  }
+  .search-btn {
+    width: 60%;
+  }
+  .col-12 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 12%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 12%;
+    -ms-flex: 0 0 12%;
+    flex: 0 0 12%;
+  }
+  .col-04 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 4%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 4%;
+    -ms-flex: 0 0 4%;
+    flex: 0 0 4%;
+  }
 }

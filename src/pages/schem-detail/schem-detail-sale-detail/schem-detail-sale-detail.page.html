@@ -13,11 +13,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-scroll scrollX="true" scrollY="true" style="height:95%; margin:10px 15px;">
+  <ion-scroll [hidden]="!(dataArray && dataArray.length > 0)" #headerScroll class="header-scroll" scrollX="false" style="height:4rem; margin:10px 15px;">
     <ion-grid no-padding class="scroll-grid">
       <ion-row align-items-center class="title-row">
-        <ion-col>发车时间</ion-col>
-        <ion-col class="col-04">车次号</ion-col>
         <ion-col>车票票号</ion-col>
         <ion-col>到站名称</ion-col>
         <ion-col class="col-04">座位号</ion-col>
@@ -25,33 +23,29 @@
         <ion-col class="col-04">状态</ion-col>
         <ion-col>票价</ion-col>
         <ion-col>售票时间</ion-col>
-        <ion-col>售票员姓名</ion-col>
-        <ion-col>售票站名称</ion-col>
         <ion-col>隶属站名称</ion-col>
         <ion-col>检票时间</ion-col>
         <ion-col>旅客姓名</ion-col>
         <ion-col class="col-12">证件号码</ion-col>
         <ion-col col-1>联系电话</ion-col>
-        <ion-col class="col-04">是否携童</ion-col>
       </ion-row>
+    </ion-grid>
+  </ion-scroll>
+  <ion-scroll [hidden]="!(dataArray && dataArray.length > 0)" #contentScroll class="content-scroll" scrollX="true" scrollY="true">
+    <ion-grid no-padding class="scroll-grid">
       <ion-row align-items-center class="content-row" *ngFor="let item of dataArray">
-        <ion-col>{{item.DriveDate}}</ion-col>
-        <ion-col class="col-04">{{item.SchemNo}}</ion-col>
-        <ion-col>{{item.TicketNo}}</ion-col>
+        <ion-col>{{item.TicketNo<0?'未取':item.TicketNo}}</ion-col>
         <ion-col>{{item.StopName}}</ion-col>
         <ion-col class="col-04">{{item.SeatNo}}</ion-col>
         <ion-col class="col-04">{{item.TicketType}}</ion-col>
         <ion-col class="col-04">{{item.Status}}</ion-col>
         <ion-col>￥{{item.Price}}</ion-col>
         <ion-col>{{item.SaleDateTime}}</ion-col>
-        <ion-col>{{item.AgentWorkerName}}</ion-col>
-        <ion-col>{{item.AgentStationName}}</ion-col>
         <ion-col>{{item.StationName}}</ion-col>
         <ion-col>{{item.CheckDateTime}}</ion-col>
         <ion-col>{{item.ClientName}}</ion-col>
         <ion-col class="col-12">{{item.IDCardNo}}</ion-col>
         <ion-col col-1>{{item.Tel}}</ion-col>
-        <ion-col class="col-04">{{item.IsFreeChild ? "是" : "否"}}</ion-col>
       </ion-row>
     </ion-grid>
   </ion-scroll>

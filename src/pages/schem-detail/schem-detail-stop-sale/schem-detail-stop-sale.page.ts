@@ -41,7 +41,7 @@ export class SchemDetailStopSalePage {
             if (value.success) {
                 this.stopList = value.object;
                 this.stopList.forEach((value) => {
-                    this.statusList.push(value.Enable == 0);
+                    this.statusList.push(value.Enable != 0);
                 });
             }
             return false;

@@ -71,3 +71,8 @@ input[type='number'] {
 .yz_toggle.item-ios .toggle-ios {
   padding: 0px;
 }
+
+// 全局隐藏scrollBar
+::-webkit-scrollbar {
+  display: none !important;
+}

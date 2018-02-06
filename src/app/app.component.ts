@@ -10,6 +10,7 @@ import { User } from '../module/User';
 import { CacheData } from './../providers/storage/CacheData';
 import { StorageUtils } from './../providers/storage/StorageUtils';
 import { StorageKeys } from './../utils/StorageKeys';
+import { DialogUtil } from '../utils/DialogUtil';
 
 @Component({
     templateUrl: 'app.html'
@@ -19,9 +20,10 @@ export class MyApp {
     @ViewChild(Nav) nav: Nav;
     lastClickTime: number;
     keyShow:boolean = false;
+    backBtnToExit = false;
     constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
         private appVersion: AppVersion, private device: Device, private storage: StorageUtils,private keyboard:Keyboard,
-        private app:App) {
+        private app:App,private dialog:DialogUtil) {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
@@ -107,7 +109,15 @@ export class MyApp {
                 act.pop();
                 return;
             }
-            this.platform.exitApp();
+            if(!this.backBtnToExit){
+                this.backBtnToExit = true;
+                this.dialog.showAtMiddleToast("再按一次返回，退出应用");
+                setTimeout(() => {
+                    this.backBtnToExit = false;
+                }, 2000);
+            }else{
+                this.platform.exitApp();
+            }
         })
     }
     

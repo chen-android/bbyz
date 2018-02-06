@@ -22,7 +22,7 @@ export class HomePage {
     busType: number = 0;
     busId: string;
     endSite: Site;
-    showOvertime: boolean;
+    showOverTime: boolean = true;
     stationSelectClass: {};
     menuClass: {};
     stations: Array<Station> = undefined;
@@ -37,14 +37,15 @@ export class HomePage {
     }
     ionViewDidLoad() {
         this.setTitleClass();
-        this.event.subscribe(EventKeys.stationFilter, (date: string, busType: number, busId: string, endSite: Site, showOvertime: boolean) => {
+        this.event.subscribe(EventKeys.stationFilter, (date: string, busType: number, busId: string, endSite: Site, showOverTime: boolean) => {
             this.selectDate = date;
             this.busType = busType;
             this.busId = busId;
             this.endSite = endSite;
-            this.showOvertime = showOvertime;
+            this.showOverTime = showOverTime;
             this.requestSchemList();
         });
+        this.stationSelect();
     }
     ionViewDidEnter(){
         this.menu.enable(true, "personCenterMenu");
@@ -83,6 +84,9 @@ export class HomePage {
         this.requestSchemList(false);
         this.refresher = refresher;
     }
+    noDataRefresh(){
+        this.requestSchemList(true);
+    }
     /**获取可查询车站 */
     requestCanSelectedStation() {
         if (this.stations == undefined) {
@@ -117,7 +121,7 @@ export class HomePage {
             "DriveDate": this.selectDate,
             "SchemNo": this.busId,
             "StopNo": this.endSite ? this.endSite.StopNo : "",
-            "ShowOverTimeSchem": this.showOvertime ? 1 : 0
+            "ShowOverTimeSchem": this.showOverTime ? 1 : 0
         };
         this.http.postRequest<Array<SchemItem>>(CommandKeys.schemlist, content, value => {
             if (value.success) {
@@ -142,6 +146,7 @@ export class HomePage {
             if (this.refresher) {
                 this.refresher.complete();
             }
+            this.schemList = undefined;
         },{
             showProgress: showProgress
         });
@@ -185,7 +190,7 @@ export class HomePage {
         this.busType = 0;
         this.endSite = undefined;
         this.selectDate = new Date().toISOString().substring(0, 10);
-        this.showOvertime = false;
+        this.showOverTime = true;
     }
 
     showSearchDialog() {
@@ -217,7 +222,7 @@ export class HomePage {
         this.navCtrl.push('SchemDetailPage', { 
             schemNo: s.SchemNo,
             driveDate: s.DriveDate.substring(0,10),
-            showOverTimeSchem: this.showOvertime ? 1 : 0
+            showOverTimeSchem: this.showOverTime ? 1 : 0
         });
     }
     /**

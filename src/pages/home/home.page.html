@@ -33,13 +33,13 @@
       </div>
     </ion-item>
   </ion-list>
-  <div class="no_data" *ngIf="!schemList">
+  <div class="no_data" *ngIf="!schemList" (click)="noDataRefresh()">
     <img src="assets/imgs/icon_home_no_data.png"/><br>
     {{selectedStation?"暂无内容":"请选择乘车站"}}
   </div>
-  <ion-fab bottom right edge>
+  <!-- <ion-fab bottom right edge>
     <button ion-fab mini (click)="showLog()">
       <ion-icon name="add"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab> -->
 </ion-content>

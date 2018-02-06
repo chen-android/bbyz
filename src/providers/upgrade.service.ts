@@ -41,6 +41,8 @@ export class UpgradeService {
                         }
                     }
                     return false;
+                },undefined,{
+                    showProgress:false
                 })
             } else {
                 if (next && this.upgrade.NeedUpdate == 1) {

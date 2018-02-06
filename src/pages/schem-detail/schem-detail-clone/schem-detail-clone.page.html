@@ -74,6 +74,15 @@
         <input type="text" [(ngModel)]="checkGateNo" />
       </ion-col>
     </ion-row>
+    <ion-row class="company">
+      <ion-col col-auto>
+        承运单位
+      </ion-col>
+      <ion-col (click)="companClick()" [class.enable_text]="selectCompany">
+        {{selectCompany?.ShortName?selectCompany.ShortName:'请选择'}}
+        <img src="assets/imgs/icon_right_arrow.png" />
+      </ion-col>
+    </ion-row>
     <ion-row radio-group [(ngModel)]="schemType">
       <ion-col col-6>
         类别
@@ -109,15 +118,7 @@
         <img src="assets/imgs/icon_right_arrow.png" />
       </ion-col>
     </ion-row>
-    <ion-row class="company">
-      <ion-col col-auto>
-        承运单位
-      </ion-col>
-      <ion-col (click)="companClick()" [class.enable_text]="selectCompany">
-        {{selectCompany?.ShortName?selectCompany.ShortName:'请选择'}}
-        <img src="assets/imgs/icon_right_arrow.png" />
-      </ion-col>
-    </ion-row>
+    
   </ion-grid>
 </ion-content>
 <ion-footer>

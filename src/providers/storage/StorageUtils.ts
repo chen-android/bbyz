@@ -32,7 +32,7 @@ export class StorageUtils {
     public get<T>(key: string): Promise<T> {
         return this.clearableStorage.get(key);
     }
-
+    /* 用户对象 */
     public setUser(user: User): Promise<any> {
         return this.constStorage.set(StorageKeys.USER, user);
     }
@@ -43,11 +43,21 @@ export class StorageUtils {
         return this.constStorage.remove(StorageKeys.USER);
     }
 
+    /* 站过滤，目的站历史记录 */
     public setFilterSite(keyId: string, site: Array<Site>): Promise<any> {
         return this.clearableStorage.set(StorageKeys.FILTERSITE + keyId, site);
     }
 
     public getFilterSite(keyId: string): Promise<Array<Site>> {
         return this.clearableStorage.get(StorageKeys.FILTERSITE + keyId);
+    }
+
+    /* 显示各种数据表的提示框，显示一次 */
+    public hasShowTableTip():Promise<boolean>{
+        return this.clearableStorage.get(StorageKeys.HASSHOWTABLETIP);
+    }
+
+    public setHasShowTableTip(show: boolean): Promise<any>{
+        return this.clearableStorage.set(StorageKeys.HASSHOWTABLETIP,show);
     }
 }

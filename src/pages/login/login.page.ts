@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams, Keyboard } from 'ionic-angular';
 
 import { CacheData } from '../../providers/storage/CacheData';
 import { DialogUtil } from '../../utils/DialogUtil';
@@ -26,7 +26,7 @@ export class LoginPage {
     isDebug:boolean ;
     path:string;
     constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageUtils, 
-        public http: HttpServices,public dialog:DialogUtil,public encrypt:EncryptUtils) {
+        public http: HttpServices,public dialog:DialogUtil,public encrypt:EncryptUtils,public keyboard:Keyboard) {
     }
 
     ionViewDidLoad() {
@@ -34,9 +34,13 @@ export class LoginPage {
         this.storage.getUser().then(value => {
             if (value) {
                 this.id = value["WorkerNo"];
-                this.saveCheck = true;
+                this.pwd = value["Password"]
+                this.saveCheck = this.pwd.length>0;
             }
         });
+        if(this.keyboard.isOpen()){
+            this.keyboard.close();
+        }
     }
     login() {
         if(!this.id){
@@ -47,15 +51,14 @@ export class LoginPage {
             this.dialog.showAtMiddleToast("密码不能为空");
             return;
         }
-        this.http.postRequest1<User>(CommandKeys.login,this.id,{"Password":this.pwd},value=>{
+        this.http.postRequestFull<User>(CommandKeys.login,this.id,{"Password":this.pwd},value=>{
             if (value.success){
                 let user = value.object;
                 CacheData.id = this.id;
-                if (this.saveCheck) {
-                    this.storage.setUser(user);
-                }else{
-                    this.storage.clearUser();
+                if (!this.saveCheck) {
+                    user.Password = "";
                 }
+                this.storage.setUser(user);
                 this.dialog.showAtMiddleToast("登录成功",800);
                 setTimeout(() => {
                     this.navCtrl.setRoot('MainMenu');

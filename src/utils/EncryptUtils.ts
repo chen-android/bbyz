@@ -7,7 +7,7 @@ export class EncryptUtils {
     private encrypt = new JSEncrypt();
     private public_key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1k10wulc/MjjWJqVHgrfGJDCYlIn0dpGM9bp/wRmHt17DErh0RVWevqYrVOIcOqsX6ij5np3wKjKBtXczWTrqBvKwj5mDeJkJnTOa1iTDr1sNPAhcU6HnQ1hkQy9HkdsOL2AqkgvuBUgNvF2ldQF2lSjnvTrtWareHnCNA9gT5wIDAQAB";
     private max_encrypt_lenght: number = 245;
-    private iv: string = CryptoJS.enc.Utf8.parse("ajxieotpbjfhdietq");
+    private iv: string = CryptoJS.enc.Utf8.parse("ajxieotpbjfhdiet");
     constructor() {
         this.encrypt.setPublicKey(this.public_key);
     }

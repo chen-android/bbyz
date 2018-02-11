@@ -22,9 +22,10 @@ page-search-ticket-number {
     font-size: 14px;
   }
   .content-scroll {
-    height: calc(95% - 5rem);
-    height: -moz-calc(95% - 5rem);
-    height: -webkit-calc(95% - 5rem);
+    height: 95%;
+    // height: calc(95% - 5rem);
+    // height: -moz-calc(95% - 5rem);
+    // height: -webkit-calc(95% - 5rem);
     margin: 10px 15px;
   }
   .arrow {

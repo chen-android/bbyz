@@ -8,12 +8,12 @@ export class BusSaleDetailItem {
     SaleStationName: string// 售票站名称
     SaleTime: string// 售票时间
     SaleWorkName: string// 售票员姓名
-    SaleWorkNo: number// 售票员工号
-    SchemID: number// 车次号
-    SeatNo: number// 座位号
+    SaleWorkNo: string// 售票员工号
+    SchemID: string// 车次号
+    SeatNo: string// 座位号
     StopName: string// 到站站名
     TelNo: string// 电话号码
-    TicketNo: number// 票号
+    TicketNo: string// 票号
     TicketPrice: string// 票价    
     TicketType: string// 车票种类
 }

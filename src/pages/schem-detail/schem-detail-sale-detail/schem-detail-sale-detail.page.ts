@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Scroll } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 
 import { BusSaleItem } from '../../../module/BusSaleItem';
@@ -21,15 +21,22 @@ import { StorageUtils } from '../../../providers/storage/StorageUtils';
   templateUrl: 'schem-detail-sale-detail.page.html',
 })
 export class SchemDetailSaleDetailPage {
-  @ViewChild("headerScroll") headScroll: Scroll;
-  @ViewChild("contentScroll") contentScroll: Scroll;
   schem: SchemItem;
   dataArray: Array<BusSaleItem> = [];
-  showTip: boolean = true;
+  listCSS: object = {}
   constructor(public navCtrl: NavController, public navParams: NavParams,
-     public http: HttpServices, public dialog: DialogUtil, public storage: StorageUtils) {
+    public http: HttpServices, public dialog: DialogUtil, public storage: StorageUtils) {
     this.schem = this.navParams.get("schem");
+    this.listCSS = {
+      "height": ((window.innerHeight - 126) * 0.95 - 50).toString() + 'px',
+      "width": "110rem"
+    }
   }
+
+  ionViewDidLoad() {
+    this.requestData();
+  }
+
 
   requestData() {
 
@@ -54,12 +61,4 @@ export class SchemDetailSaleDetailPage {
     });
   }
 
-
-  ionViewDidLoad() {
-    this.requestData();
-    let that = this;
-    this.contentScroll.addScrollEventListener(function (event: any) {
-      that.headScroll._scrollContent.nativeElement.scrollLeft = event.target.scrollLeft;
-    })
-  }
 }

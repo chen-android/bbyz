@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Scroll } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 
 import { BusIssueItem } from '../../../module/BusIssueItem';
@@ -25,24 +25,24 @@ import { StorageUtils } from '../../../providers/storage/StorageUtils';
   templateUrl: 'search-issue-bus.page.html',
 })
 export class SearchIssueBusPage {
-  @ViewChild('headerScroll') headerScroll: Scroll;
-  @ViewChild('contentScroll') contentScroll: Scroll;
 
   driveDate: string;
   stopNo: string;
+  stopName: string;
   dataArray: Array<BusIssueItem>;
-  showTip: boolean = true;
+  listCSS: object = {}
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpServices, public dialog: DialogUtil, public storage: StorageUtils) {
     this.driveDate = new Date().toISOString().substring(0, 10);
+    this.listCSS = {
+      "height" : ((window.innerHeight - 238)*0.95 - 50).toString() + 'px',
+      "width" : "100rem"
+    } 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchIssueBusPage');
-    let that = this;
-    this.contentScroll.addScrollEventListener(function (event: any) {
-      that.headerScroll._scrollContent.nativeElement.scrollLeft = event.target.scrollLeft;
-    })
   }
+
   /**
    * 获取站点代码
    */
@@ -56,6 +56,7 @@ export class SearchIssueBusPage {
     return new Promise((resolve, reject) => {
       if (typeof (params) != "undefined") {
         this.stopNo = params.StopNo;
+        this.stopName = params.StopName;
         resolve("ok");
       } else {
         reject(Error("params error"));

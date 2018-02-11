@@ -23,18 +23,19 @@
       background-color: #fff;
     }
     .content-scroll {
-      height: calc(95% - 5rem);
-      height: -moz-calc(95% - 5rem);
-      height: -webkit-calc(95% - 5rem);
+      height: 95%;
+      // height: calc(95% - 5rem);
+      // height: -moz-calc(95% - 5rem);
+      // height: -webkit-calc(95% - 5rem);
       margin: 10px 15px;
     }
-    .col-12 {
+    .col-15 {
       -webkit-box-flex: 0;
-      -webkit-flex: 0 0 12%;
+      -webkit-flex: 0 0 15%;
       -moz-box-flex: 0;
-      -moz-flex: 0 0 12%;
-      -ms-flex: 0 0 12%;
-      flex: 0 0 12%;
+      -moz-flex: 0 0 15%;
+      -ms-flex: 0 0 15%;
+      flex: 0 0 15%;
     }
     .col-04 {
       -webkit-box-flex: 0;

@@ -52,14 +52,14 @@ export class SchemDetailStopSalePage {
         let kLength = 0;
         this.stopList.forEach((value, index) => {
             if (value.Enable == 0) {
-                if (!this.statusList[index]) {
+                if (this.statusList[index]) {
                     /* 原来停售，改为可售 */
                     this.noList.push(value.StopNo);
                     this.valueList.push("1");
                     kLength++;
                 }
             } else {
-                if (this.statusList[index]) {
+                if (!this.statusList[index]) {
                     /* 原来可售，改为停售 */
                     this.noList.push(value.StopNo);
                     this.valueList.push("0");

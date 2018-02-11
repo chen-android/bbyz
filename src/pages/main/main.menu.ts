@@ -92,6 +92,8 @@ export class MainMenu {
     checkUpdate(){
        if(this.hasUpdate){
            this.upService.detectionUpgrade(true);
+       }else{
+           this.dialog.showAtMiddleToast("已经是最新版本")
        }
     }
 

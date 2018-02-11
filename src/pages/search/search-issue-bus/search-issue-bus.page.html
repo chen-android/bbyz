@@ -15,7 +15,7 @@
     </ion-col>
   </ion-row>
   <ion-row class="input-warp">
-    <button class="stopNo-button" (click)="getStopNo()">{{stopNo?stopNo:"请选择站点代码"}}</button>
+    <button class="stopNo-button" (click)="getStopNo()">{{stopName?stopName:""}} {{stopNo?stopNo:"请选择站点代码"}}</button>
     <!-- <ion-input class="default-input" type="text" placeholder="请输入站点代码" [(ngModel)]="stopNo"></ion-input> -->
   </ion-row>
   <ion-row align-items-center class="search-btn-wrap">
@@ -25,7 +25,7 @@
 
 
 <ion-content>
-  <ion-scroll [hidden]="!(dataArray && dataArray.length > 0)" #headerScroll scrollX="false" scrollY="false" style="height:4rem; margin:10px 15px;">
+  <ion-scroll [hidden]="!(dataArray && dataArray.length > 0)" class="content-scroll" scrollX="true" scrollY="false">
     <ion-grid no-padding class="scroll-grid">
       <ion-row align-items-center class="title-row">
         <ion-col>发车时间</ion-col>
@@ -42,23 +42,23 @@
         <ion-col col-1>最小携童数</ion-col>
       </ion-row>
     </ion-grid>
-  </ion-scroll>
-  <ion-scroll [hidden]="!(dataArray && dataArray.length > 0)" #contentScroll class="content-scroll" scrollX="true" scrollY="true">
-    <ion-grid no-padding class="scroll-grid">
-      <ion-row align-items-center class="content-row" *ngFor="let item of dataArray">
-        <ion-col>{{item.DriveTime}}</ion-col>
-        <ion-col>{{item.SchemID}}</ion-col>
-        <ion-col>{{item.BusTypeName}}</ion-col>
-        <ion-col>{{item.PassID}}</ion-col>
-        <ion-col>{{item.EndStopName}}</ion-col>
-        <ion-col>{{item.SchTypeName}}</ion-col>
-        <ion-col>{{item.RunTypeName}}</ion-col>
-        <ion-col>￥{{item.FullPrice}}</ion-col>
-        <ion-col>￥{{item.HalfPrice}}</ion-col>
-        <ion-col>{{item.StationName}}</ion-col>
-        <ion-col>{{item.CarrierName}}</ion-col>
-        <ion-col col-1>{{item.LeastFreeChildNum}}</ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-scroll [hidden]="!(dataArray && dataArray.length > 0)" [ngStyle]="listCSS" scrollX="false" scrollY="true">
+      <ion-grid no-padding class="scroll-grid">
+        <ion-row align-items-center class="content-row" *ngFor="let item of dataArray">
+          <ion-col>{{item.DriveTime}}</ion-col>
+          <ion-col>{{item.SchemID}}</ion-col>
+          <ion-col>{{item.BusTypeName}}</ion-col>
+          <ion-col>{{item.PassID}}</ion-col>
+          <ion-col>{{item.EndStopName}}</ion-col>
+          <ion-col>{{item.SchTypeName}}</ion-col>
+          <ion-col>{{item.RunTypeName}}</ion-col>
+          <ion-col>￥{{item.FullPrice}}</ion-col>
+          <ion-col>￥{{item.HalfPrice}}</ion-col>
+          <ion-col>{{item.StationName}}</ion-col>
+          <ion-col>{{item.CarrierName}}</ion-col>
+          <ion-col col-1>{{item.LeastFreeChildNum}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-scroll>
   </ion-scroll>
 </ion-content>

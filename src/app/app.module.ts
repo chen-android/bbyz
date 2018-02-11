@@ -13,9 +13,9 @@ import { ShareModule } from './app.shared.module';
     MODULES,
     ShareModule,
     IonicModule.forRoot(MyApp,{
-      platform:{
-        ios:{
-          backButtonText: ''
+      platforms: {
+        ios: {
+          backButtonText: ""
         }
       }
     })

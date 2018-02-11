@@ -3,7 +3,7 @@ page-search-sale-detail {
     background-color: #fff;
   } // 车次查询相关
   .scroll-grid {
-    width: 144rem;
+    width: 150rem;
   }
   .title-row {
     height: 4rem;
@@ -22,9 +22,10 @@ page-search-sale-detail {
     font-size: 14px;
   }
   .content-scroll {
-    height: calc(95% - 5rem);
-    height: -moz-calc(95% - 5rem);
-    height: -webkit-calc(95% - 5rem);
+    height: 95%;
+    // height: calc(95% - 5rem);
+    // height: -moz-calc(95% - 5rem);
+    // height: -webkit-calc(95% - 5rem);
     margin: 10px 15px;
   }
   .arrow {

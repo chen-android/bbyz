@@ -4,7 +4,7 @@ export class BusSaleItem {
     StationName: string;            // 隶属站名称
     SchemNo: string;                // 车次号
     TicketNo: string;               // 车票票号
-    SeatNo: number;                 // 座位号
+    SeatNo: string;                 // 座位号
     StopName: string;               // 到站站名
     TicketType: string;             // 车票种类
     Price: number;                  // 票价       
